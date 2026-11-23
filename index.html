@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, nosnippet">
+<meta name="yandex" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Недельный отчёт по рекламе и лидам · 16–22.11.2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&family=Unbounded:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f2f4f9; --card:#ffffff; --txt:#0d1522; --txt-2:#5a6a80; --txt-3:#8b98a8;
+    --accent:#2f5dfa; --accent-2:#7c3aed; --ok:#0f9f6e; --warn:#c2740a; --bad:#d93a3a;
+    --pool:#0e7490; --line:#e6eaf2;
+    --r:22px; --r-s:14px;
+    --sh:0 1px 2px rgba(16,26,44,.04), 0 8px 24px -12px rgba(16,26,44,.16);
+    --sh-h:0 2px 4px rgba(16,26,44,.05), 0 22px 48px -20px rgba(16,26,44,.28);
+    --sans:"Onest",system-ui,sans-serif; --disp:"Unbounded","Onest",sans-serif;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{box-sizing:border-box}
+  html{color-scheme:light;scroll-behavior:smooth;overflow-x:clip}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:14.5px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;overflow-x:clip}
+  ::selection{background:#c9d6ff}
+
+  .amb{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+  .amb i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;animation:drift 26s ease-in-out infinite alternate}
+  .amb i:nth-child(1){width:520px;height:520px;left:-120px;top:-160px;background:radial-gradient(circle,#c7d7ff,transparent 68%)}
+  .amb i:nth-child(2){width:460px;height:460px;right:-80px;top:120px;background:radial-gradient(circle,#e6d4ff,transparent 68%);animation-delay:-8s}
+  .amb i:nth-child(3){width:420px;height:420px;left:40%;bottom:-180px;background:radial-gradient(circle,#d3f2e8,transparent 70%);animation-delay:-15s}
+  @keyframes drift{to{transform:translate3d(40px,-30px,0) scale(1.12)}}
+  .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.16;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+
+  .shell{max-width:1240px;margin:0 auto;padding:26px 20px 64px}
+
+  header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;margin-bottom:24px}
+  header .who{justify-self:start}
+  .per{justify-self:center;font-family:var(--disp);font-weight:500;font-size:clamp(24px,2.5vw,32px);
+    letter-spacing:-.03em;line-height:1;white-space:nowrap;color:var(--txt)}
+  .mark{width:38px;height:38px;border-radius:13px;background:linear-gradient(145deg,#2f5dfa,#7c3aed);
+    display:grid;place-items:center;color:#fff;font-family:var(--disp);font-size:13px;letter-spacing:-.02em;
+    box-shadow:0 8px 20px -10px rgba(47,93,250,.9)}
+  .who{display:flex;flex-direction:column;line-height:1.25}
+  .who b{font-size:14px;font-weight:600}
+  .who span{font-size:11.5px;color:var(--txt-3)}
+  .hsp{flex:1}
+  .seg{display:flex;gap:2px;background:#e9edf6;padding:3px;border-radius:12px;font-size:12.5px}
+  .seg button{appearance:none;border:0;background:transparent;padding:6px 13px;border-radius:9px;font:inherit;
+    font-size:12.5px;color:var(--txt-2);cursor:pointer;transition:background .2s var(--ease),color .2s var(--ease),box-shadow .2s}
+  .seg button[aria-pressed="true"]{background:#fff;color:var(--txt);box-shadow:0 1px 2px rgba(16,26,44,.12);font-weight:500}
+  .stamp{font-size:11px;color:var(--txt-3);white-space:nowrap}
+
+  h1{font-family:var(--disp);font-weight:400;font-size:clamp(26px,3.4vw,40px);line-height:1.12;letter-spacing:-.03em;margin:4px 0 6px;max-width:20ch}
+  .lede{color:var(--txt-2);max-width:62ch;margin:0 0 22px;font-size:14.5px}
+
+  /* bento */
+  .bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+  .c{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:1px solid rgba(230,234,242,.9);
+    transition:transform .34s var(--ease),box-shadow .34s var(--ease);will-change:transform}
+  .c:hover{transform:translateY(-3px);box-shadow:var(--sh-h)}
+  .c.h{grid-column:span 5;display:flex;flex-direction:column;justify-content:space-between;
+    background:linear-gradient(160deg,#101a34 0%,#1b2a52 52%,#241b43 100%);color:#fff;border:0;overflow:hidden;position:relative}
+  .c.h::after{content:"";position:absolute;width:420px;height:420px;right:-140px;top:-160px;border-radius:50%;
+    background:radial-gradient(circle,rgba(124,58,237,.55),transparent 66%);filter:blur(10px)}
+  .c.k{grid-column:span 7/span 7;display:grid;grid-template-columns:repeat(2,1fr);gap:0;padding:0;overflow:hidden}
+  .kv{padding:18px 18px 16px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:0;justify-content:flex-start;min-height:132px}
+  .kv:nth-child(2n){border-right:0}
+  .kv:nth-child(n+3){border-top:1px solid var(--line)}
+  .k-l{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--txt-3)}
+  .k-v{display:flex;align-items:baseline;gap:.22em;font-family:var(--disp);font-weight:300;
+    font-size:clamp(26px,3vw,34px);letter-spacing:-.04em;line-height:1;margin:8px 0 2px}
+  .k-v small{font-family:var(--sans);font-size:.4em;font-weight:500;letter-spacing:0;color:var(--txt-2)}
+  .k-main{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-top:9px}
+  .k-v{margin:0}
+  .k-d{display:flex;flex-direction:column;align-items:flex-end;gap:3px;padding-top:3px;text-align:right}
+  .k-d>span{white-space:nowrap}
+  .k-d>span:last-child{font-size:11px;color:var(--txt-3)}
+  .k-d>.up,.k-d>.down{font-size:13.5px;font-weight:700;padding:4px 10px;border-radius:99px;line-height:1.25}
+  .k-d>.up{background:#e6f6ee;color:#0a7a4f}
+  .k-d>.down{background:#fdeced;color:#b23b3b}
+  .up{color:var(--ok)} .down{color:var(--bad)}
+  .tri{font-size:8px;line-height:1}
+
+  .c.trend{grid-column:span 7}
+  .c.ring{grid-column:span 5;display:flex;gap:18px;align-items:center}
+  .c.chan{grid-column:span 6}
+  .c.proj{grid-column:span 6}
+  .c.fun{grid-column:span 8}
+  .c.wk{grid-column:span 4}
+  .c.trd{grid-column:span 12}
+  .trd-host{position:relative;margin-top:2px}
+  .trd-leg{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;font-size:10.5px;color:var(--txt-3)}
+  .trd-leg span{display:flex;align-items:center;gap:6px}
+  .trd-leg i{width:15px;height:2px;border-radius:2px;display:inline-block}
+  .trd-leg i.dash{background:repeating-linear-gradient(90deg,#12a06a 0 4px,transparent 4px 7px)}
+  .trd-tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .15s var(--ease);background:#fff;
+    border:1px solid var(--line);border-radius:10px;box-shadow:var(--sh);padding:8px 10px;font-size:11px;
+    color:var(--txt-2);z-index:6;min-width:158px}
+  .trd-tip b{display:block;font-size:10.5px;color:var(--txt);margin-bottom:5px;letter-spacing:.01em}
+  .trd-tip u{display:flex;justify-content:space-between;gap:14px;text-decoration:none;padding:1px 0}
+  .trd-tip em{font-style:normal;color:var(--txt);font-weight:600}
+  .c.w2w{grid-column:span 5;display:flex;flex-direction:column}
+  .w2w-note{margin:auto 0 0;padding-top:14px;font-size:10.5px;color:var(--txt-3);line-height:1.55}
+  .c.full{grid-column:span 7}
+
+  /* неделя к неделе */
+  .w2w-b{display:flex;flex-direction:column;gap:13px;margin-top:2px;flex:1;justify-content:space-between}
+  .w2wh{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+  .w2wh b{font-size:12.5px;font-weight:600}
+  .dchip{font-size:10px;font-weight:600;padding:2.5px 8px;border-radius:99px;letter-spacing:.01em}
+  .dchip.up{color:#0a7a4f;background:#e4f6ee}
+  .dchip.down{color:#b23b3b;background:#fdeaea}
+  .w2wl{display:grid;grid-template-columns:66px 1fr 60px;align-items:center;gap:10px;height:19px}
+  .w2wl i{font-style:normal;font-size:10.5px;color:var(--txt-3);white-space:nowrap}
+  .w2wt{height:7px;border-radius:99px;background:#eef1f7;overflow:hidden}
+  .w2wb{display:block;height:100%;border-radius:99px;background:#c6cedd}
+  .w2wl.on .w2wb{background:linear-gradient(90deg,#2f5dfa,#7c3aed)}
+  .w2wl b{font-size:11.5px;font-weight:600;text-align:right;font-variant-numeric:tabular-nums;color:var(--txt-2)}
+  .w2wl.on b{color:var(--txt)}
+
+  /* полная таблица показателей */
+  .full-s{margin:-7px 0 11px;font-size:10.5px;color:var(--txt-3);line-height:1.5}
+  .ft{width:100%;border-collapse:collapse;table-layout:fixed}
+  .ft th{font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--txt-3);font-weight:500;
+    text-align:right;padding:0 0 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+  .ft th:first-child{text-align:left}
+  .ft td{padding:7.5px 0;font-size:11.5px;text-align:right;border-bottom:1px solid #eef1f7;
+    font-variant-numeric:tabular-nums;color:var(--txt-2)}
+  .ft td:first-child{text-align:left;font-size:12px;color:var(--txt-2)}
+  .ft td.v{font-weight:600;color:var(--txt)}
+  .ft td.up{color:#0a7a4f;font-weight:600}
+  .ft td.down{color:#b23b3b;font-weight:600}
+  .ft td.flat{color:var(--txt-3)}
+  .ft tr:last-child td{border-bottom:0}
+
+  .c-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .c-h h2{font-size:13.5px;font-weight:600;margin:0}
+  .c-h span{font-size:11px;color:var(--txt-3)}
+
+  /* matrix: каналы по проектам */
+  .mx{width:100%;border-collapse:collapse;table-layout:fixed}
+  .c.mtx .c-h{margin-bottom:3px;align-items:center}
+  .c.mtx .c-h h2{line-height:1.1}
+  .mx th{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt-3);font-weight:500;
+    padding:0;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;line-height:1.1}
+  .mx th:first-child{text-align:left}
+  .mx td{padding:4px 0 20px;text-align:center;font-size:12.5px;border-bottom:1px solid #eef1f7;line-height:1.2}
+  .mx td:first-child{text-align:left}
+  .mx tr:last-child td{border-bottom:0}
+  .mx .bdg{display:inline-block;font-size:10.5px;font-weight:500;padding:3px 9px;border-radius:99px;white-space:nowrap}
+  .bdg.sq{background:#e6f0e9;color:#2f6b4a}
+  .bdg.rq{background:#e7eefb;color:#2b56b8}
+  .bdg.sp{background:#fbeedb;color:#8a5a13}
+  .mx td.tot{font-weight:600}
+  .mx tr.tot td{background:#f4f5f8;border-bottom:0;padding:20px 0}
+  .mx tr.tot td:first-child{border-radius:10px 0 0 10px;padding-left:10px;font-weight:600}
+  .mx tr.tot td:last-child{border-radius:0 10px 10px 0;padding-right:10px}
+  /* ring */
+  .ring-wrap{position:relative;width:132px;height:132px;flex:none}
+  .ring-wrap svg{transform:rotate(-90deg)}
+  .ring-wrap circle{fill:none;stroke-linecap:round}
+  .ring-bg{stroke:#e9edf6;stroke-width:10}
+  .ring-fg{stroke:url(#g1);stroke-width:10;stroke-dasharray:352;stroke-dashoffset:226;
+    animation:dash 1.5s var(--ease) .18s}
+  @keyframes dash{from{stroke-dashoffset:352}}
+  .ring-mid{position:absolute;inset:0;display:grid;place-items:center;text-align:center;line-height:1.05}
+  .ring-mid b{font-family:var(--disp);font-size:26px;font-weight:400;letter-spacing:-.03em;display:block}
+  .ring-mid span{font-size:10.5px;color:var(--txt-3)}
+
+  /* trend chart */
+  .chart{position:relative;height:150px;display:flex;align-items:flex-end;gap:12px;padding-top:10px;
+    background-image:repeating-linear-gradient(to top,rgba(16,26,44,.055) 0 1px,transparent 1px 34px);
+    background-position:0 0;background-size:100% 100%}
+  .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:7px;height:100%}
+  .col .bar{width:100%;max-width:60px;border-radius:10px 10px 5px 5px;background:linear-gradient(180deg,#b9c8ff,#dde5ff);
+    height:0;transition:height .62s var(--ease),background .3s;position:relative}
+  .col.mtd{padding-left:12px;border-left:1px dashed #d5dcea}
+  .col.on .bar{background:linear-gradient(180deg,#2f5dfa,#6f8dff);box-shadow:0 12px 26px -14px rgba(47,93,250,.9)}
+  .col .cap{font-size:11px;color:var(--txt-3);white-space:nowrap}
+  .col .num{font-size:11.5px;color:var(--txt);font-variant-numeric:tabular-nums}
+  .col:hover .bar{filter:brightness(1.05)}
+
+  /* channels rows */
+  .row{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center;margin-bottom:12px}
+  .row .nm{font-size:12.5px;color:var(--txt-2)}
+  .row .vl{font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--txt)}
+  .track{grid-column:1/-1;height:6px;border-radius:99px;background:#eef1f8;overflow:hidden}
+  .track i{display:block;height:100%;border-radius:99px;width:0;transition:width .8s var(--ease)}
+  .i1{background:linear-gradient(90deg,#2f5dfa,#5d82ff)}
+  .i2{background:linear-gradient(90deg,#0f9f6e,#31c48d)}
+  .i3{background:linear-gradient(90deg,#c2740a,#e8a33d)}
+
+  /* funnel chips */
+  .fnrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border-radius:11px;
+    background:#f7f9fd;margin-bottom:6px;transition:background .2s var(--ease),transform .2s var(--ease);cursor:default;position:relative}
+  .fnrow:hover{background:#eef3ff;transform:translateX(2px)}
+  .fnrow b{font-weight:600;font-size:12.5px}
+  .fnrow .q{font-size:12px;color:var(--txt-2);font-variant-numeric:tabular-nums}
+  .fnrow .tip{position:absolute;right:8px;bottom:calc(100% + 6px);background:#101a34;color:#fff;font-size:11px;
+    padding:5px 9px;border-radius:8px;opacity:0;transform:translateY(4px);transition:.22s var(--ease);pointer-events:none;white-space:nowrap}
+  .fnrow:hover .tip{opacity:1;transform:none}
+
+  /* weeks strip */
+  .weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .w{padding:14px;border-radius:var(--r-s);background:#f7f9fd;transition:background .25s var(--ease),transform .25s var(--ease)}
+  .w:hover{background:#eef3ff;transform:translateY(-2px)}
+  .w.on{background:linear-gradient(160deg,#eef3ff,#e6ecff);box-shadow:inset 0 0 0 1px #d5e0ff}
+  .w .d{font-size:11px;color:var(--txt-3);letter-spacing:.03em}
+  .w .v{font-family:var(--disp);font-size:24px;font-weight:300;letter-spacing:-.03em;margin:4px 0 2px}
+  .w .m{font-size:11px;color:var(--txt-2);line-height:1.45}
+
+    footer{margin-top:26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    font-size:11px;color:var(--txt-3)}
+
+  .k-v,.w .v{animation:numIn .8s var(--ease) both}
+  @keyframes numIn{from{opacity:0;transform:translateY(9px);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+  .fade{transition:opacity .5s var(--ease),transform .5s var(--ease)}
+  html.js .fade{opacity:0;transform:translateY(10px)}
+  html.js .fade.in{opacity:1;transform:none}
+
+
+  /* — ноябрь: накопленные ЦЛ, недели, лиды — */
+  .c.nov{grid-column:span 5;display:flex;flex-direction:column}
+  .c.novw{grid-column:span 7}
+  .c.leads{grid-column:span 12}
+  .cu-host{position:relative;flex:1;min-height:250px;margin-top:2px}
+  .cu-host svg{display:block}
+  .cu-leg{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;font-size:10.5px;color:var(--txt-3)}
+  .cu-leg span{display:flex;align-items:center;gap:6px}
+  .cu-leg i{width:16px;height:2px;border-radius:2px;display:inline-block}
+  .cu-leg i.f{background:#12a06a}
+  .cu-leg i.p{background:repeating-linear-gradient(90deg,#e08a1e 0 5px,transparent 5px 9px)}
+  .nw-rows{margin-top:2px}
+  .nw-r,.nw-acc{display:grid;grid-template-columns:1fr auto;column-gap:12px;row-gap:7px;align-items:baseline}
+  .nw-r{padding:10px 0;border-bottom:1px solid var(--line)}
+  .nw-r:first-child{padding-top:0}
+  .nw-r .nw-l,.nw-acc .nw-l{font-size:11.5px;color:var(--txt-2)}
+  .nw-r .nw-v{font-size:11.5px;color:var(--txt);text-align:right;font-variant-numeric:tabular-nums}
+  .nw-r .nw-bar,.nw-acc .nw-bar{grid-column:1/-1}
+  .nw-bar{height:5px;background:#eef1f7;border-radius:99px;overflow:hidden}
+  .nw-bar i{display:block;height:100%;border-radius:99px;background:#12a06a}
+  .nw-r.on .nw-bar i{background:linear-gradient(90deg,#12a06a,#2f5dfa)}
+  .nw-acc{padding:12px 0 0}
+  .nw-acc .nw-v{font-size:12px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+  .nw-acc .nw-bar{height:6px}
+  .nw-acc .nw-bar i{background:linear-gradient(90deg,#2f5dfa,#7c3aed)}
+  .nw-call{margin-top:10px;padding:10px 12px;border-radius:12px;font-size:11.5px;line-height:1.5;color:var(--txt-2);display:flex;gap:9px}
+  .nw-call:before{content:"";width:6px;height:6px;border-radius:50%;margin-top:6px;flex:0 0 auto;background:#2f5dfa}
+  .nw-call.blue{background:#eef3fe}
+  .nw-call.amber{background:#fdf6ea}
+  .nw-call.amber:before{background:#e08a1e}
+  .nw-tb{width:100%;border-collapse:collapse;margin-top:14px;font-size:11.5px}
+  .nw-tb th{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--txt-3);font-weight:600;text-align:right;padding:0 0 7px;border-bottom:1px solid var(--line)}
+  .nw-tb th:first-child{text-align:left}
+  .nw-tb td{padding:7px 0;border-bottom:1px solid var(--line);text-align:right;color:var(--txt-2);font-variant-numeric:tabular-nums}
+  .nw-tb td:first-child{text-align:left;color:var(--txt)}
+  .nw-tb tr:last-child td{border-bottom:0}
+  .nw-tb td.down{color:#b23b3b;font-weight:600}
+  .nw-tb td.flat{color:var(--txt-3)}
+
+  .leads-s{margin:6px 0 0;font-size:11.5px;line-height:1.5;color:var(--txt-3);max-width:980px}
+  .ld-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0 10px}
+  .ld-seg{display:flex;gap:3px;background:#f2f4f9;padding:4px;border-radius:99px}
+  .ld-seg button{border:0;background:transparent;font-family:var(--sans);font-size:11.5px;color:var(--txt-2);padding:6px 11px;border-radius:99px;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:background .18s var(--ease),color .18s var(--ease)}
+  .ld-seg button b{font-size:10.5px;font-weight:600;color:var(--txt-3)}
+  .ld-seg button:hover{color:var(--txt)}
+  .ld-seg button.on{background:#fff;color:var(--txt);box-shadow:0 1px 2px rgba(15,26,43,.09)}
+  .ld-seg button.on b{color:var(--accent)}
+  .ld-search{margin-left:auto;display:flex;align-items:center;gap:7px;background:#f2f4f9;border-radius:99px;padding:7px 13px;min-width:272px}
+  .ld-search svg{flex:0 0 auto;opacity:.45}
+  .ld-search input{border:0;background:transparent;outline:0;font-family:var(--sans);font-size:11.5px;color:var(--txt);width:100%}
+  .ld-search input::placeholder{color:var(--txt-3)}
+  .ldtb{width:100%;border-collapse:collapse;font-size:11.5px}
+  .ldtb th{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--txt-3);font-weight:600;text-align:left;padding:0 10px 8px;border-bottom:1px solid var(--line)}
+  .ldtb th.r,.ldtb td.r{text-align:right}
+  .ldtb td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--txt-2)}
+  .ldtb tbody tr:hover{background:#fbfcfe}
+  .ldtb tbody tr:last-child td{border-bottom:0}
+  .ld-d{color:var(--txt-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .ld-n{font-weight:600;color:var(--txt);font-size:12px;line-height:1.35}
+  .ld-c{color:var(--txt-2);font-size:11px;margin-top:3px;word-break:break-word}
+  .src{display:inline-block;font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:99px;white-space:nowrap}
+  .src.d{background:#eef3fe;color:#2f5dfa}
+  .src.seo{background:#e6f6ee;color:#0a7a4f}
+  .src.em{background:#fdf3e6;color:#a96a12}
+  .prj{display:inline-block;font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:99px;white-space:nowrap}
+  .prj.seq{background:#e6f6ee;color:#0a7a4f}
+  .prj.ruq{background:#eef3fe;color:#2f5dfa}
+  .prj.spr{background:#f4ecfe;color:#7c3aed}
+  .ld-sum{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--txt)}
+  .ld-sum.zero{color:var(--txt-3);font-weight:400}
+  .ld-empty{text-align:center!important;color:var(--txt-3)!important;padding:22px 0!important}
+
+  .c.chk{grid-column:span 7}
+  .c.eff{grid-column:span 5}
+  .chk-rows{padding-top:2px}
+  .chk-r{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+  .chk-r:last-of-type{border-bottom:0}
+  .chk-k{font-size:11.5px;font-weight:600;color:var(--txt-2)}
+  .chk-bar{height:6px;border-radius:99px;background:#eef1f7;overflow:hidden}
+  .chk-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#2f5dfa,#7c3aed);transition:width .5s var(--ease)}
+  .chk-v{font-size:14px;font-weight:700;color:var(--txt);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .chk-v small{display:block;font-size:10.5px;font-weight:500;color:var(--txt-2);margin-top:3px;white-space:normal;line-height:1.35;text-align:right}
+  .eff-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;padding-top:6px}
+  .eff-i b{display:block;font-family:var(--disp);font-size:21px;font-weight:600;letter-spacing:-.01em;color:var(--txt)}
+  .eff-i span{display:block;font-size:10.5px;color:var(--txt-2);line-height:1.35;margin-top:4px}
+  @media (max-width:1080px){
+    .c.h,.c.k,.c.trend,.c.ring,.c.chan,.c.proj,.c.fun,.c.wk,.c.w2w,.c.full,.c.trd,.c.nov,.c.novw,.c.leads,.c.chk,.c.eff{grid-column:span 12}
+    .c.k{grid-template-columns:1fr 1fr}
+    .weeks{grid-template-columns:1fr 1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .fade{opacity:1;transform:none}
+    .ring-fg{stroke-dashoffset:226}
+  }
+
+  /* — правки по макету: воронка на всю ширину, недели в узкой карточке — */
+  .c.wk .weeks{grid-template-columns:1fr 1fr;gap:10px}
+  .c.wk .w{padding:12px}
+  .c.wk .w .v{font-size:22px}
+  .c.fun .fn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .c.fun .fnrow{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;
+    gap:8px;padding:14px;margin-bottom:0;min-height:108px}
+  .c.fun .fnrow b{order:2;font-size:11.5px;line-height:1.25;font-weight:600}
+  .c.fun .fnrow .q{order:1;font-family:var(--disp);font-weight:300;font-size:26px;line-height:1;color:var(--txt)}
+  .c.fun .fnrow .tip{order:3;position:static;opacity:1;transform:none;background:none;color:var(--txt-3);
+    padding:0;font-size:10.5px;line-height:1.3;white-space:normal;pointer-events:auto}
+  .c.fun .fnrow:hover{transform:none}
+
+  .h-top{display:grid;grid-template-columns:1.06fr 1fr;gap:10px 18px;align-items:start;position:relative;z-index:1}
+  .h-l{font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;opacity:.6;margin-bottom:12px}
+  .h-big{font-family:var(--disp);font-weight:300;font-size:clamp(66px,8vw,96px);line-height:.86;letter-spacing:-.05em}
+  .h-dl{display:flex;align-items:center;gap:9px;margin-top:13px;font-size:13.5px}
+  .h-pill{background:rgba(52,211,153,.18);color:#7ceeb8;padding:4px 11px;border-radius:99px;font-weight:600;font-size:12.5px}
+  .h-dim{opacity:.75;font-size:12px}
+  .h-cpl{padding-top:66px}
+  .h-num{font-family:var(--disp);font-weight:300;font-size:22px;line-height:1.15}
+  .h-sub{font-size:11.5px;opacity:.75;margin-top:4px}
+  .h-bot{display:grid;grid-template-columns:1.06fr 1fr;gap:10px 18px;margin-top:26px;position:relative;z-index:1}
+  .h-bot .h-l{margin-bottom:8px}
+
+  /* period switcher */
+  .per-sw{position:relative;justify-self:end}
+  .per-btn{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:99px;
+    padding:8px 14px 8px 15px;font:inherit;color:var(--txt);cursor:pointer;box-shadow:var(--sh);
+    transition:box-shadow .2s var(--ease),border-color .2s var(--ease)}
+  .per-btn:hover{border-color:#d3dcee;box-shadow:var(--sh-h)}
+  .per-btn .pl{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt-3)}
+  .per-btn .pdv{width:1px;height:15px;background:var(--line)}
+  .per-btn .pid{font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:.01em}
+  .per-btn .pv{font-size:12.5px;font-weight:600;color:var(--txt);white-space:nowrap}
+  .per-btn .chev{color:var(--txt-3);transition:transform .22s var(--ease)}
+  .per-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+  .per-pop{position:absolute;right:0;top:calc(100% + 10px);z-index:80;width:344px;background:#fff;
+    border:1px solid var(--line);border-radius:18px;padding:12px 12px 10px;box-shadow:0 26px 64px -26px rgba(16,26,44,.38)}
+  .per-pop[hidden]{display:none}
+  .pp-search{position:relative;margin-bottom:10px}
+  .pp-search input{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:11px;
+    padding:9px 12px 9px 34px;font:inherit;font-size:12.5px;background:#f8fafd;color:var(--txt);outline:none;transition:border-color .18s,background .18s}
+  .pp-search input:focus{border-color:#b7c8ef;background:#fff}
+  .pp-search input::placeholder{color:var(--txt-3)}
+  .pp-search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--txt-3);pointer-events:none}
+  .pp-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#f1f4fa;border-radius:11px;padding:4px;margin-bottom:8px}
+  .pp-tabs button{border:0;background:none;border-radius:8px;padding:7px 0;font:inherit;font-size:12px;
+    color:var(--txt-2);cursor:pointer;transition:background .18s,color .18s}
+  .pp-tabs button[aria-selected="true"]{background:#fff;color:var(--txt);font-weight:600;box-shadow:0 1px 3px rgba(16,26,44,.14)}
+  .pp-list{max-height:288px;overflow:auto;margin:0 -4px;padding:0 4px}
+  .pp-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;width:100%;border:0;
+    background:none;border-radius:10px;padding:8px 10px;font:inherit;cursor:pointer;text-align:left;transition:background .15s}
+  .pp-row:hover{background:#f4f7fd}
+  .pp-row .rid{font-size:10.5px;color:var(--txt-3)}
+  .pp-row .rdate{font-size:12.5px;font-weight:600;color:var(--txt);white-space:nowrap}
+  .pp-row .rb{font-size:10.5px;color:var(--txt-2);background:#eef1f7;border-radius:99px;padding:2px 8px;font-style:normal;white-space:nowrap}
+  .pp-row[aria-selected="true"]{background:#eef3ff}
+  .pp-row[aria-selected="true"] .rid{color:var(--accent);font-weight:600}
+  .pp-row[aria-selected="true"] .rb{background:#dde7ff;color:#26408f}
+  .pp-empty{padding:18px 10px;font-size:12px;color:var(--txt-3);text-align:center}
+  .pp-note{font-size:11px;line-height:1.5;color:var(--txt-3);border-top:1px solid var(--line);margin:10px 0 0;padding:9px 2px 0}
+  .pp-fast{display:flex;align-items:center;gap:6px;margin-top:9px}
+  .pp-fast .fl{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-3)}
+  .pp-fast button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:4px 10px;font:inherit;
+    font-size:11px;color:var(--txt-2);cursor:pointer;transition:border-color .18s,color .18s}
+  .pp-fast button:hover{border-color:#c6d2ea;color:var(--txt)}
+  /* section nav */
+  .secnav{display:flex;align-items:center;gap:2px;margin:-6px 0 20px;padding:5px;border:1px solid var(--line);
+    border-radius:16px;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);position:sticky;top:10px;z-index:50;
+    box-shadow:0 10px 26px -22px rgba(16,26,44,.4)}
+  .secnav a{font-size:12.5px;color:var(--txt-2);text-decoration:none;padding:7px 12px;border-radius:11px;
+    transition:background .18s,color .18s;white-space:nowrap}
+  .secnav a:hover{color:var(--txt);background:#eef2fa}
+  .secnav a.on{color:var(--txt);background:#e9eefb;font-weight:600}
+  .fixnote{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--txt-3);margin:-8px 0 16px}
+  .fixnote::before{content:"";width:6px;height:6px;border-radius:99px;background:var(--warn);flex:none}
+  .fixnote[hidden]{display:none}
+  .bento .c{scroll-margin-top:74px}
+  html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+<div class="amb"><i></i><i></i><i></i></div>
+<div class="grain"></div>
+
+<div class="shell">
+
+  <header>
+    <div class="who"><b>Sequoia · Ruqi · Solution PRO</b><span>недельный отчёт по рекламе и лидам · <span id="whoWk">неделя 47</span></span></div>
+    <div class="per" id="perTitle">16 — 22 ноября 2026</div>
+    <div class="per-sw">
+      <button type="button" class="per-btn" id="perBtn" aria-haspopup="dialog" aria-expanded="false" aria-label="Выбрать период">
+        <span class="pl">Период</span>
+        <span class="pdv"></span>
+        <span class="pid" id="perId">w14</span>
+        <span class="pv" id="perDates">16.11 – 22.11</span>
+        <svg class="chev" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>
+      </button>
+      <div class="per-pop" id="perPop" role="dialog" aria-label="Выбор периода" hidden>
+        <div class="pp-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.4-3.4"/></svg>
+          <input type="search" id="ppQ" placeholder="Поиск недели…" aria-label="Поиск периода" autocomplete="off">
+        </div>
+        <div class="pp-tabs" role="tablist" aria-label="Тип периода">
+          <button type="button" role="tab" data-mode="w" aria-selected="true">Недели</button>
+          <button type="button" role="tab" data-mode="m" aria-selected="false">Месяцы</button>
+        </div>
+        <div class="pp-list" id="ppList" role="listbox" aria-label="Периоды"></div>
+        <p class="pp-note" id="ppNote"></p>
+        <div class="pp-fast">
+          <span class="fl">Быстрый</span>
+          <button type="button" data-fast="first">Первая</button>
+          <button type="button" data-fast="last">Последняя</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="secnav" id="secnav" aria-label="Разделы отчёта">
+    <a href="#s-kpi" class="on">Показатели</a>
+    <a href="#s-trend">Тренд</a>
+    <a href="#s-w2w">Неделя к неделе</a>
+    <a href="#s-chan">Каналы</a>
+    <a href="#s-proj">Проекты</a>
+    <a href="#s-leads">Лиды</a>
+    <a href="#s-fun">Воронка</a>
+  </nav>
+
+  <div class="fixnote" id="fixNote" hidden>Верхние показатели — за выбранную неделю. Каналы, проекты, лиды, воронка и план месяца ниже — за 16–22.11.</div>
+
+  <div class="bento">
+
+    <div class="c h fade" id="s-kpi">
+      <div class="h-top">
+        <div>
+          <div class="h-l">Целевые лиды</div>
+          <div class="h-big"><span data-count="10" id="hv-leads">10</span></div>
+          <div class="h-dl"><span class="h-pill" id="hv-pill">▲ +100 %</span><span class="h-dim" id="hv-base">было 5</span></div>
+        </div>
+        <div class="h-cpl">
+          <div class="h-l">Цена ЦЛ (CPL)</div>
+          <div class="h-num" id="hv-cpl">6 779 ₽</div>
+          <div class="h-sub" id="hv-cplsub">▼ 37 % · было 10 775 ₽</div>
+        </div>
+      </div>
+      <div class="h-bot">
+        <div><div class="h-l">Конверсия</div><div class="h-num" id="hv-conv">8,93 %</div></div>
+        <div><div class="h-l">Целевых в день</div><div class="h-num" id="hv-day">1,43</div></div>
+      </div>
+    </div>
+
+    <div class="c k fade">
+      <div class="kv">
+        <div class="k-l">Бюджет</div>
+        <div class="k-main">
+          <div class="k-v"><span data-count="67790" id="hv-spend">67 790</span><small>₽</small></div>
+          <div class="k-d"><span class="down" id="hv-spendd">▲ 26 %</span><span id="hv-spendb">было 53 877 ₽</span></div>
+        </div>
+      </div>
+      <div class="kv">
+        <div class="k-l">Все лиды</div>
+        <div class="k-main">
+          <div class="k-v"><span data-count="243" id="hv-all">243</span></div>
+          <div class="k-d"><span class="up" id="hv-alld">▲ 40 %</span><span id="hv-allb">было 173</span></div>
+        </div>
+      </div>
+      <div class="kv">
+        <div class="k-l">Цена лида (CPA)</div>
+        <div class="k-main">
+          <div class="k-v"><span data-count="279" id="hv-cpa">279</span><small id="hv-cpau">₽</small></div>
+          <div class="k-d"><span class="up" id="hv-cpad">▼ 10 %</span><span id="hv-cpab">было 311 ₽</span></div>
+        </div>
+      </div>
+      <div class="kv">
+        <div class="k-l">CR% — из просмотра в лид</div>
+        <div class="k-main">
+          <div class="k-v"><span data-count="0.9" id="hv-cr">0,90</span><small id="hv-cru">%</small></div>
+          <div class="k-d"><span class="up" id="hv-crd">▲ 0,81 п.п.</span><span id="hv-crb">было 0,09 %</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c trd fade" id="s-trend">
+      <div class="c-h"><h2>Тренд ЦЛ по проектам · 13 недель</h2><span>у каждого ряда своя шкала — сравнивайте форму, а не высоту</span></div>
+      <div class="trd-host" id="trHost">
+        <div class="trd-tip" id="trTip"></div>
+      </div>
+      <div class="trd-leg">
+        <span><i style="background:#0f1a2b"></i>Всего ЦЛ</span>
+        <span><i style="background:#2f5dfa"></i>Директ · платный</span>
+        <span><i style="background:#7c3aed"></i>SEO · органика</span>
+        <span><i class="dash"></i>Скользящая (3 нед.)</span>
+      </div>
+      <p class="w2w-note" style="padding-top:10px">Серые столбцы — факт недели. Пунктир — среднее за текущую и две предыдущие недели. Источник: недельные отчёты и CRM, 24.08–22.11.</p>
+    </div>
+
+
+    <div class="c nov fade">
+      <div class="c-h"><h2>Накопленные целевые по неделям</h2><span>факт против плана · 08.11 → 30.11</span></div>
+      <div class="cu-host" id="cuHost"></div>
+      <div class="cu-leg">
+        <span><i class="f"></i>Факт, накопленным итогом</span>
+        <span><i class="p"></i>План 70 ЦЛ (чек-поинты 18 / 34 / 52)</span>
+      </div>
+      <p class="w2w-note" style="padding-top:8px">Данные на 22.11.2026: 25 ЦЛ из 70 — 36 % при 73 % срока. Чек-поинт 22.11 по медиаплану — 52 ЦЛ, недобор 27.</p>
+    </div>
+
+    <div class="c novw fade">
+      <div class="c-h"><h2>Недели ноября</h2><span>целевые и доля месячного плана</span></div>
+      <div class="nw-rows">
+        <div class="nw-r">
+          <div class="nw-l">02–08.11 · неделя 1</div>
+          <div class="nw-v">10 ЦЛ · 14 % месячного плана</div>
+          <div class="nw-bar"><i style="width:100%"></i></div>
+        </div>
+        <div class="nw-r">
+          <div class="nw-l">09–15.11 · неделя 2</div>
+          <div class="nw-v">5 ЦЛ · 7 % месячного плана</div>
+          <div class="nw-bar"><i style="width:50%"></i></div>
+        </div>
+        <div class="nw-r on">
+          <div class="nw-l">16–22.11 · неделя 3</div>
+          <div class="nw-v">10 ЦЛ · 14 % месячного плана</div>
+          <div class="nw-bar"><i style="width:100%"></i></div>
+        </div>
+      </div>
+      <div class="nw-acc">
+        <div class="nw-l">Накоплено за месяц (22 дня)</div>
+        <div class="nw-v">25 ЦЛ · 36 %</div>
+        <div class="nw-bar"><i style="width:36%"></i></div>
+      </div>
+      <div class="nw-call blue">Ноябрь идёт на 36 % плана: 25 из 70 за 22 дня. Отставание от чек-поинта 22.11 — 27 ЦЛ; неделя 16–22.11 дала 10 — вдвое больше предыдущей (5).</div>
+      <div class="nw-call amber">Экономика хуже октября: CPL 6 800 ₽ против 6 294 ₽ (+8 %), конверсия 1,95 % против 3,43 % — 1 282 клика ноября дали 25 ЦЛ. Освоено 170 012 ₽ из 480 000 ₽ (35 %).</div>
+      <table class="nw-tb">
+        <colgroup><col><col style="width:16%"><col style="width:16%"><col style="width:14%"></colgroup>
+        <thead><tr><th>Контрольная точка</th><th>План, ЦЛ</th><th>Факт, ЦЛ</th><th>Δ</th></tr></thead>
+        <tbody>
+          <tr><td>08.11</td><td>18</td><td>10</td><td class="down">−8</td></tr>
+          <tr><td>15.11</td><td>34</td><td>15</td><td class="down">−19</td></tr>
+          <tr><td>22.11</td><td>52</td><td>25</td><td class="down">−27</td></tr>
+          <tr><td>30.11</td><td>70</td><td class="flat">—</td><td class="flat">—</td></tr>
+        </tbody>
+      </table>
+      <p class="w2w-note" style="padding-top:8px">Чек-поинты — из медиаплана ноября от 03.11.2026. Факт — CRM, тег «Целевой», сделки, созданные 01.11–22.11.</p>
+    </div>
+
+    <div class="c w2w fade" id="s-w2w">
+      <div class="c-h"><h2>Неделя к неделе</h2><span>16–22.11 против 09–15.11</span></div>
+      <div class="w2w-b">
+        <div class="w2wr">
+          <div class="w2wh"><b>Показы</b><span class="dchip up">−85 %</span></div>
+          <div class="w2wl"><i>09.11–15.11</i><span class="w2wt"><span class="w2wb" style="width:100%"></span></span><b>182 780</b></div>
+          <div class="w2wl on"><i>16–22.11</i><span class="w2wt"><span class="w2wb" style="width:14.8%"></span></span><b>26 997</b></div>
+        </div>
+        <div class="w2wr">
+          <div class="w2wh"><b>Клики</b><span class="dchip up">−65 %</span></div>
+          <div class="w2wl"><i>09.11–15.11</i><span class="w2wt"><span class="w2wb" style="width:100%"></span></span><b>324</b></div>
+          <div class="w2wl on"><i>16–22.11</i><span class="w2wt"><span class="w2wb" style="width:34.6%"></span></span><b>112</b></div>
+        </div>
+        <div class="w2wr">
+          <div class="w2wh"><b>Бюджет, тыс ₽</b><span class="dchip down">+26 %</span></div>
+          <div class="w2wl"><i>09.11–15.11</i><span class="w2wt"><span class="w2wb" style="width:79.5%"></span></span><b>53,9</b></div>
+          <div class="w2wl on"><i>16–22.11</i><span class="w2wt"><span class="w2wb" style="width:100%"></span></span><b>67,8</b></div>
+        </div>
+        <div class="w2wr">
+          <div class="w2wh"><b>Целевые</b><span class="dchip up">+100 %</span></div>
+          <div class="w2wl"><i>09.11–15.11</i><span class="w2wt"><span class="w2wb" style="width:50%"></span></span><b>5</b></div>
+          <div class="w2wl on"><i>16–22.11</i><span class="w2wt"><span class="w2wb" style="width:100%"></span></span><b>10</b></div>
+        </div>
+      </div>
+      <p class="w2w-note">22.11 отсутствует в выгрузке Директа — неделя считается по шести дням. Целевые — CRM, показы и клики — Директ.</p>
+    </div>
+
+    <div class="c full fade" id="s-full">
+      <div class="c-h"><h2>Полная таблица показателей</h2><span>изм. к 09–15.11</span></div>
+      <p class="full-s">Предыдущие недели — из отчётов 02–08.11 и 09–15.11. Все периоды — выгрузки Директа и CRM, сверка 23.11.</p>
+      <table class="ft">
+        <colgroup><col style="width:32%"><col style="width:17%"><col style="width:17%"><col style="width:17%"><col style="width:17%"></colgroup>
+        <thead><tr><th>Показатель</th><th>02.11–08.11</th><th>09.11–15.11</th><th>16–22.11</th><th>Изм.</th></tr></thead>
+        <tbody>
+          <tr><td>Целевые лиды (CRM)</td><td>10</td><td>5</td><td class="v">10</td><td class="up">+100 %</td></tr>
+          <tr><td>Показы (Директ)</td><td>152 209</td><td>182 780</td><td class="v">26 997</td><td class="up">−85 %</td></tr>
+          <tr><td>Клики (Директ)</td><td>846</td><td>324</td><td class="v">112</td><td class="up">−65 %</td></tr>
+          <tr><td>CTR</td><td>0,56 %</td><td>0,18 %</td><td class="v">0,41 %</td><td class="up">+0,24 п.п.</td></tr>
+          <tr><td>CPC</td><td>57 ₽</td><td>166 ₽</td><td class="v">605 ₽</td><td class="down">+264 %</td></tr>
+          <tr><td>Рекламный бюджет</td><td>48 345 ₽</td><td>53 877 ₽</td><td class="v">67 790 ₽</td><td class="down">+26 %</td></tr>
+          <tr><td>Цена целевого лида</td><td>4 835 ₽</td><td>10 775 ₽</td><td class="v">6 779 ₽</td><td class="up">−37 %</td></tr>
+          <tr><td>Конверсия клик → ЦЛ</td><td>1,18 %</td><td>1,54 %</td><td class="v">8,93 %</td><td class="up">+7,39 п.п.</td></tr>
+          <tr><td>Целевых в день</td><td>1,43</td><td>0,71</td><td class="v">1,43</td><td class="up">+100 %</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="c chan fade" id="s-chan">
+      <div class="c-h"><h2>Каналы</h2><span>10 целевых</span></div>
+      <div class="row"><span class="nm">Директ</span><span class="vl">4 · 40 %</span><div class="track"><i class="i1" data-w="40"></i></div></div>
+      <div class="row"><span class="nm">SEO / органика</span><span class="vl">5 · 50 %</span><div class="track"><i class="i2" data-w="50"></i></div></div>
+      <div class="row" style="margin-bottom:0"><span class="nm">Email</span><span class="vl">1 · 10 %</span><div class="track"><i class="i3" data-w="10"></i></div></div>
+      <p style="margin:14px 0 0;font-size:11.5px;color:var(--txt-3)">Директ: 16 947 ₽ за целевой · SEO и письма — вне рекламного бюджета</p>
+      <p style="margin:10px 0 0;font-size:11.5px;color:var(--txt-3)">CTR <b style="color:var(--txt);font-weight:600">0,41 %</b> · CPC <b style="color:var(--txt);font-weight:600">605 ₽</b> · 29 обращений Calltouch</p>
+    </div>
+
+    <div class="c proj fade" id="s-proj">
+      <div class="c-h"><h2>Проекты</h2><span>показы · клики · расход</span></div>
+      <div class="row"><span class="nm">Sequoia</span><span class="vl">8 ЦЛ · 38 547 ₽</span><div class="track"><i class="i1" data-w="80"></i></div></div>
+      <div class="row"><span class="nm">Ruqi</span><span class="vl">1 ЦЛ · 29 243 ₽</span><div class="track"><i class="i2" data-w="10"></i></div></div>
+      <div class="row" style="margin-bottom:0"><span class="nm">Solution PRO</span><span class="vl">1 ЦЛ · вне Direct</span><div class="track"><i class="i3" data-w="10"></i></div></div>
+      <p style="margin:14px 0 0;font-size:11.5px;color:var(--txt-3)">26 442 показа / 68 кликов у Sequoia · 555 / 44 у Ruqi</p>
+      <p style="margin:10px 0 0;font-size:11.5px;color:var(--txt-3)">Цена ЦЛ: <b style="color:var(--txt);font-weight:600">4 818 ₽</b> у Sequoia · <b style="color:var(--txt);font-weight:600">29 243 ₽</b> у Ruqi</p>
+    </div>
+
+
+    <div class="c leads fade" id="s-leads">
+      <div class="c-h"><h2>Целевые лиды по клиентам</h2><span id="ldCount">8 сделок · 16–22.11</span></div>
+      <p class="leads-s">8 сделок с тегом «Целевой», созданных 16.11–22.11: у всех есть название и контакт в CRM. Номер или почта клиента — копируется. Статусы этапов — на 23.11.2026.</p>
+      <div class="ld-tools">
+        <div class="ld-seg" id="ldProj">
+          <button class="on" data-p="all">Все <b>8</b></button>
+          <button data-p="seq">Секвойя <b>6</b></button>
+          <button data-p="ruq">Руки <b>1</b></button>
+          <button data-p="spr">Solution PRO <b>1</b></button>
+        </div>
+        <div class="ld-seg" id="ldChan">
+          <button class="on" data-c="all">Все каналы</button>
+          <button data-c="Директ">Директ <b>4</b></button>
+          <button data-c="SEO">SEO <b>3</b></button>
+          <button data-c="Email">Email <b>1</b></button>
+        </div>
+        <div class="ld-search">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="#5b6a80" stroke-width="1.6"/><path d="M11 11l3 3" stroke="#5b6a80" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input id="ldQ" type="text" placeholder="Поиск: название, телефон, почта">
+        </div>
+      </div>
+      <table class="ldtb">
+        <colgroup><col style="width:6%"><col><col style="width:9%"><col style="width:12%"><col style="width:16%"><col style="width:11%"></colgroup>
+        <thead><tr><th>Дата</th><th>Сделка</th><th>Источник</th><th>Проект</th><th>Этап</th><th class="r">Сумма, ₽</th></tr></thead>
+        <tbody id="ldB"></tbody>
+      </table>
+      <p class="w2w-note" style="padding-top:10px">Ещё 2 сделки недели (16.11, этапы «Взял в работу» и «ЛПР выявлен») в выгрузке CRM без названия и контакта — в таблицу не выведены, но входят в 10 ЦЛ недели.</p>
+    </div>
+
+    <div class="c wk fade">
+      <div class="c-h"><h2>Ноябрь по неделям</h2><span>план 70 ЦЛ · 480 000 ₽</span></div>
+      <div class="weeks">
+        <div class="w" data-wk="0"><div class="d">02–08.11</div><div class="v">10 ЦЛ</div><div class="m">48 345 ₽<br>846 кликов</div></div>
+        <div class="w" data-wk="1"><div class="d">09–15.11</div><div class="v">5 ЦЛ</div><div class="m">53 877 ₽<br>324 клика</div></div>
+        <div class="w on" data-wk="2"><div class="d">16–22.11</div><div class="v">10 ЦЛ</div><div class="m">67 790 ₽<br>112 кликов</div></div>
+        <div class="w" data-wk="3"><div class="d">01–22.11</div><div class="v">25 ЦЛ</div><div class="m">170 012 ₽<br>цена ЦЛ 6 800 ₽ · 1,95 %</div></div>
+      </div>
+    </div>
+
+    <div class="c fun fade" id="s-fun">
+      <div class="c-h"><h2>Воронка</h2><span>10 сделок</span></div>
+      <div class="fn-grid">
+      <div class="fnrow"><b>Договор подписан</b><span class="q">1</span><span class="tip">оплачено 0 ₽</span></div>
+      <div class="fnrow"><b>В договоре</b><span class="q">1</span><span class="tip">сумма договора в работе</span></div>
+      <div class="fnrow"><b>Потребности выявлены</b><span class="q">1</span><span class="tip">квалификация пройдена</span></div>
+      <div class="fnrow"><b>КП выставлено</b><span class="q">1</span><span class="tip">ожидание решения</span></div>
+      <div class="fnrow"><b>В работе</b><span class="q">2</span><span class="tip">активные сделки</span></div>
+      <div class="fnrow" style="margin-bottom:0"><b>Закрыто и не реализовано</b><span class="q">4</span><span class="tip">пайплайн 7,73 млн ₽</span></div>
+      </div>
+    </div>
+
+
+
+    
+
+    <div class="c chk fade" id="s-money">
+      <div class="c-h"><h2>Средний чек по каналам</h2><span>ноябрь · 22 дня</span></div>
+      <div class="chk-rows">
+        <div class="chk-r">
+          <span class="chk-k">Директ</span>
+          <div class="chk-bar"><i style="width:17%"></i></div>
+          <span class="chk-v">—<small>0 подписанных · +948 750 ₽ в договоре</small></span>
+        </div>
+        <div class="chk-r">
+          <span class="chk-k">SEO</span>
+          <div class="chk-bar"><i style="width:65%"></i></div>
+          <span class="chk-v">—<small>0 подписанных · +3 575 000 ₽ в договоре</small></span>
+        </div>
+        <div class="chk-r">
+          <span class="chk-k">Email</span>
+          <div class="chk-bar"><i style="width:18%"></i></div>
+          <span class="chk-v">—<small>0 подписанных · +996 480 ₽ в договоре</small></span>
+        </div>
+      </div>
+      <p class="w2w-note" style="padding-top:10px">Подписанных договоров в ноябре пока нет, поэтому средний чек не считается. Полосы — доля сумм в работе: 5 520 230 ₽ на 22.11 (данные из карточек CRM).</p>
+    </div>
+
+    <div class="c eff fade" id="s-eff">
+      <div class="c-h"><h2>Эффективность рекламы</h2><span>ноябрь · 22 дня</span></div>
+      <div class="eff-grid">
+        <div class="eff-i"><b>0 ₽</b><span>договоров на 1 ₽ рекламы</span></div>
+        <div class="eff-i"><b>—</b><span>стоимость подписанной сделки</span></div>
+        <div class="eff-i"><b>6 800 ₽</b><span>стоимость целевого лида</span></div>
+        <div class="eff-i"><b>0 %</b><span>лидов дошло до договора</span></div>
+      </div>
+      <p class="w2w-note" style="padding-top:12px">Ноябрь: бюджет 170 012 ₽ и 25 целевых лидов, CPL 6 800 ₽. Подписанных договоров на 22.11 нет.</p>
+    </div>
+  </div>
+
+  <footer>
+    <span>Вариант C — bento / motion</span>
+    <span>Директ API · CRM · Calltouch · 23.11.2026</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.documentElement.classList.add("js");
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // reveal
+  var fades = document.querySelectorAll(".fade");
+  if(reduce || !("IntersectionObserver" in window)){
+    fades.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(ents){
+      ents.forEach(function(e){
+        if(e.isIntersecting){
+          var i = Array.prototype.indexOf.call(fades, e.target);
+          e.target.style.transitionDelay = (i*55)+"ms";
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+          setTimeout(function(){ drawBars(); }, 220);
+        }
+      });
+    },{threshold:.12});
+    fades.forEach(function(el){ io.observe(el); });
+  }
+
+  // страховка: контент не должен оставаться скрытым
+  setTimeout(function(){ fades.forEach(function(el){ el.classList.add("in"); }); }, 1400);
+
+  // bars inside tracks
+  function drawBars(){
+    document.querySelectorAll(".track i[data-w]").forEach(function(el,i){
+      setTimeout(function(){ el.style.width = el.getAttribute("data-w")+"%"; }, i*70);
+    });
+  }
+  if(reduce) drawBars();
+
+  if(reduce) return;
+
+})();
+</script>
+
+<script>
+(function(){
+  var WEEKS=[
+    {k:'w7',d:'28.09 – 04.10',t:'28 сентября — 4 октября 2026',wk:'2026-09-28',leads:12,spend:63000,cpl:5250,conv:null,all:null,impr:null,
+     note:'12 ЦЛ, 63 000 ₽, CPL 5 250 ₽. Неделя закрыта отчётом 28.09–04.10, из них 7 ЦЛ — в октябре.'},
+    {k:'w8',d:'05.10 – 11.10',t:'5 — 11 октября 2026',wk:'2026-10-05',leads:16,spend:89000,cpl:5563,conv:null,all:null,impr:null,
+     note:'16 ЦЛ, 89 000 ₽, CPL 5 563 ₽. В отчёте на 11.10 было 13 — разница из-за переатрибуции сделок в CRM 23.11.'},
+    {k:'w9',d:'12.10 – 18.10',t:'12 — 18 октября 2026',wk:'2026-10-12',leads:13,spend:76194,cpl:5861,conv:3.07,all:null,impr:null,
+     note:'13 ЦЛ, 76 194 ₽, CPL 5 861 ₽, конверсия 3,07 %. В недельном отчёте было 14 — база CRM от 23.11.'},
+    {k:'w10',d:'19.10 – 25.10',t:'19 — 25 октября 2026',wk:'2026-10-19',leads:13,spend:96124,cpl:7394,conv:2.85,all:null,impr:null,
+     note:'13 ЦЛ, 96 124 ₽, CPL 7 394 ₽, конверсия 2,85 %. Расход пересчитан повторной выгрузкой 02.11 (было 98 159 ₽).'},
+    {k:'w11',d:'26.10 – 01.11',t:'26 октября — 1 ноября 2026',wk:'2026-10-26',leads:14,spend:87738,cpl:6267,conv:3.12,all:247,impr:50378,
+     note:'14 ЦЛ, 87 738 ₽, CPL 6 267 ₽, конверсия 3,12 %; Директ 7 / SEO 5 / Email 2. Лидов всего — 247.'},
+    {k:'w12',d:'02.11 – 08.11',t:'2 — 8 ноября 2026',wk:'2026-11-02',leads:10,spend:48345,cpl:4835,conv:1.18,all:188,impr:152209,
+     note:'10 ЦЛ, 48 345 ₽, CPL 4 835 ₽, конверсия 1,18 %; Директ 5 / SEO 2 / Email 3. Лидов всего — 188.'},
+    {k:'w13',d:'09.11 – 15.11',t:'9 — 15 ноября 2026',wk:'2026-11-09',leads:5,spend:53877,cpl:10775,conv:1.54,all:173,impr:182780,
+     note:'5 ЦЛ из 324 кликов (1,54 %), 53 877 ₽, CPL 10 775 ₽; Директ 1 / SEO 1 / Email 3. Лидов всего — 173.'},
+    {k:'w14',d:'16.11 – 22.11',t:'16 — 22 ноября 2026',wk:'2026-11-16',leads:10,spend:67790,cpl:6779,conv:8.93,all:243,impr:26997,
+     note:'10 ЦЛ, 67 790 ₽, CPL 6 779 ₽; Директ 4 / SEO 5 / Email 1. Лидов всего — 243. Последний день в выгрузке Директа — 21.11.'}
+  ];
+  var MONTHS=[
+    {k:'m9',id:'сен',d:'01.09 – 30.09',t:'Сентябрь 2026',who:'сентябрь',days:30,leads:49,spend:396147,cpl:8085,conv:3.26,all:null,impr:86411,
+     note:'49 ЦЛ, 396 147 ₽, CPL 8 085 ₽, конверсия 3,26 %. Директ API: 1 503 клика, 86 411 показов.'},
+    {k:'m10',id:'окт',d:'01.10 – 31.10',t:'Октябрь 2026',who:'октябрь',days:31,leads:63,spend:396494,cpl:6294,conv:3.43,all:null,impr:204723,
+     note:'63 ЦЛ, 396 494 ₽, CPL 6 294 ₽, конверсия 3,43 %. 1 836 кликов; расход сверен повторной выгрузкой 02.11.'},
+    {k:'m11',id:'ноя',d:'01.11 – 22.11',t:'Ноябрь 2026 — по 22.11',who:'ноябрь · MTD',days:22,leads:25,spend:170012,cpl:6800,conv:1.95,all:null,impr:361986,
+     note:'25 ЦЛ из плана 70, 170 012 ₽, CPL 6 800 ₽, конверсия 1,95 %. Выполнение плана месяца — 36 %. 1 282 клика.'}
+  ];
+  var state={mode:'w',key:'w14'};
+  function $(id){ return document.getElementById(id); }
+  function money(v){ return String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
+  function pct(v){ return v.toFixed(2).replace('.',',')+' %'; }
+  function num2(v){ return v.toFixed(2).replace('.',','); }
+  function isoWeek(dstr){
+    var d=new Date(dstr+'T00:00:00Z');
+    var t=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()));
+    var day=t.getUTCDay()||7; t.setUTCDate(t.getUTCDate()+4-day);
+    var y0=new Date(Date.UTC(t.getUTCFullYear(),0,1));
+    return Math.ceil((((t-y0)/86400000)+1)/7);
+  }
+  function cpaOf(x){ return (x.all!=null&&x.all>0)? x.spend/x.all : null; }
+  function crOf(x){ return (x.all!=null&&x.impr)? x.all/x.impr*100 : null; }
+  function dp(cur,prev,invert,pp){
+    if(cur==null||prev==null||prev===0) return null;
+    var diff=cur-prev, up=diff>0, good=invert?!up:up;
+    return {text: pp ? (up?'▲ ':'▼ ')+num2(Math.abs(diff))+' п.п.'
+                     : (up?'▲ ':'▼ ')+Math.round(Math.abs(diff)/Math.abs(prev)*100)+' %',
+            cls: good?'up':'down'};
+  }
+  function txt(id,v){ var el=$(id); if(!el) return; if(v==null||v===''){ el.style.display='none'; } else { el.style.display=''; el.textContent=v; } }
+  function delta(id,d){ var el=$(id); if(!d){ el.style.display='none'; return; } el.style.display=''; el.textContent=d.text; el.className=d.cls; }
+  function base(id,v){ txt(id, v==null?'':'было '+v); }
+
+  var CHART={w12:0,w13:1,w14:2,m11:3};
+  function apply(mode,key){
+    var list=mode==='m'?MONTHS:WEEKS, i=0, it=null, prev=null;
+    for(var q=0;q<list.length;q++){ if(list[q].k===key){ i=q; it=list[q]; break; } }
+    if(!it){ it=list[list.length-1]; i=list.length-1; }
+    if(i>0) prev=list[i-1];
+    state.mode=mode; state.key=it.k;
+
+    $('perTitle').textContent=it.t;
+    $('perId').textContent=mode==='m'?it.id:it.k;
+    $('perDates').textContent=it.d;
+    $('whoWk').textContent=mode==='m'?it.who:'неделя '+isoWeek(it.wk);
+    $('ppNote').textContent=it.note;
+    document.title='Недельный отчёт по рекламе и лидам · '+it.t;
+
+    // тёмная карточка
+    $('hv-leads').textContent=it.leads;
+    var dl=dp(it.leads,prev?prev.leads:null,false,false);
+    var pill=$('hv-pill');
+    if(dl){
+      pill.style.display='';
+      pill.textContent=dl.text;
+      pill.style.background= dl.cls==='up'?'rgba(52,211,153,.16)':'rgba(248,113,113,.18)';
+      pill.style.color= dl.cls==='up'?'#6ee7b7':'#fca5a5';
+      $('hv-base').style.display=''; $('hv-base').textContent='было '+money(prev.leads);
+    } else { pill.style.display='none'; $('hv-base').style.display='none'; }
+    $('hv-cpl').textContent=money(it.cpl)+' ₽';
+    var dc=dp(it.cpl,prev?prev.cpl:null,true,false);
+    txt('hv-cplsub', dc? dc.text+' · было '+money(prev.cpl)+' ₽' : '');
+    $('hv-conv').textContent=it.conv!=null?pct(it.conv):'—';
+    $('hv-day').textContent=num2(it.leads/(mode==='m'?it.days:7));
+
+    // белые плитки
+    $('hv-spend').textContent=money(it.spend);
+    var ds=dp(it.spend,prev?prev.spend:null,true,false);
+    delta('hv-spendd',ds); base('hv-spendb', prev?money(prev.spend)+' ₽':null);
+    $('hv-all').textContent=it.all!=null?String(it.all):'—';
+    var da=dp(it.all,prev?prev.all:null,false,false);
+    delta('hv-alld',da); base('hv-allb', (da&&prev)?String(prev.all):null);
+    var cpa=cpaOf(it), cpaP=prev?cpaOf(prev):null;
+    $('hv-cpa').textContent=cpa?money(cpa):'—';
+    $('hv-cpau').style.display=cpa?'':'none';
+    var dcp=dp(cpa,cpaP,true,false);
+    delta('hv-cpad',dcp); base('hv-cpab',(dcp&&cpaP)?money(cpaP)+' ₽':null);
+    var cr=crOf(it), crP=prev?crOf(prev):null;
+    $('hv-cr').textContent=cr!=null?pct(cr).replace(' %',''):'—';
+    $('hv-cru').style.display=cr!=null?'':'none';
+    var dcr=dp(cr,crP,false,true);
+    delta('hv-crd',dcr); base('hv-crb',(dcr&&crP!=null)?pct(crP):null);
+
+    // график и плитки недель
+    var ci=CHART[it.k]; if(ci==null) ci=-1;
+    var wks=document.querySelectorAll('.weeks .w[data-wk]');
+    for(var w=0;w<wks.length;w++){ wks[w].classList.toggle('on', w===ci); }
+
+    // примечание о фиксированных блоках
+    var fn=$('fixNote');
+    if(mode==='w'&&it.k==='w14'){ fn.hidden=true; }
+    else {
+      fn.hidden=false;
+      fn.textContent = mode==='m'
+        ? 'Верхние показатели — за месяц. Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты, лиды, воронка и план ниже — за 16–22.11.'
+        : (ci>=0 ? 'Шапка и выделенная неделя — за выбранный период. Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты, лиды, воронка и план месяца ниже — за 16–22.11.'
+                 : 'Шапка — за выбранную неделю. Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты, лиды и воронка ниже — за 16–22.11.');
+    }
+  }
+
+  function listFor(mode){ return mode==='m'?MONTHS:WEEKS; }
+  function label(it){ return it.k.charAt(0)==='m'?it.id:it.k; }
+  function noteFor(){
+    var list=listFor(state.mode), cur=null;
+    list.forEach(function(it){ if(it.k===state.key) cur=it; });
+    return cur? cur.note : 'Выберите период — верхние показатели пересчитаются под него.';
+  }
+  function renderList(){
+    var q=($('ppQ').value||'').trim().toLowerCase();
+    var list=listFor(state.mode), html='';
+    list.forEach(function(it){
+      var hay=(label(it)+' '+it.d+' '+it.t).toLowerCase();
+      if(q && hay.indexOf(q)<0) return;
+      html+='<button type="button" class="pp-row" role="option" data-k="'+it.k+'" aria-selected="'+(it.k===state.key)+'">'
+          +'<span class="rid">'+label(it)+'</span><span class="rdate">'+it.d+'</span><em class="rb">ЦЛ '+it.leads+'</em></button>';
+    });
+    $('ppList').innerHTML=html||'<div class="pp-empty">Ничего не нашлось</div>';
+    $('ppNote').textContent=noteFor();
+  }
+  function openPop(){
+    $('perPop').hidden=false;
+    $('perBtn').setAttribute('aria-expanded','true');
+    $('ppQ').value='';
+    renderList();
+    var list=$('ppList'), sel=list.querySelector('[aria-selected="true"]');
+    if(sel){ list.scrollTop=Math.max(0, sel.offsetTop-list.clientHeight/2+sel.offsetHeight/2); }
+    $('ppQ').focus();
+  }
+  function closePop(){
+    $('perPop').hidden=true;
+    $('perBtn').setAttribute('aria-expanded','false');
+  }
+  var btn=$('perBtn');
+  btn.addEventListener('click',function(){ if($('perPop').hidden) openPop(); else closePop(); });
+  $('ppQ').addEventListener('input',renderList);
+  document.querySelectorAll('.pp-tabs button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.pp-tabs button').forEach(function(x){ x.setAttribute('aria-selected','false'); });
+      b.setAttribute('aria-selected','true');
+      state.mode=b.getAttribute('data-mode');
+      $('ppQ').placeholder= state.mode==='m'?'Поиск месяца…':'Поиск недели…';
+      $('ppQ').value=''; renderList();
+    });
+  });
+  $('ppList').addEventListener('click',function(e){
+    var row=e.target.closest('.pp-row'); if(!row) return;
+    apply(state.mode,row.getAttribute('data-k'));
+    closePop();
+    btn.focus();
+  });
+  document.querySelectorAll('.pp-fast button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var list=listFor(state.mode);
+      var it=b.getAttribute('data-fast')==='first'?list[0]:list[list.length-1];
+      apply(state.mode,it.k);
+      closePop();
+    });
+  });
+  document.addEventListener('click',function(e){
+    if(!$('perPop').hidden && !e.target.closest('.per-sw')) closePop();
+  });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closePop(); });
+
+  // подсветка разделов
+  var links=[].slice.call(document.querySelectorAll('#secnav a'));
+  var secs=links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  function spy(){
+    var y=window.scrollY+Math.round(window.innerHeight*0.30), idx=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].getBoundingClientRect().top+window.scrollY<=y) idx=i; }
+    if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-6) idx=links.length-1;
+    links.forEach(function(a,i){ a.classList.toggle('on', i===idx); });
+  }
+  var lock=0;
+  links.forEach(function(a,i){
+    a.addEventListener('click',function(){
+      lock=Date.now()+900;
+      links.forEach(function(x,j){ x.classList.toggle('on', j===i); });
+    });
+  });
+  window.addEventListener('scroll',function(){ if(Date.now()>lock) spy(); },{passive:true});
+  spy();
+
+  apply('w','w14');
+})();
+</script>
+
+<script>
+(function(){
+  var TREND=[
+    {k:'w2',d:'24–30.08',t:11,di:8,se:3},
+    {k:'w3',d:'31.08–06.09',t:12,di:6,se:6},
+    {k:'w4',d:'07–13.09',t:13,di:4,se:7},
+    {k:'w5',d:'14–20.09',t:10,di:5,se:1},
+    {k:'w6',d:'21–27.09',t:15,di:7,se:6},
+    {k:'w7',d:'28.09–04.10',t:12,di:5,se:5},
+    {k:'w8',d:'05–11.10',t:16,di:15,se:1},
+    {k:'w9',d:'12–18.10',t:13,di:7,se:4},
+    {k:'w10',d:'19–25.10',t:13,di:6,se:3},
+    {k:'w11',d:'26.10–01.11',t:14,di:7,se:5},
+    {k:'w12',d:'02–08.11',t:10,di:5,se:2},
+    {k:'w13',d:'09–15.11',t:5,di:1,se:1},
+    {k:'w14',d:'16–22.11',t:10,di:4,se:5}
+  ];
+  var host=document.getElementById('trHost'), tip=document.getElementById('trTip');
+  if(!host) return;
+  var NS='http://www.w3.org/2000/svg';
+  function el(n,a){ var e=document.createElementNS(NS,n); for(var k in a) e.setAttribute(k,a[k]); return e; }
+  var COL={all:'#0f1a2b',dir:'#2f5dfa',se:'#7c3aed',sma:'#12a06a',bar:'#dde3ee',grid:'#eaeef6',band:'#f6f8fc',mute:'#8b97ab',x:'#5b6a80'};
+  var N=TREND.length;
+
+  function draw(){
+    host.querySelectorAll('svg').forEach(function(n){ n.remove(); });
+    var W=Math.max(720, host.clientWidth||1000), padL=48, padR=128, padT=24, rowH=74, gap=22;
+    var rowsH=3*(rowH+gap)-gap, H=padT+rowsH+40;
+    var x0=padL, x1=W-padR, dx=(x1-x0)/(N-1);
+    function X(i){ return x0+i*dx; }
+    var svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:'100%',height:H,role:'img',
+      'aria-label':'Тренд целевых лидов по неделям: всего, Директ и SEO, со скользящей за три недели'});
+    var rows=[
+      {n:'Всего ЦЛ',c:COL.all,d:TREND.map(function(p){ return p.t; })},
+      {n:'Директ · платный',c:COL.dir,d:TREND.map(function(p){ return p.di; })},
+      {n:'SEO · органика',c:COL.se,d:TREND.map(function(p){ return p.se; })}
+    ];
+    rows.forEach(function(r,ri){
+      var top=padT+ri*(rowH+gap), bot=top+rowH;
+      var lo=Math.min.apply(null,r.d)-1, hi=Math.max.apply(null,r.d)+1;
+      function Y(v){ return top+rowH*(1-(v-lo)/(hi-lo)); }
+      svg.appendChild(el('rect',{x:x0,y:top,width:x1-x0,height:rowH,rx:8,fill:COL.band}));
+      for(var i=0;i<=3;i++){
+        var gy=top+rowH*i/3;
+        svg.appendChild(el('line',{x1:x0,x2:x1,y1:gy,y2:gy,stroke:COL.grid,'stroke-width':1}));
+        svg.appendChild(el('text',{x:x0-9,y:gy+3.5,'text-anchor':'end','font-size':'10',fill:COL.mute})).textContent=Math.round(hi-(hi-lo)*i/3);
+      }
+      svg.appendChild(el('text',{x:x0,y:top-8,'font-size':'11.5','font-weight':'600',fill:r.c})).textContent=r.n;
+      var f=r.d[0], l=r.d[N-1], pc=f>0?Math.round((l-f)/f*100):0;
+      svg.appendChild(el('text',{x:W-8,y:top+22,'text-anchor':'end','font-size':'11','font-weight':'600',fill:pc>=0?COL.sma:'#b23b3b'}))
+        .textContent=f+' \u2192 '+l+' \u00b7 '+(pc>0?'+':'\u2212')+Math.abs(pc)+'%';
+      for(var j=0;j<N;j++){
+        var bw=Math.max(4,dx*0.34);
+        svg.appendChild(el('rect',{x:X(j)-bw/2,y:Y(r.d[j]),width:bw,height:Math.max(1,bot-Y(r.d[j])),rx:2,fill:COL.bar}));
+      }
+      var dp='';
+      for(var k=0;k<N;k++) dp+=(k?'L':'M')+X(k).toFixed(1)+' '+Y(r.d[k]).toFixed(1);
+      svg.appendChild(el('path',{d:dp,fill:'none',stroke:r.c,'stroke-width':2.2,'stroke-linejoin':'round','stroke-linecap':'round'}));
+      for(var m=0;m<N;m++) svg.appendChild(el('circle',{cx:X(m),cy:Y(r.d[m]),r:2.6,fill:r.c}));
+      var sma=r.d.map(function(v,i){ return i<2?null:(v+r.d[i-1]+r.d[i-2])/3; });
+      var sp='';
+      sma.forEach(function(v,i){ if(v===null) return; sp+=(sp===''?'M':'L')+X(i).toFixed(1)+' '+Y(v).toFixed(1); });
+      svg.appendChild(el('path',{d:sp,fill:'none',stroke:COL.sma,'stroke-width':1.6,'stroke-dasharray':'4 4','stroke-linecap':'round'}));
+      sma.forEach(function(v,i){ if(v===null) return; svg.appendChild(el('circle',{cx:X(i),cy:Y(v),r:2,fill:COL.sma})); });
+    });
+    var guide=el('line',{x1:0,x2:0,y1:padT,y2:padT+rowsH,stroke:'#c4cede','stroke-width':1,opacity:0});
+    svg.appendChild(guide);
+    for(var g=0;g<N;g++){
+      (function(gi){
+        var hit=el('rect',{x:X(gi)-dx/2,y:padT,width:dx,height:rowsH,fill:'transparent'});
+        hit.style.cursor='crosshair';
+        hit.addEventListener('mouseenter',function(){
+          guide.setAttribute('x1',X(gi)); guide.setAttribute('x2',X(gi)); guide.setAttribute('opacity','1');
+          tip.innerHTML='<b>'+TREND[gi].k+' · '+TREND[gi].d+'</b>'+
+            '<u><span>Всего ЦЛ</span><em>'+TREND[gi].t+'</em></u>'+
+            '<u><span>Директ</span><em>'+TREND[gi].di+'</em></u>'+
+            '<u><span>SEO</span><em>'+TREND[gi].se+'</em></u>';
+          tip.style.opacity='1';
+          var left=X(gi)+16;
+          if(left+tip.offsetWidth>host.clientWidth-4) left=X(gi)-tip.offsetWidth-16;
+          tip.style.left=left+'px';
+          tip.style.top=(padT-2)+'px';
+        });
+        hit.addEventListener('mouseleave',function(){ tip.style.opacity='0'; guide.setAttribute('opacity','0'); });
+        svg.appendChild(hit);
+      })(g);
+    }
+    for(var t=0;t<N;t++){
+      var tx=t===0?X(0):(t===N-1?X(N-1):X(t));
+      var an=t===0?'start':(t===N-1?'end':'middle');
+      svg.appendChild(el('text',{x:tx,y:H-27,'text-anchor':an,'font-size':'10.5','font-weight':'600',fill:COL.x})).textContent=TREND[t].k;
+      svg.appendChild(el('text',{x:tx,y:H-10,'text-anchor':an,'font-size':'9.5',fill:COL.mute})).textContent=TREND[t].d;
+    }
+    host.insertBefore(svg,tip);
+  }
+  draw();
+  var tm; window.addEventListener('resize',function(){ clearTimeout(tm); tm=setTimeout(draw,150); });
+})();
+</script>
+
+<script>
+(function(){
+  var host=document.getElementById('cuHost'); if(!host) return;
+  var PTS=[{x:'08.11',f:10,p:18},{x:'15.11',f:15,p:34},{x:'22.11',f:25,p:52},{x:'30.11',f:null,p:70}],MAX=70;
+  function el(n,a){var e=document.createElementNS('http://www.w3.org/2000/svg',n);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function draw(){
+    host.innerHTML='';
+    var W=Math.max(280,host.clientWidth||320), H=Math.max(240,host.clientHeight||280);
+    var m={t:18,r:18,b:26,l:30}, iw=W-m.l-m.r, ih=H-m.t-m.b;
+    var X=function(i){return m.l+iw*i/(PTS.length-1);}, Y=function(v){return m.t+ih-ih*v/MAX;};
+    var svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Накопленные целевые: 10 к 08.11, 15 к 15.11, 25 к 22.11 при плане 18 / 34 / 52 / 70'});
+    [0,18,35,53,70].forEach(function(v){
+      var y=Y(v);
+      svg.appendChild(el('line',{x1:m.l,x2:W-m.r,y1:y,y2:y,stroke:'#eef1f7'}));
+      var t=el('text',{x:m.l-8,y:y+3.5,'text-anchor':'end','font-size':'9.5',fill:'#8b97ab'});
+      t.textContent=v; svg.appendChild(t);
+    });
+    PTS.forEach(function(pt,i){ if(!i)return; svg.appendChild(el('line',{x1:X(i),x2:X(i),y1:m.t,y2:m.t+ih,stroke:'#f2f5fa','stroke-dasharray':'2 4'})); });
+    var pd='';
+    PTS.forEach(function(pt,i){ pd+=(i?'L':'M')+X(i).toFixed(1)+' '+Y(pt.p).toFixed(1)+' '; });
+    svg.appendChild(el('path',{d:pd,fill:'none',stroke:'#e08a1e','stroke-width':'2','stroke-dasharray':'5 5','stroke-linecap':'round','stroke-linejoin':'round'}));
+    var fp='',any=false;
+    PTS.forEach(function(pt,i){ if(pt.f==null)return; fp+=(any?'L':'M')+X(i).toFixed(1)+' '+Y(pt.f).toFixed(1)+' '; any=true; });
+    svg.appendChild(el('path',{d:fp+'L'+X(2).toFixed(1)+' '+Y(0).toFixed(1)+' L'+X(0).toFixed(1)+' '+Y(0).toFixed(1)+' Z',fill:'rgba(18,160,106,.10)'}));
+    svg.appendChild(el('path',{d:fp,fill:'none',stroke:'#12a06a','stroke-width':'2.2','stroke-linecap':'round','stroke-linejoin':'round'}));
+    PTS.forEach(function(pt,i){
+      var cx=X(i), last=i===PTS.length-1;
+      if(pt.f!=null){
+        svg.appendChild(el('circle',{cx:cx,cy:Y(pt.f),r:3.4,fill:'#fff',stroke:'#12a06a','stroke-width':'2'}));
+        var tl=el('text',{x:cx+8,y:Y(pt.f)+11,'font-size':'10','font-weight':'700',fill:'#0a7a4f'});
+        tl.textContent=pt.f; svg.appendChild(tl);
+      }
+      svg.appendChild(el('circle',{cx:cx,cy:Y(pt.p),r:3,fill:'#fff',stroke:'#e08a1e','stroke-width':'1.8'}));
+      var pl=el('text',{x:cx,y:Y(pt.p)-9,'text-anchor':i===0?'start':'middle','font-size':'9.5','font-weight':'600',fill:'#a96a12'});
+      if(i===0) pl.setAttribute('x',cx+1);
+      if(last) pl.setAttribute('text-anchor','end');
+      pl.textContent=pt.p; svg.appendChild(pl);
+      var xl=el('text',{x:cx,y:H-8,'text-anchor':i===0?'start':(last?'end':'middle'),'font-size':'9.5',fill:'#8b97ab'});
+      xl.textContent=pt.x; svg.appendChild(xl);
+    });
+    host.appendChild(svg);
+  }
+  draw();
+  var t; window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(draw,150); });
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ setTimeout(draw,40); });
+  window.addEventListener('load',function(){ setTimeout(draw,60); });
+})();
+
+(function(){
+  var body=document.getElementById('ldB'); if(!body) return;
+  var DEALS=[
+    {d:'21.11',n:'Гудфудрус',c:'+7 (985) 458-06-93',s:'SEO',p:'seq',pn:'Секвойя',st:'Закрыто и не реализовано'},
+    {d:'20.11',n:'ТЕХНОСПЕХ',c:'+7 (495) 968-80-20',s:'SEO',p:'seq',pn:'Секвойя',st:'КП выставлено',sum:3575000},
+    {d:'20.11',n:'ТД Лед Эксперт',c:'форма s-pro.group/prices',s:'Директ',p:'spr',pn:'Solution PRO',st:'Потребности выявлены'},
+    {d:'20.11',n:'Мед Уфа',c:'форма sequoia-service.ru/ufa · метка 10',s:'Директ',p:'seq',pn:'Секвойя',st:'Закрыто и не реализовано'},
+    {d:'19.11',n:'РЕАЛ',c:'a.rumyanceva@realpak.ru',s:'Email',p:'seq',pn:'Секвойя',st:'КП выставлено',sum:996480},
+    {d:'19.11',n:'СИ ЭМ ЭС ПРО',c:'форма sequoia-service.ru/spb · метка 5',s:'Директ',p:'seq',pn:'Секвойя',st:'Переговоры по КП',sum:948750},
+    {d:'18.11',n:'Симерик',c:'+7 (499) 455-27-86',s:'Директ',p:'ruq',pn:'Руки',st:'Закрыто и не реализовано',sum:2207920},
+    {d:'17.11',n:'Праздник Вам',c:'+7 (962) 959-20-00',s:'SEO',p:'seq',pn:'Секвойя',st:'Закрыто и не реализовано'}
+  ];
+  var F={p:'all',c:'all',q:''};
+  function esc(v){return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function srcCls(v){return v==='Директ'?'d':(v==='Email'?'em':'seo');}
+  function money(v){return v?new Intl.NumberFormat('ru-RU').format(v)+' ₽':'—';}
+  var count=document.getElementById('ldCount');
+  function render(){
+    var out='',n=0,q=F.q.trim().toLowerCase();
+    DEALS.forEach(function(x){
+      if(F.p!=='all'&&x.p!==F.p)return;
+      if(F.c!=='all'&&x.s!==F.c)return;
+      if(q&&(x.n+' '+x.c+' '+x.pn+' '+x.s).toLowerCase().indexOf(q)<0)return;
+      n++;
+      out+='<tr><td class="ld-d">'+x.d+'</td><td><div class="ld-n">'+esc(x.n)+'</div><div class="ld-c">'+esc(x.c)+'</div></td>'+
+        '<td><span class="src '+srcCls(x.s)+'">'+x.s+'</span></td>'+
+        '<td><span class="prj '+x.p+'">'+x.pn+'</span></td>'+
+        '<td>'+x.st+'</td>'+
+        '<td class="r"><span class="ld-sum'+(x.sum?'':' zero')+'">'+money(x.sum)+'</span></td></tr>';
+    });
+    if(!n) out='<tr><td class="ld-empty" colspan="6">Ничего не найдено — сбросьте фильтр или запрос</td></tr>';
+    body.innerHTML=out;
+    if(count) count.textContent=(n===DEALS.length?DEALS.length:n+' из '+DEALS.length)+' сделок · 16–22.11';
+  }
+  function group(id,key){
+    var g=document.getElementById(id); if(!g) return;
+    g.addEventListener('click',function(e){
+      var b=e.target.closest('button'); if(!b||!g.contains(b)) return;
+      [].forEach.call(g.querySelectorAll('button'),function(x){ x.classList.toggle('on',x===b); });
+      F[key]=key==='p'?b.getAttribute('data-p'):b.getAttribute('data-c');
+      render();
+    });
+  }
+  group('ldProj','p'); group('ldChan','c');
+  var q=document.getElementById('ldQ');
+  if(q) q.addEventListener('input',function(){ F.q=q.value; render(); });
+  render();
+})();
+</script>
+</body>
+</html>
