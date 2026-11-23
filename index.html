@@ -84,6 +84,7 @@
   .k-d>.up,.k-d>.down{font-size:13.5px;font-weight:700;padding:4px 10px;border-radius:99px;line-height:1.25}
   .k-d>.up{background:#e6f6ee;color:#0a7a4f}
   .k-d>.down{background:#fdeced;color:#b23b3b}
+  .k-d>.flat{background:#eef1f7;color:#5a6a80}
   .up{color:var(--ok)} .down{color:var(--bad)}
   .tri{font-size:8px;line-height:1}
 
@@ -505,7 +506,7 @@
     </div>
 
     <div class="c trd fade" id="s-trend">
-      <div class="c-h"><h2>Тренд ЦЛ по проектам · 13 недель</h2><span>у каждого ряда своя шкала — сравнивайте форму, а не высоту</span></div>
+      <div class="c-h"><h2>Тренд ЦЛ по каналам · 13 недель</h2><span>у каждого ряда своя шкала — сравнивайте форму, а не высоту</span></div>
       <div class="trd-host" id="trHost">
         <div class="trd-tip" id="trTip"></div>
       </div>
@@ -515,7 +516,7 @@
         <span><i style="background:#7c3aed"></i>SEO · органика</span>
         <span><i class="dash"></i>Скользящая (3 нед.)</span>
       </div>
-      <p class="w2w-note" style="padding-top:10px">Серые столбцы — факт недели. Пунктир — среднее за текущую и две предыдущие недели. Источник: недельные отчёты и CRM, 24.08–22.11.</p>
+      <p class="w2w-note" style="padding-top:10px">Серые столбцы — факт недели. Пунктир — среднее за текущую и две предыдущие недели. «Всего» включает Email и прямые обращения, поэтому больше суммы Директа и SEO. Источник: недельные отчёты и CRM, 24.08–22.11.</p>
     </div>
 
 
@@ -597,7 +598,7 @@
 
     <div class="c full fade" id="s-full">
       <div class="c-h"><h2>Полная таблица показателей</h2><span>изм. к 09–15.11</span></div>
-      <p class="full-s">Предыдущие недели — из отчётов 02–08.11 и 09–15.11. Все периоды — выгрузки Директа и CRM, сверка 23.11.</p>
+      <p class="full-s">Предыдущие недели — из отчётов 02–08.11 и 09–15.11. Все периоды — выгрузки Директа и CRM, сверка 23.11; у 16–22.11 в Директе шесть дней — 22.11 не откручивался.</p>
       <table class="ft">
         <colgroup><col style="width:32%"><col style="width:17%"><col style="width:17%"><col style="width:17%"><col style="width:17%"></colgroup>
         <thead><tr><th>Показатель</th><th>02.11–08.11</th><th>09.11–15.11</th><th>16–22.11</th><th>Изм.</th></tr></thead>
@@ -621,7 +622,7 @@
       <div class="row"><span class="nm">SEO / органика</span><span class="vl">5 · 50 %</span><div class="track"><i class="i2" data-w="50"></i></div></div>
       <div class="row" style="margin-bottom:0"><span class="nm">Email</span><span class="vl">1 · 10 %</span><div class="track"><i class="i3" data-w="10"></i></div></div>
       <p style="margin:14px 0 0;font-size:11.5px;color:var(--txt-3)">Директ: 16 947 ₽ за целевой · SEO и письма — вне рекламного бюджета</p>
-      <p style="margin:10px 0 0;font-size:11.5px;color:var(--txt-3)">CTR <b style="color:var(--txt);font-weight:600">0,41 %</b> · CPC <b style="color:var(--txt);font-weight:600">605 ₽</b> · 29 обращений Calltouch</p>
+      <p style="margin:10px 0 0;font-size:11.5px;color:var(--txt-3)">CTR <b style="color:var(--txt);font-weight:600">0,41 %</b> · CPC <b style="color:var(--txt);font-weight:600">605 ₽</b> · 16 целевых обращений Calltouch</p>
     </div>
 
     <div class="c proj fade" id="s-proj">
@@ -660,7 +661,7 @@
         <thead><tr><th>Дата</th><th>Сделка</th><th>Источник</th><th>Проект</th><th>Этап</th><th class="r">Сумма, ₽</th></tr></thead>
         <tbody id="ldB"></tbody>
       </table>
-      <p class="w2w-note" style="padding-top:10px">Ещё 2 сделки недели (16.11, этапы «Взял в работу» и «ЛПР выявлен») в выгрузке CRM без названия и контакта — в таблицу не выведены, но входят в 10 ЦЛ недели.</p>
+      <p class="w2w-note" style="padding-top:10px">Ещё 2 сделки недели (16.11, этапы «Взял в работу» и «ЛПР выявлен», SEO · Секвойя) в выгрузке CRM без названия и контакта — в таблицу не выведены, но входят в 10 ЦЛ недели и в блоки «Каналы» и «Проекты».</p>
     </div>
 
     <div class="c wk fade">
@@ -676,12 +677,11 @@
     <div class="c fun fade" id="s-fun">
       <div class="c-h"><h2>Воронка</h2><span>10 сделок</span></div>
       <div class="fn-grid">
-      <div class="fnrow"><b>Договор подписан</b><span class="q">1</span><span class="tip">оплачено 0 ₽</span></div>
-      <div class="fnrow"><b>В договоре</b><span class="q">1</span><span class="tip">сумма договора в работе</span></div>
-      <div class="fnrow"><b>Потребности выявлены</b><span class="q">1</span><span class="tip">квалификация пройдена</span></div>
-      <div class="fnrow"><b>КП выставлено</b><span class="q">1</span><span class="tip">ожидание решения</span></div>
-      <div class="fnrow"><b>В работе</b><span class="q">2</span><span class="tip">активные сделки</span></div>
-      <div class="fnrow" style="margin-bottom:0"><b>Закрыто и не реализовано</b><span class="q">4</span><span class="tip">пайплайн 7,73 млн ₽</span></div>
+      <div class="fnrow"><b>Договор подписан</b><span class="q">0</span><span class="tip">подписанных нет</span></div>
+      <div class="fnrow"><b>Переговоры по КП</b><span class="q">1</span><span class="tip">948 750 ₽</span></div>
+      <div class="fnrow"><b>КП выставлено</b><span class="q">2</span><span class="tip">4 571 480 ₽</span></div>
+      <div class="fnrow"><b>В работе</b><span class="q">3</span><span class="tip">потребности · взял в работу · ЛПР</span></div>
+      <div class="fnrow" style="margin-bottom:0"><b>Закрыто и не реализовано</b><span class="q">4</span><span class="tip">2 207 920 ₽</span></div>
       </div>
     </div>
 
@@ -813,10 +813,13 @@
   function crOf(x){ return (x.all!=null&&x.impr)? x.all/x.impr*100 : null; }
   function dp(cur,prev,invert,pp){
     if(cur==null||prev==null||prev===0) return null;
-    var diff=cur-prev, up=diff>0, good=invert?!up:up;
-    return {text: pp ? (up?'▲ ':'▼ ')+num2(Math.abs(diff))+' п.п.'
-                     : (up?'▲ ':'▼ ')+Math.round(Math.abs(diff)/Math.abs(prev)*100)+' %',
-            cls: good?'up':'down'};
+    var diff=cur-prev;
+    if(Math.abs(diff)<1e-9) return {text:'= 0'+(pp?' п.п.':' %'), cls:'flat'};
+    var up=diff>0, good=invert?!up:up;
+    var rel=Math.abs(diff)/Math.abs(prev)*100, val;
+    if(pp) val=num2(Math.abs(diff));
+    else val= rel<1 ? num2(rel) : String(Math.round(rel));
+    return {text: (up?'▲ ':'▼ ')+val+(pp?' п.п.':' %'), cls: good?'up':'down'};
   }
   function txt(id,v){ var el=$(id); if(!el) return; if(v==null||v===''){ el.style.display='none'; } else { el.style.display=''; el.textContent=v; } }
   function delta(id,d){ var el=$(id); if(!d){ el.style.display='none'; return; } el.style.display=''; el.textContent=d.text; el.className=d.cls; }
@@ -831,7 +834,7 @@
     state.mode=mode; state.key=it.k;
 
     $('perTitle').textContent=it.t;
-    $('perId').textContent=mode==='m'?it.id:it.k;
+    $('perId').textContent=mode==='m'?it.id:isoWeek(it.wk)+' нед.';
     $('perDates').textContent=it.d;
     $('whoWk').textContent=mode==='m'?it.who:'неделя '+isoWeek(it.wk);
     $('ppNote').textContent=it.note;
@@ -844,8 +847,8 @@
     if(dl){
       pill.style.display='';
       pill.textContent=dl.text;
-      pill.style.background= dl.cls==='up'?'rgba(52,211,153,.16)':'rgba(248,113,113,.18)';
-      pill.style.color= dl.cls==='up'?'#6ee7b7':'#fca5a5';
+      pill.style.background= dl.cls==='up'?'rgba(52,211,153,.16)':(dl.cls==='flat'?'rgba(255,255,255,.16)':'rgba(248,113,113,.18)');
+      pill.style.color= dl.cls==='up'?'#6ee7b7':(dl.cls==='flat'?'#dbe3f0':'#fca5a5');
       $('hv-base').style.display=''; $('hv-base').textContent='было '+money(prev.leads);
     } else { pill.style.display='none'; $('hv-base').style.display='none'; }
     $('hv-cpl').textContent=money(it.cpl)+' ₽';
@@ -903,7 +906,7 @@
       var hay=(label(it)+' '+it.d+' '+it.t).toLowerCase();
       if(q && hay.indexOf(q)<0) return;
       html+='<button type="button" class="pp-row" role="option" data-k="'+it.k+'" aria-selected="'+(it.k===state.key)+'">'
-          +'<span class="rid">'+label(it)+'</span><span class="rdate">'+it.d+'</span><em class="rb">ЦЛ '+it.leads+'</em></button>';
+          +'<span class="rid">'+(it.k.charAt(0)==='m'?it.id:isoWeek(it.wk)+' нед.')+'</span><span class="rdate">'+it.d+'</span><em class="rb">ЦЛ '+it.leads+'</em></button>';
     });
     $('ppList').innerHTML=html||'<div class="pp-empty">Ничего не нашлось</div>';
     $('ppNote').textContent=noteFor();
@@ -1048,7 +1051,7 @@
         hit.style.cursor='crosshair';
         hit.addEventListener('mouseenter',function(){
           guide.setAttribute('x1',X(gi)); guide.setAttribute('x2',X(gi)); guide.setAttribute('opacity','1');
-          tip.innerHTML='<b>'+TREND[gi].k+' · '+TREND[gi].d+'</b>'+
+          tip.innerHTML='<b>'+TREND[gi].d.split('–').join(' — ')+'</b>'+
             '<u><span>Всего ЦЛ</span><em>'+TREND[gi].t+'</em></u>'+
             '<u><span>Директ</span><em>'+TREND[gi].di+'</em></u>'+
             '<u><span>SEO</span><em>'+TREND[gi].se+'</em></u>';
@@ -1065,8 +1068,7 @@
     for(var t=0;t<N;t++){
       var tx=t===0?X(0):(t===N-1?X(N-1):X(t));
       var an=t===0?'start':(t===N-1?'end':'middle');
-      svg.appendChild(el('text',{x:tx,y:H-27,'text-anchor':an,'font-size':'10.5','font-weight':'600',fill:COL.x})).textContent=TREND[t].k;
-      svg.appendChild(el('text',{x:tx,y:H-10,'text-anchor':an,'font-size':'9.5',fill:COL.mute})).textContent=TREND[t].d;
+      svg.appendChild(el('text',{x:tx,y:H-16,'text-anchor':an,'font-size':'9.5',fill:COL.x})).textContent=TREND[t].d;
     }
     host.insertBefore(svg,tip);
   }
