@@ -791,11 +791,11 @@
   ];
   var MONTHS=[
     {k:'m9',id:'сен',d:'01.09 – 30.09',t:'Сентябрь 2026',who:'сентябрь',days:30,leads:49,spend:396147,cpl:8085,conv:3.26,all:null,impr:86411,
-     note:'49 ЦЛ, 396 147 ₽, CPL 8 085 ₽, конверсия 3,26 %. Директ API: 1 503 клика, 86 411 показов.'},
+     note:'49 ЦЛ, 396 147 ₽, CPL 8 085 ₽, конверсия 3,26 %. Директ API: 1 503 клика, 86 411 показов. Сырых обращений за сентябрь в выгрузках нет — CPA и CR не считаются.'},
     {k:'m10',id:'окт',d:'01.10 – 31.10',t:'Октябрь 2026',who:'октябрь',days:31,leads:63,spend:396494,cpl:6294,conv:3.43,all:null,impr:204723,
-     note:'63 ЦЛ, 396 494 ₽, CPL 6 294 ₽, конверсия 3,43 %. 1 836 кликов; расход сверен повторной выгрузкой 02.11.'},
-    {k:'m11',id:'ноя',d:'01.11 – 22.11',t:'Ноябрь 2026 — по 22.11',who:'ноябрь · MTD',days:22,leads:25,spend:170012,cpl:6800,conv:1.95,all:null,impr:361986,
-     note:'25 ЦЛ из плана 70, 170 012 ₽, CPL 6 800 ₽, конверсия 1,95 %. Выполнение плана месяца — 36 %. 1 282 клика.'}
+     note:'63 ЦЛ, 396 494 ₽, CPL 6 294 ₽, конверсия 3,43 %. 1 836 кликов; расход сверен повторной выгрузкой 02.11. Сырых обращений за октябрь в выгрузках нет — CPA и CR не считаются.'},
+    {k:'m11',id:'ноя',d:'01.11 – 22.11',t:'Ноябрь 2026 — по 22.11',who:'ноябрь · MTD',days:22,leads:25,spend:170012,cpl:6800,conv:1.95,all:604,allSub:'из них 25 целевых · 02–22.11',cpaSub:'за 02–22.11',crSub:'за 02–22.11',impr:361986,
+     note:'25 ЦЛ из плана 70, 170 012 ₽, CPL 6 800 ₽, конверсия 1,95 %. Выполнение плана месяца — 36 %. 1 282 клика. Все обращения — 604 по неделям 02–22.11 (за 01.11 сырых данных нет).'}
   ];
   var state={mode:'w',key:'w14'};
   function $(id){ return document.getElementById(id); }
@@ -824,6 +824,7 @@
   function txt(id,v){ var el=$(id); if(!el) return; if(v==null||v===''){ el.style.display='none'; } else { el.style.display=''; el.textContent=v; } }
   function delta(id,d){ var el=$(id); if(!d){ el.style.display='none'; return; } el.style.display=''; el.textContent=d.text; el.className=d.cls; }
   function base(id,v){ txt(id, v==null?'':'было '+v); }
+  function na(id,on){ var e=$(id); if(!e) return; e.style.fontSize=on?'22px':''; e.style.fontWeight=on?'600':''; e.style.color=on?'var(--txt-3)':''; e.style.letterSpacing=on?'-0.4px':''; e.style.whiteSpace=on?'nowrap':''; }
 
   var CHART={w12:0,w13:1,w14:2,m11:3};
   function apply(mode,key){
@@ -861,19 +862,25 @@
     $('hv-spend').textContent=money(it.spend);
     var ds=dp(it.spend,prev?prev.spend:null,true,false);
     delta('hv-spendd',ds); base('hv-spendb', prev?money(prev.spend)+' ₽':null);
-    $('hv-all').textContent=it.all!=null?String(it.all):'—';
+    na('hv-all', it.all==null);
+    $('hv-all').textContent=it.all!=null?String(it.all):'н/д';
     var da=dp(it.all,prev?prev.all:null,false,false);
-    delta('hv-alld',da); base('hv-allb', (da&&prev)?String(prev.all):null);
+    delta('hv-alld',da);
+    txt('hv-allb', it.allSub || ((da&&prev)?String(prev.all):(it.all==null?'в выгрузке только целевые сделки':'')));
     var cpa=cpaOf(it), cpaP=prev?cpaOf(prev):null;
-    $('hv-cpa').textContent=cpa?money(cpa):'—';
+    na('hv-cpa', cpa==null);
+    $('hv-cpa').textContent=cpa?money(cpa):'н/д';
     $('hv-cpau').style.display=cpa?'':'none';
     var dcp=dp(cpa,cpaP,true,false);
-    delta('hv-cpad',dcp); base('hv-cpab',(dcp&&cpaP)?money(cpaP)+' ₽':null);
+    delta('hv-cpad',dcp);
+    txt('hv-cpab', it.cpaSub || ((dcp&&cpaP)?'было '+money(cpaP)+' ₽':(cpa==null?'в выгрузке только целевые сделки':'')));
     var cr=crOf(it), crP=prev?crOf(prev):null;
-    $('hv-cr').textContent=cr!=null?pct(cr).replace(' %',''):'—';
+    na('hv-cr', cr==null);
+    $('hv-cr').textContent=cr!=null?pct(cr).replace(' %',''):'н/д';
     $('hv-cru').style.display=cr!=null?'':'none';
     var dcr=dp(cr,crP,false,true);
-    delta('hv-crd',dcr); base('hv-crb',(dcr&&crP!=null)?pct(crP):null);
+    delta('hv-crd',dcr);
+    txt('hv-crb', it.crSub || ((dcr&&crP!=null)?'было '+pct(crP):(cr==null?'в выгрузке только целевые сделки':'')));
 
     // график и плитки недель
     var ci=CHART[it.k]; if(ci==null) ci=-1;
