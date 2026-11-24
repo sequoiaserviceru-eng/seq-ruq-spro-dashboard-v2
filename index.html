@@ -1047,7 +1047,9 @@
   window.addEventListener('scroll',function(){ if(Date.now()>lock) spy(); },{passive:true});
   spy();
 
-  apply('w','w14');
+  var qp=(location.search.match(/[?&]p=([a-z0-9]+)/i)||[])[1];
+  var known=qp && (WEEKS.concat(MONTHS).some(function(x){ return x.k===qp; }));
+  if(known) apply(qp.charAt(0)==='m'?'m':'w', qp); else apply('w','w14');
 })();
 </script>
 
