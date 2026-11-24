@@ -236,6 +236,9 @@
   .c.leads{grid-column:span 12}
   .cu-host{position:relative;flex:1;min-height:250px;margin-top:2px}
   .cu-host svg{display:block}
+  .cu-msg{flex:1;display:flex;align-items:center;min-height:250px;padding:0 6px;font-size:12px;line-height:1.65;color:var(--txt-2)}
+  .cu-msg[hidden]{display:none}
+  .cu-host[hidden]{display:none}
   .cu-leg{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;font-size:10.5px;color:var(--txt-3)}
   .cu-leg span{display:flex;align-items:center;gap:6px}
   .cu-leg i{width:16px;height:2px;border-radius:2px;display:inline-block}
@@ -527,13 +530,14 @@
 
 
     <div class="c nov fade">
-      <div class="c-h"><h2>Накопленные целевые по неделям</h2><span>факт против плана · 08.11 → 30.11</span></div>
+      <div class="c-h"><h2>Накопленные целевые по неделям</h2><span id="cuSub">факт против плана · 08.11 → 30.11</span></div>
       <div class="cu-host" id="cuHost"></div>
-      <div class="cu-leg">
+      <div class="cu-msg" id="cuMsg" hidden></div>
+      <div class="cu-leg" id="cuLeg">
         <span><i class="f"></i>Факт, накопленным итогом</span>
-        <span><i class="p"></i>План 70 ЦЛ (чек-поинты 18 / 34 / 52)</span>
+        <span id="cuLegP"><i class="p"></i>План 70 ЦЛ (чек-поинты 18 / 34 / 52)</span>
       </div>
-      <p class="w2w-note" style="padding-top:8px">Данные на 22.11.2026: 25 ЦЛ из 70 — 36 % при 73 % срока. Чек-поинт 22.11 по медиаплану — 52 ЦЛ, недобор 27.</p>
+      <p class="w2w-note" id="cuNote" style="padding-top:8px">Данные на 22.11.2026: 25 ЦЛ из 70 — 36 % при 73 % срока. Чек-поинт 22.11 по медиаплану — 52 ЦЛ, недобор 27.</p>
     </div>
 
     <div class="c novw fade">
@@ -840,7 +844,7 @@
     if(!it){ it=list[list.length-1]; i=list.length-1; }
     if(i>0) prev=list[i-1];
     state.mode=mode; state.key=it.k;
-    window.__M=mode;
+    window.__M=mode; window.__K=it.k;
     if(window.__funnel) window.__funnel(mode);
     if(window.__updLeads) window.__updLeads();
 
@@ -943,6 +947,8 @@
     var wks=document.querySelectorAll('.weeks .w[data-wk]');
     for(var w=0;w<wks.length;w++){ wks[w].classList.toggle('on', w===ci); }
 
+    if(window.__cuDraw) window.__cuDraw(mode,it.k);
+
     // примечание о фиксированных блоках
     var fn=$('fixNote');
     if(mode==='w'&&it.k==='w14'){ fn.hidden=true; }
@@ -952,7 +958,7 @@
         ? (it.k==='m11'
             ? 'Верхние показатели, лиды и воронка — за ноябрь (01–22.11). Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты и план ниже — за 16–22.11.'
             : (it.k==='m10'
-              ? 'Верхние показатели — за октябрь. Разбивка октября по CRM: 63 ЦЛ — Директ 38 / SEO 16 / Email 9; Секвойя 35 / Руки 16 / Solution PRO 12. Блоки ниже — за ноябрь: лиды 16–22.11, воронка 27 сделок за 01–22.11, каналы, проекты, тренд и план — 16–22.11.'
+              ? 'Верхние показатели и накопление по неделям — за октябрь (недели 28.09–01.11). Разбивка октября по CRM: 63 ЦЛ — Директ 38 / SEO 16 / Email 9; Секвойя 35 / Руки 16 / Solution PRO 12. Блоки ниже, включая «Недели ноября» и план 70 ЦЛ, — за ноябрь: лиды 16–22.11, воронка 27 сделок за 01–22.11, каналы, проекты, тренд — 16–22.11.'
               : 'Верхние показатели — за сентябрь. Разбивки по каналам и проектам за сентябрь нет. Блоки ниже — за ноябрь: лиды 16–22.11, воронка 27 сделок за 01–22.11, каналы, проекты, тренд и план — 16–22.11.'))
         : (ci>=0 ? 'Шапка и выделенная неделя — за выбранный период. Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты, лиды, воронка и план месяца ниже — за 16–22.11.'
                  : 'Шапка — за выбранную неделю. Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты, лиды и воронка ниже — за 16–22.11.');
@@ -1147,27 +1153,37 @@
 <script>
 (function(){
   var host=document.getElementById('cuHost'); if(!host) return;
-  var PTS=[{x:'08.11',f:10,p:18},{x:'15.11',f:15,p:34},{x:'22.11',f:25,p:52},{x:'30.11',f:null,p:70}],MAX=70;
+  function $(id){ return document.getElementById(id); }
+  var NOV={pts:[{x:'08.11',f:10,p:18},{x:'15.11',f:15,p:34},{x:'22.11',f:25,p:52},{x:'30.11',f:null,p:70}],
+           max:70,ticks:[0,18,35,53,70],plan:true,
+           aria:'Накопленные целевые: 10 к 08.11, 15 к 15.11, 25 к 22.11 при плане 18 / 34 / 52 / 70'};
+  var OCT={pts:[{x:'04.10',f:7,p:null},{x:'11.10',f:23,p:null},{x:'18.10',f:36,p:null},{x:'25.10',f:49,p:null},{x:'01.11',f:63,p:null}],
+           max:63,ticks:[0,21,42,63],plan:false,
+           aria:'Накопленные целевые за октябрь: 7 к 04.10, 23 к 11.10, 36 к 18.10, 49 к 25.10, 63 к 01.11'};
+  var cur=NOV;
   function el(n,a){var e=document.createElementNS('http://www.w3.org/2000/svg',n);for(var k in a)e.setAttribute(k,a[k]);return e;}
   function draw(){
+    var PTS=cur.pts,MAX=cur.max;
     host.innerHTML='';
     var W=Math.max(280,host.clientWidth||320), H=Math.max(240,host.clientHeight||280);
     var m={t:18,r:18,b:26,l:30}, iw=W-m.l-m.r, ih=H-m.t-m.b;
     var X=function(i){return m.l+iw*i/(PTS.length-1);}, Y=function(v){return m.t+ih-ih*v/MAX;};
-    var svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Накопленные целевые: 10 к 08.11, 15 к 15.11, 25 к 22.11 при плане 18 / 34 / 52 / 70'});
-    [0,18,35,53,70].forEach(function(v){
+    var svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H,role:'img','aria-label':cur.aria});
+    cur.ticks.forEach(function(v){
       var y=Y(v);
       svg.appendChild(el('line',{x1:m.l,x2:W-m.r,y1:y,y2:y,stroke:'#eef1f7'}));
       var t=el('text',{x:m.l-8,y:y+3.5,'text-anchor':'end','font-size':'9.5',fill:'#8b97ab'});
       t.textContent=v; svg.appendChild(t);
     });
     PTS.forEach(function(pt,i){ if(!i)return; svg.appendChild(el('line',{x1:X(i),x2:X(i),y1:m.t,y2:m.t+ih,stroke:'#f2f5fa','stroke-dasharray':'2 4'})); });
-    var pd='';
-    PTS.forEach(function(pt,i){ pd+=(i?'L':'M')+X(i).toFixed(1)+' '+Y(pt.p).toFixed(1)+' '; });
-    svg.appendChild(el('path',{d:pd,fill:'none',stroke:'#e08a1e','stroke-width':'2','stroke-dasharray':'5 5','stroke-linecap':'round','stroke-linejoin':'round'}));
-    var fp='',any=false;
-    PTS.forEach(function(pt,i){ if(pt.f==null)return; fp+=(any?'L':'M')+X(i).toFixed(1)+' '+Y(pt.f).toFixed(1)+' '; any=true; });
-    svg.appendChild(el('path',{d:fp+'L'+X(2).toFixed(1)+' '+Y(0).toFixed(1)+' L'+X(0).toFixed(1)+' '+Y(0).toFixed(1)+' Z',fill:'rgba(18,160,106,.10)'}));
+    if(cur.plan){
+      var pd='';
+      PTS.forEach(function(pt,i){ pd+=(i?'L':'M')+X(i).toFixed(1)+' '+Y(pt.p).toFixed(1)+' '; });
+      svg.appendChild(el('path',{d:pd,fill:'none',stroke:'#e08a1e','stroke-width':'2','stroke-dasharray':'5 5','stroke-linecap':'round','stroke-linejoin':'round'}));
+    }
+    var fp='',any=false,lastI=0;
+    PTS.forEach(function(pt,i){ if(pt.f==null)return; fp+=(any?'L':'M')+X(i).toFixed(1)+' '+Y(pt.f).toFixed(1)+' '; any=true; lastI=i; });
+    svg.appendChild(el('path',{d:fp+'L'+X(lastI).toFixed(1)+' '+Y(0).toFixed(1)+' L'+X(0).toFixed(1)+' '+Y(0).toFixed(1)+' Z',fill:'rgba(18,160,106,.10)'}));
     svg.appendChild(el('path',{d:fp,fill:'none',stroke:'#12a06a','stroke-width':'2.2','stroke-linecap':'round','stroke-linejoin':'round'}));
     PTS.forEach(function(pt,i){
       var cx=X(i), last=i===PTS.length-1;
@@ -1176,20 +1192,40 @@
         var tl=el('text',{x:cx+8,y:Y(pt.f)+11,'font-size':'10','font-weight':'700',fill:'#0a7a4f'});
         tl.textContent=pt.f; svg.appendChild(tl);
       }
-      svg.appendChild(el('circle',{cx:cx,cy:Y(pt.p),r:3,fill:'#fff',stroke:'#e08a1e','stroke-width':'1.8'}));
-      var pl=el('text',{x:cx,y:Y(pt.p)-9,'text-anchor':i===0?'start':'middle','font-size':'9.5','font-weight':'600',fill:'#a96a12'});
-      if(i===0) pl.setAttribute('x',cx+1);
-      if(last) pl.setAttribute('text-anchor','end');
-      pl.textContent=pt.p; svg.appendChild(pl);
+      if(pt.p!=null){
+        svg.appendChild(el('circle',{cx:cx,cy:Y(pt.p),r:3,fill:'#fff',stroke:'#e08a1e','stroke-width':'1.8'}));
+        var pl=el('text',{x:cx,y:Y(pt.p)-9,'text-anchor':i===0?'start':'middle','font-size':'9.5','font-weight':'600',fill:'#a96a12'});
+        if(i===0) pl.setAttribute('x',cx+1);
+        if(last) pl.setAttribute('text-anchor','end');
+        pl.textContent=pt.p; svg.appendChild(pl);
+      }
       var xl=el('text',{x:cx,y:H-8,'text-anchor':i===0?'start':(last?'end':'middle'),'font-size':'9.5',fill:'#8b97ab'});
       xl.textContent=pt.x; svg.appendChild(xl);
     });
     host.appendChild(svg);
   }
-  draw();
+  window.__cuDraw=function(mode,key){
+    var sub=$('cuSub'), legP=$('cuLegP'), note=$('cuNote'), msg=$('cuMsg'), leg=$('cuLeg');
+    var isOct = mode==='m' && key==='m10';
+    var isSep = mode==='m' && key==='m9';
+    if(isSep){
+      host.hidden=true; msg.hidden=false; leg.style.display='none';
+      sub.textContent='недельный разрез с 28.09';
+      msg.textContent='За сентябрь недельного разреза нет: недельная выгрузка начинается с 28.09, и в сентябрь из неё попадают только 5 ЦЛ недели 28.09–04.10. Поэтому кривую накопления за сентябрь не строим.';
+      note.textContent='';
+      return;
+    }
+    host.hidden=false; msg.hidden=true; leg.style.display=''; sub.textContent=isOct?'накопительно за октябрь · недели 28.09 → 01.11':'факт против плана · 08.11 → 30.11';
+    legP.style.display=isOct?'none':'';
+    note.textContent = isOct
+      ? 'Недели 28.09–01.11 дали 68 ЦЛ, из них 63 — в октябре (5 ЦЛ недели 28.09–04.10 ушли в сентябрь). Итог совпадает с месячным: 63. Месячного плана на октябрь в медиаплане нет — линия плана не показана.'
+      : 'Данные на 22.11.2026: 25 ЦЛ из 70 — 36 % при 73 % срока. Чек-поинт 22.11 по медиаплану — 52 ЦЛ, недобор 27.';
+    cur = isOct ? OCT : NOV;
+    draw();
+  };
   var t; window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(draw,150); });
-  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ setTimeout(draw,40); });
-  window.addEventListener('load',function(){ setTimeout(draw,60); });
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ if(window.__cuDraw) window.__cuDraw(window.__M||'w',window.__K||'w14'); });
+  window.__cuDraw(window.__M||'w',window.__K||'w14');
 })();
 
 (function(){
