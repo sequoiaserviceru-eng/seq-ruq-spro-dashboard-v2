@@ -294,6 +294,7 @@
   .prj.seq{background:#e6f6ee;color:#0a7a4f}
   .prj.ruq{background:#eef3fe;color:#2f5dfa}
   .prj.spr{background:#f4ecfe;color:#7c3aed}
+  .src.na,.prj.na{background:#f1f4fa;color:#6b7a90}
   .ld-sum{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--txt)}
   .ld-sum.zero{color:var(--txt-3);font-weight:400}
   .ld-empty{text-align:center!important;color:var(--txt-3)!important;padding:22px 0!important}
@@ -637,13 +638,14 @@
 
     <div class="c leads fade" id="s-leads">
       <div class="c-h"><h2>Целевые лиды по клиентам</h2><span id="ldCount">8 сделок · 16–22.11</span></div>
-      <p class="leads-s">8 сделок с тегом «Целевой», созданных 16.11–22.11: у всех есть название и контакт в CRM. Номер или почта клиента — копируется. Статусы этапов — на 23.11.2026.</p>
+      <p class="leads-s" id="ldSub">8 сделок с тегом «Целевой», созданных 16.11–22.11: у всех есть название и контакт в CRM. Номер или почта клиента — копируется. Статусы этапов — на 24.11.2026.</p>
       <div class="ld-tools">
         <div class="ld-seg" id="ldProj">
           <button class="on" data-p="all">Все <b>8</b></button>
           <button data-p="seq">Секвойя <b>6</b></button>
           <button data-p="ruq">Руки <b>1</b></button>
           <button data-p="spr">Solution PRO <b>1</b></button>
+          <button data-p="na">Не определён <b>0</b></button>
         </div>
         <div class="ld-seg" id="ldChan">
           <button class="on" data-c="all">Все каналы</button>
@@ -675,13 +677,13 @@
     </div>
 
     <div class="c fun fade" id="s-fun">
-      <div class="c-h"><h2>Воронка</h2><span>10 сделок</span></div>
+      <div class="c-h"><h2>Воронка</h2><span id="fnHead">10 сделок</span></div>
       <div class="fn-grid">
-      <div class="fnrow"><b>Договор подписан</b><span class="q">0</span><span class="tip">подписанных нет</span></div>
-      <div class="fnrow"><b>Переговоры по КП</b><span class="q">1</span><span class="tip">948 750 ₽</span></div>
-      <div class="fnrow"><b>КП выставлено</b><span class="q">2</span><span class="tip">4 571 480 ₽</span></div>
-      <div class="fnrow"><b>В работе</b><span class="q">3</span><span class="tip">потребности · взял в работу · ЛПР</span></div>
-      <div class="fnrow" style="margin-bottom:0"><b>Закрыто и не реализовано</b><span class="q">4</span><span class="tip">2 207 920 ₽</span></div>
+      <div class="fnrow"><b>Договор подписан</b><span class="q" id="fnDog">0</span><span class="tip" id="fnDogT">подписанных нет</span></div>
+      <div class="fnrow"><b>Переговоры по КП</b><span class="q" id="fnPer">1</span><span class="tip" id="fnPerT">948 750 ₽</span></div>
+      <div class="fnrow"><b>КП выставлено</b><span class="q" id="fnKp">2</span><span class="tip" id="fnKpT">4 571 480 ₽</span></div>
+      <div class="fnrow"><b>В работе</b><span class="q" id="fnWork">3</span><span class="tip" id="fnWorkT">потребности · взял в работу · ЛПР</span></div>
+      <div class="fnrow" style="margin-bottom:0"><b>Закрыто и не реализовано</b><span class="q" id="fnZak">4</span><span class="tip" id="fnZakT">2 207 920 ₽</span></div>
       </div>
     </div>
 
@@ -833,6 +835,9 @@
     if(!it){ it=list[list.length-1]; i=list.length-1; }
     if(i>0) prev=list[i-1];
     state.mode=mode; state.key=it.k;
+    window.__M=mode;
+    if(window.__funnel) window.__funnel(mode);
+    if(window.__updLeads) window.__updLeads();
 
     $('perTitle').textContent=it.t;
     $('perId').textContent=mode==='m'?it.id:isoWeek(it.wk)+' нед.';
@@ -893,7 +898,7 @@
     else {
       fn.hidden=false;
       fn.textContent = mode==='m'
-        ? 'Верхние показатели — за месяц. Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты, лиды, воронка и план ниже — за 16–22.11.'
+        ? 'Верхние показатели, лиды и воронка — за ноябрь (01–22.11). Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты и план ниже — за 16–22.11.'
         : (ci>=0 ? 'Шапка и выделенная неделя — за выбранный период. Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты, лиды, воронка и план месяца ниже — за 16–22.11.'
                  : 'Шапка — за выбранную неделю. Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты, лиды и воронка ниже — за 16–22.11.');
     }
@@ -1134,9 +1139,9 @@
 
 (function(){
   var body=document.getElementById('ldB'); if(!body) return;
-  var DEALS=[
-    {d:'21.11',n:'Гудфудрус',c:'+7 (985) 458-06-93',s:'SEO',p:'seq',pn:'Секвойя',st:'Закрыто и не реализовано'},
-    {d:'20.11',n:'ТЕХНОСПЕХ',c:'+7 (495) 968-80-20',s:'SEO',p:'seq',pn:'Секвойя',st:'КП выставлено',sum:3575000},
+  var DEALS_W=[
+    {d:'21.11',n:'Гудфудрус',c:'+7 (985) 458-06-93 · закрытая сделка',s:'SEO',p:'spr',pn:'Solution PRO',st:'Закрыто и не реализовано'},
+    {d:'20.11',n:'ТЕХНОУСПЕХ',c:'+7 (495) 968-80-20',s:'SEO',p:'seq',pn:'Секвойя',st:'КП выставлено',sum:3575000},
     {d:'20.11',n:'ТД Лед Эксперт',c:'форма s-pro.group/prices',s:'Директ',p:'spr',pn:'Solution PRO',st:'Потребности выявлены'},
     {d:'20.11',n:'Мед Уфа',c:'форма sequoia-service.ru/ufa · метка 10',s:'Директ',p:'seq',pn:'Секвойя',st:'Закрыто и не реализовано'},
     {d:'19.11',n:'РЕАЛ',c:'a.rumyanceva@realpak.ru',s:'Email',p:'seq',pn:'Секвойя',st:'КП выставлено',sum:996480},
@@ -1144,14 +1149,62 @@
     {d:'18.11',n:'Симерик',c:'+7 (499) 455-27-86',s:'Директ',p:'ruq',pn:'Руки',st:'Закрыто и не реализовано',sum:2207920},
     {d:'17.11',n:'Праздник Вам',c:'+7 (962) 959-20-00',s:'SEO',p:'seq',pn:'Секвойя',st:'Закрыто и не реализовано'}
   ];
+  var DEALS_M=[
+    {d:'—',n:'Техносила',c:'30 чел · от 1 400 ₽/ч · производство машин',s:'—',p:'na',pn:'Не определён',st:'КП выставлено',sum:13860000},
+    {d:'20.11',n:'ТЕХНОУСПЕХ',c:'+7 (495) 968-80-20 · звонок',s:'SEO',p:'seq',pn:'Секвойя',st:'КП выставлено',sum:3575000},
+    {d:'—',n:'Петербургский мельничный комбинат',c:'20 чел · от 565 ₽/ч · Почта',s:'Email',p:'na',pn:'Не определён',st:'КП выставлено',sum:3231800},
+    {d:'—',n:'ООО «Дистрибьюторская компания МИКС»',c:'5→10 чел · от 600 ₽/ч',s:'—',p:'na',pn:'Не определён',st:'КП выставлено',sum:1452000},
+    {d:'19.11',n:'РЕАЛ',c:'a.rumyanceva@realpak.ru · 6 чел',s:'Email',p:'seq',pn:'Секвойя',st:'КП выставлено',sum:996480},
+    {d:'02.11',n:'Рэмос',c:'ООО «РЭМОС-АЛЬФА» · remos.ru · 35 чел',s:'Email',p:'seq',pn:'Секвойя',st:'Переговоры по КП',sum:8124000},
+    {d:'09.11',n:'БЕРГ ХОЛДИНГ',c:'berg.ru · 20→30 чел',s:'Email',p:'seq',pn:'Секвойя',st:'Переговоры по КП',sum:5119400},
+    {d:'19.11',n:'СИ ЭМ ЭС ПРО',c:'форма sequoia-service.ru/spb · метка 5',s:'Директ',p:'seq',pn:'Секвойя',st:'Переговоры по КП',sum:948750},
+    {d:'—',n:'Заявка с почты — lunch-up.ru',c:'info@lunch-up.ru · Почта',s:'Email',p:'spr',pn:'Solution PRO',st:'Взял в работу'},
+    {d:'21.11',n:'Гудфудрус',c:'info@lunch-up.ru · s-pro.group',s:'Email',p:'spr',pn:'Solution PRO',st:'ЛПР выявлен'},
+    {d:'—',n:'ООО Глобал транс',c:'колл-центр · +7 (495) 796-20-70',s:'SEO',p:'seq',pn:'Секвойя',st:'Контакт с ЛПР установлен'},
+    {d:'20.11',n:'ТД Лед Эксперт',c:'форма s-pro.group/prices · 3 PL',s:'Директ',p:'spr',pn:'Solution PRO',st:'Потребности выявлены'},
+    {d:'—',n:'Новотранс',c:'ООО «ТК «НОВОТРАНС»» · 90 чел · 731/697 ₽/ч',s:'—',p:'na',pn:'Не определён',st:'Закрыто · пропала потребность',sum:18810000},
+    {d:'02.11',n:'Традиции Вкуса',c:'заявка с сайта · 50 чел · от 753 ₽/ч',s:'Директ',p:'na',pn:'Не определён',st:'Закрыто · дорого',sum:10679000},
+    {d:'18.11',n:'Симерик',c:'ООО «ТК «РОДИНА»» · +7 (499) 455-27-86',s:'Директ',p:'ruq',pn:'Руки',st:'Закрыто · не реализовано',sum:2207920},
+    {d:'18.11',n:'AryaHome',c:'ООО «БИРИЗ ТЕКСТИЛЬ» · сайт sequoia-service.ru',s:'Директ',p:'seq',pn:'Секвойя',st:'Закрыто · пропала потребность',sum:1716000},
+    {d:'21.11',n:'Гудфудрус (второй контакт)',c:'колл-центр · 17:24',s:'SEO',p:'spr',pn:'Solution PRO',st:'Закрыто · уже работаем'},
+    {d:'20.11',n:'Мед Уфа',c:'форма sequoia-service.ru/ufa · метка 10',s:'Директ',p:'seq',pn:'Секвойя',st:'Закрыто · дорого'},
+    {d:'17.11',n:'Праздник Вам',c:'+7 (962) 959-20-00 · 15 чел',s:'SEO',p:'seq',pn:'Секвойя',st:'Закрыто · мониторит цены'},
+    {d:'—',n:'Заявка с почты — russianpost.ru',c:'Почта · Григоркина',s:'Email',p:'na',pn:'Не определён',st:'Закрыто · уже работаем'},
+    {d:'—',n:'Почта России',c:'s-pro.group · Marketplace · 20 чел',s:'Директ',p:'spr',pn:'Solution PRO',st:'Закрыто · дорого'},
+    {d:'—',n:'Заявка с почты — gazprombank.ru',c:'Почта',s:'Email',p:'spr',pn:'Solution PRO',st:'Закрыто · маленькая потребность'},
+    {d:'—',n:'Заявка с сайта sequoia-service.ru — Zvonok',c:'сайт sequoia-service.ru',s:'Директ',p:'seq',pn:'Секвойя',st:'Закрыто · неподходящая локация'},
+    {d:'—',n:'Авангард',c:'заявка с сайта · 30 чел',s:'Директ',p:'seq',pn:'Секвойя',st:'Закрыто · мониторит цены'},
+    {d:'—',n:'Тендер МТС',c:'s-pro.group',s:'Директ',p:'spr',pn:'Solution PRO',st:'Закрыто · дорого'},
+    {d:'—',n:'Рэмос (подразделение)',c:'звонок · Calltouch',s:'SEO',p:'seq',pn:'Секвойя',st:'Закрыто · уже работаем'},
+    {d:'—',n:'ООО «ФУДМАРКЕТ ЦЕНТР»',c:'20 чел · сайт не определён',s:'—',p:'na',pn:'Не определён',st:'Закрыто · пропала потребность'}
+  ];
   var F={p:'all',c:'all',q:''};
   function esc(v){return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-  function srcCls(v){return v==='Директ'?'d':(v==='Email'?'em':'seo');}
+  function srcCls(v){return v==='Директ'?'d':(v==='Email'?'em':(v==='SEO'?'seo':'na'));}
   function money(v){return v?new Intl.NumberFormat('ru-RU').format(v)+' ₽':'—';}
   var count=document.getElementById('ldCount');
+  var sub=document.getElementById('ldSub');
+  function curData(){ return window.__M==='m'?DEALS_M:DEALS_W; }
+  function periodLabel(){ return window.__M==='m'?'01.11–22.11':'16–22.11'; }
+  var CH_DEF=[
+    {n:'8 сделок с тегом «Целевой», созданных 16.11–22.11: у всех есть название и контакт в CRM. Номер или почта клиента — копируется. Статусы этапов — на 24.11.2026.'},
+    {n:'27 сделок с тегом «Целевой», созданных 01.11–22.11 (25 уникальных компаний: по Рэмосу и Гудфудрусу — по две сделки). Статусы этапов — на 24.11.2026, суммы — бюджеты КП, не выручка.'}
+  ];
+  function syncChips(){
+    var data=curData(), cp={all:data.length,seq:0,ruq:0,spr:0,na:0}, cc={'Директ':0,'SEO':0,'Email':0};
+    data.forEach(function(x){ cp[x.p]=(cp[x.p]||0)+1; cc[x.s]=(cc[x.s]||0)+1; });
+    [['p','seq',cp.seq],['p','ruq',cp.ruq],['p','spr',cp.spr],['p','na',cp.na],['c','Директ',cc['Директ']],['c','SEO',cc['SEO']],['c','Email',cc['Email']]].forEach(function(t){
+      var b=document.querySelector('#ldProj [data-p="'+t[1]+'"], #ldChan [data-c="'+t[1]+'"]'); if(!b) return;
+      var e=b.querySelector('b'); if(e) e.textContent=t[2];
+    });
+    var all=document.querySelector('#ldProj [data-p="all"] b'); if(all) all.textContent=data.length;
+    [].forEach.call(document.querySelectorAll('#ldProj button'),function(b){
+      var k=b.getAttribute('data-p'); if(k!=='all') b.style.display=(cp[k]?'':'none');
+    });
+  }
   function render(){
-    var out='',n=0,q=F.q.trim().toLowerCase();
-    DEALS.forEach(function(x){
+    var data=curData(), out='', n=0, q=F.q.trim().toLowerCase();
+    data.forEach(function(x){
       if(F.p!=='all'&&x.p!==F.p)return;
       if(F.c!=='all'&&x.s!==F.c)return;
       if(q&&(x.n+' '+x.c+' '+x.pn+' '+x.s).toLowerCase().indexOf(q)<0)return;
@@ -1164,9 +1217,12 @@
     });
     if(!n) out='<tr><td class="ld-empty" colspan="6">Ничего не найдено — сбросьте фильтр или запрос</td></tr>';
     body.innerHTML=out;
-    if(count) count.textContent=(n===DEALS.length?DEALS.length:n+' из '+DEALS.length)+' сделок · 16–22.11';
+    syncChips();
+    if(count) count.textContent=(n===data.length?data.length:n+' из '+data.length)+' сделок · '+periodLabel();
+    if(sub) sub.textContent=CH_DEF[window.__M==='m'?1:0].n;
   }
-  function group(id,key){
+  window.__updLeads=function(){ render(); };
+function group(id,key){
     var g=document.getElementById(id); if(!g) return;
     g.addEventListener('click',function(e){
       var b=e.target.closest('button'); if(!b||!g.contains(b)) return;
@@ -1179,6 +1235,20 @@
   var q=document.getElementById('ldQ');
   if(q) q.addEventListener('input',function(){ F.q=q.value; render(); });
   render();
+})();
+</script>
+<script>
+(function(){
+  var W={head:'10 сделок',dog:0,dogT:'подписанных нет',per:1,perT:'948 750 ₽',kp:2,kpT:'4 571 480 ₽',work:3,workT:'потребности · взял в работу · ЛПР',zak:4,zakT:'2 207 920 ₽'};
+  var M={head:'27 сделок',dog:0,dogT:'подписанных нет',per:3,perT:'14 192 150 ₽',kp:5,kpT:'23 115 280 ₽',work:4,workT:'потребности · ЛПР · контакт · взял в работу',zak:15,zakT:'33 412 920 ₽'};
+  function set(id,v){var e=document.getElementById(id); if(e) e.textContent=v;}
+  window.__funnel=function(mode){
+    var d=mode==='m'?M:W;
+    set('fnHead',d.head); set('fnDog',d.dog); set('fnDogT',d.dogT);
+    set('fnPer',d.per); set('fnPerT',d.perT); set('fnKp',d.kp); set('fnKpT',d.kpT);
+    set('fnWork',d.work); set('fnWorkT',d.workT); set('fnZak',d.zak); set('fnZakT',d.zakT);
+  };
+  window.__funnel('w');
 })();
 </script>
 </body>
