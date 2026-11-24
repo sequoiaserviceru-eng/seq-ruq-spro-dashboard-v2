@@ -1178,6 +1178,9 @@
   var OCT={pts:[{x:'04.10',f:7,p:8},{x:'11.10',f:23,p:23},{x:'18.10',f:37,p:38},{x:'25.10',f:49,p:52},{x:'01.11',f:60,p:65}],
            max:65,ticks:[0,22,43,65],plan:true,
            aria:'Накопленные целевые за октябрь: факт 7 / 23 / 37 / 49 / 60 против плана 8 / 23 / 38 / 52 / 65'};
+  var SEPT={pts:[{x:'06.09',f:7,p:13},{x:'13.09',f:19,p:28},{x:'20.09',f:29,p:43},{x:'27.09',f:44,p:58},{x:'30.09',f:49,p:65}],
+           max:65,ticks:[0,22,43,65],plan:true,
+           aria:'Накопленные целевые за сентябрь: факт 7 / 19 / 29 / 44 / 49 против плана 13 / 28 / 43 / 58 / 65'};
   var cur=NOV;
   function el(n,a){var e=document.createElementNS('http://www.w3.org/2000/svg',n);for(var k in a)e.setAttribute(k,a[k]);return e;}
   function draw(){
@@ -1226,14 +1229,17 @@
     var sub=$('cuSub'), legP=$('cuLegP'), note=$('cuNote'), msg=$('cuMsg'), leg=$('cuLeg');
     var isOct = mode==='m' && key==='m10';
     var isSep = mode==='m' && key==='m9';
+    host.hidden=false; msg.hidden=true; leg.style.display='';
     if(isSep){
-      host.hidden=true; msg.hidden=false; leg.style.display='none';
-      sub.textContent='недельный разрез с 28.09';
-      msg.textContent='За сентябрь кривую накопления не строим: недельный расход в выгрузке Директа начинается с 28.09, поэтому «факт против плана» по неделям не сходится. Итоги месяца — в блоках ниже: 49 ЦЛ при плане 65.';
-      note.textContent='';
+      sub.textContent='факт против плана · 06.09 → 30.09';
+      legP.style.display='';
+      legP.innerHTML='<i class="p"></i>План 65 ЦЛ · линейный темп 65 / 30 дней';
+      note.textContent='Расход Директа по неделям: 65 500 / 93 732 / 115 416 / 72 708 / 48 791 ₽ — всего 396 147 ₽ (Секвойя 263 097 ₽ + Руки 133 050 ₽). ЦЛ по неделям: 7 / 12 / 10 / 15 / 5 — сумма недель 49 при плане 65. Выгрузка Direct за 01–30.09.2026 сверена с итогами кабинетов: 86 411 показов, 1 503 клика.';
+      cur=SEPT;
+      draw();
       return;
     }
-    host.hidden=false; msg.hidden=true; leg.style.display=''; sub.textContent=isOct?'накопительно · недели 28.09 → 01.11':'факт против плана · 08.11 → 30.11';
+    sub.textContent=isOct?'накопительно · недели 28.09 → 01.11':'факт против плана · 08.11 → 30.11';
     legP.style.display='';
     legP.innerHTML='<i class="p"></i>'+(isOct?'План 65 ЦЛ · линейный темп 65 / 31 день':'План 70 ЦЛ (чек-поинты 18 / 34 / 52)');
     note.textContent = isOct
