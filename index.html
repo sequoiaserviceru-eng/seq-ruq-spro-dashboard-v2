@@ -286,6 +286,12 @@
   .ld-search input::placeholder{color:var(--txt-3)}
   .ldtb{width:100%;border-collapse:collapse;font-size:11.5px}
   .ldtb th{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--txt-3);font-weight:600;text-align:left;padding:0 10px 8px;border-bottom:1px solid var(--line)}
+  .ldtb th[data-k]{cursor:pointer;user-select:none;white-space:nowrap;transition:color .18s var(--ease)}
+  .ldtb th[data-k]:hover{color:var(--txt)}
+  .ldtb th[data-k]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+  .ldtb th .sari{font-size:9px;margin-left:4px;opacity:.4;font-weight:400;letter-spacing:0;line-height:1}
+  .ldtb th.on{color:var(--txt)}
+  .ldtb th.on .sari{opacity:1;color:var(--accent)}
   .ldtb th.r,.ldtb td.r{text-align:right}
   .ldtb td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--txt-2)}
   .ldtb tbody tr:hover{background:#fbfcfe}
@@ -672,7 +678,7 @@
       </div>
       <table class="ldtb">
         <colgroup><col style="width:6%"><col><col style="width:9%"><col style="width:12%"><col style="width:16%"><col style="width:11%"></colgroup>
-        <thead><tr><th>Дата</th><th>Сделка</th><th>Источник</th><th>Проект</th><th>Этап</th><th class="r">Сумма, ₽</th></tr></thead>
+        <thead><tr><th data-k="d" tabindex="0" aria-sort="descending">Дата<span class="sari">▼</span></th><th data-k="n" tabindex="0">Сделка<span class="sari">↕</span></th><th data-k="s" tabindex="0">Источник<span class="sari">↕</span></th><th data-k="pn" tabindex="0">Проект<span class="sari">↕</span></th><th data-k="st" tabindex="0">Этап<span class="sari">↕</span></th><th class="r" data-k="sum" tabindex="0">Сумма, ₽<span class="sari">↕</span></th></tr></thead>
         <tbody id="ldB"></tbody>
       </table>
       <p class="w2w-note" id="ldNote" style="padding-top:10px">Ещё 2 сделки недели (16.11, этапы «Взял в работу» и «ЛПР выявлен», SEO · Секвойя) в выгрузке CRM без названия и контакта — в таблицу не выведены, но входят в 10 ЦЛ недели и в блоки «Каналы» и «Проекты».</p>
@@ -1304,13 +1310,45 @@
       var k=b.getAttribute('data-p'); if(k!=='all') b.style.display=(cp[k]?'':'none');
     });
   }
+  var SORT={k:'d',dir:-1};
+  function dateKey(v){ var m=String(v||'').match(/(\d{2})\.(\d{2})/); return m?(+m[2])*100+(+m[1]):null; }
+  function sortVal(x,k){
+    if(k==='d') return dateKey(x.d);
+    if(k==='n') return String(x.n||'').toLowerCase();
+    if(k==='s') return x.s;
+    if(k==='pn') return x.pn;
+    if(k==='st') return String(x.st||'').toLowerCase();
+    if(k==='sum') return (typeof x.sum==='number'&&x.sum>0)?x.sum:null;
+    return null;
+  }
+  function cmpRows(a,b){
+    var av=sortVal(a,SORT.k), bv=sortVal(b,SORT.k);
+    if(av==null&&bv==null) return 0;
+    if(av==null) return 1;
+    if(bv==null) return -1;
+    if(typeof av==='string'){ var c=av.localeCompare(bv,'ru'); if(!c) c=sortVal(a,'d')&&sortVal(b,'d')?sortVal(a,'d')-sortVal(b,'d'):0; return c*SORT.dir; }
+    return (av-bv)*SORT.dir;
+  }
+  function syncSort(){
+    var card=document.getElementById('s-leads'); if(!card) return;
+    [].forEach.call(card.querySelectorAll('.ldtb th[data-k]'),function(th){
+      var on=th.getAttribute('data-k')===SORT.k;
+      th.classList.toggle('on',on);
+      th.setAttribute('aria-sort',on?(SORT.dir===1?'ascending':'descending'):'none');
+      var s=th.querySelector('.sari'); if(s) s.textContent=on?(SORT.dir===1?'▲':'▼'):'↕';
+    });
+  }
   function render(){
-    var data=curData(), out='', n=0, q=F.q.trim().toLowerCase();
+    var data=curData(), out='', n=0, q=F.q.trim().toLowerCase(), rows=[];
     data.forEach(function(x){
       if(F.p!=='all'&&x.p!==F.p)return;
       if(F.c!=='all'&&x.s!==F.c)return;
       if(q&&(x.n+' '+x.c+' '+x.pn+' '+x.s).toLowerCase().indexOf(q)<0)return;
+      rows.push(x);
       n++;
+    });
+    rows.sort(cmpRows);
+    rows.forEach(function(x){
       out+='<tr><td class="ld-d">'+x.d+'</td><td><div class="ld-n">'+esc(x.n)+'</div><div class="ld-c">'+esc(x.c)+'</div></td>'+
         '<td><span class="src '+srcCls(x.s)+'">'+x.s+'</span></td>'+
         '<td><span class="prj '+x.p+'">'+x.pn+'</span></td>'+
@@ -1319,6 +1357,7 @@
     });
     if(!n) out='<tr><td class="ld-empty" colspan="6">Ничего не найдено — сбросьте фильтр или запрос</td></tr>';
     body.innerHTML=out;
+    syncSort();
     syncChips();
     if(count) count.textContent=window.__ldHead || ((n===data.length?data.length:n+' из '+data.length)+' сделок · '+periodLabel());
     if(sub) sub.textContent=window.__ldSub || CH_DEF[window.__M==='m'?1:0].n;
@@ -1328,12 +1367,27 @@
     body=document.getElementById('ldB')||body;
     count=document.getElementById('ldCount')||count;
     sub=document.getElementById('ldSub')||sub;
-    var p=document.getElementById('ldProj');
-    if(p&&!p.dataset.ldOn){ p.dataset.ldOn='1'; group('ldProj','p'); }
-    var ch=document.getElementById('ldChan');
-    if(ch&&!ch.dataset.ldOn){ ch.dataset.ldOn='1'; group('ldChan','c'); }
-    var q=document.getElementById('ldQ');
-    if(q&&!q.dataset.ldOn){ q.dataset.ldOn='1'; q.addEventListener('input',function(){ F.q=q.value; render(); }); }
+    var card=document.getElementById('s-leads');
+    if(card&&!card.dataset.ldOn){
+      card.dataset.ldOn='1';
+      card.addEventListener('click',function(e){
+        var t=e.target;
+        var th=t.closest?t.closest('th[data-k]'):null;
+        if(th){
+          var k=th.getAttribute('data-k');
+          if(SORT.k===k) SORT.dir=-SORT.dir; else SORT={k:k,dir:(k==='d'||k==='sum')?-1:1};
+          render(); return;
+        }
+        var b=t.closest?t.closest('#ldProj button, #ldChan button'):null;
+        if(!b||!b.parentNode) return;
+        var g=b.parentNode, key=g.id==='ldProj'?'p':'c';
+        [].forEach.call(g.querySelectorAll('button'),function(x){ x.classList.toggle('on',x===b); });
+        F[key]=key==='p'?b.getAttribute('data-p'):b.getAttribute('data-c');
+        render();
+      });
+      card.addEventListener('input',function(e){ if(e.target&&e.target.id==='ldQ'){ F.q=e.target.value; render(); } });
+      card.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ var th=e.target.closest?e.target.closest('th[data-k]'):null; if(th){ e.preventDefault(); th.click(); } } });
+    }
   }
   window.__updLeads=function(){ bind(); render(); };
 function group(id,key){
