@@ -412,7 +412,7 @@
 <div class="shell">
 
   <header>
-    <div class="who"><b>Sequoia · Ruqi · Solution PRO</b><span>недельный отчёт по рекламе и лидам · <span id="whoWk">неделя 47</span></span></div>
+    <div class="who"><b>Sequoia · Ruqi · Solution PRO</b><span><span id="reportKind">недельный отчёт по рекламе и лидам</span> · <span id="whoWk">неделя 47</span></span></div>
     <div class="per" id="perTitle">16 — 22 ноября 2026</div>
     <div class="per-sw">
       <button type="button" class="per-btn" id="perBtn" aria-haspopup="dialog" aria-expanded="false" aria-label="Выбрать период">
@@ -844,7 +844,8 @@
     $('perDates').textContent=it.d;
     $('whoWk').textContent=mode==='m'?it.who:'неделя '+isoWeek(it.wk);
     $('ppNote').textContent=it.note;
-    document.title='Недельный отчёт по рекламе и лидам · '+it.t;
+    document.title=(mode==='m'?'Месячный':'Недельный')+' отчёт по рекламе и лидам · '+it.t;
+    $('reportKind').textContent=(mode==='m'?'месячный':'недельный')+' отчёт по рекламе и лидам';
 
     // тёмная карточка
     $('hv-leads').textContent=it.leads;
