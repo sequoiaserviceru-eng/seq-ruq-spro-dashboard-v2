@@ -410,6 +410,9 @@
   .fixnote[hidden]{display:none}
   .bento .c{scroll-margin-top:74px}
   html{scroll-behavior:smooth}
+.c.flat{align-self:start}
+.ld-scroll{max-height:620px;overflow:auto;border-radius:14px}
+.ld-scroll thead th{position:sticky;top:0;background:#fff;z-index:3;box-shadow:inset 0 -1px 0 var(--line)}
 </style>
 </head>
 <body>
@@ -515,7 +518,7 @@
     </div>
 
     <div class="c trd fade" id="s-trend">
-      <div class="c-h"><h2>Тренд ЦЛ по каналам · 13 недель</h2><span>у каждого ряда своя шкала — сравнивайте форму, а не высоту</span></div>
+      <div class="c-h"><h2 id="trTitle">Тренд ЦЛ по каналам · 13 недель</h2><span id="trSub">у каждого ряда своя шкала — сравнивайте форму, а не высоту</span></div>
       <div class="trd-host" id="trHost">
         <div class="trd-tip" id="trTip"></div>
       </div>
@@ -525,11 +528,11 @@
         <span><i style="background:#7c3aed"></i>SEO · органика</span>
         <span><i class="dash"></i>Скользящая (3 нед.)</span>
       </div>
-      <p class="w2w-note" style="padding-top:10px">Серые столбцы — факт недели. Пунктир — среднее за текущую и две предыдущие недели. «Всего» включает Email и прямые обращения, поэтому больше суммы Директа и SEO. Источник: недельные отчёты и CRM, 24.08–22.11.</p>
+      <p class="w2w-note" id="trNote" style="padding-top:10px">Серые столбцы — факт недели. Пунктир — среднее за текущую и две предыдущие недели. «Всего» включает Email и прямые обращения, поэтому больше суммы Директа и SEO. Источник: недельные отчёты и CRM, 24.08–22.11.</p>
     </div>
 
 
-    <div class="c nov fade">
+    <div class="c nov fade" id="s-cu">
       <div class="c-h"><h2>Накопленные целевые по неделям</h2><span id="cuSub">факт против плана · 08.11 → 30.11</span></div>
       <div class="cu-host" id="cuHost"></div>
       <div class="cu-msg" id="cuMsg" hidden></div>
@@ -540,7 +543,7 @@
       <p class="w2w-note" id="cuNote" style="padding-top:8px">Данные на 22.11.2026: 25 ЦЛ из 70 — 36 % при 73 % срока. Чек-поинт 22.11 по медиаплану — 52 ЦЛ, недобор 27.</p>
     </div>
 
-    <div class="c novw fade">
+    <div class="c novw fade" id="s-novw">
       <div class="c-h"><h2>Недели ноября</h2><span>целевые и доля месячного плана</span></div>
       <div class="nw-rows">
         <div class="nw-r">
@@ -675,7 +678,7 @@
       <p class="w2w-note" id="ldNote" style="padding-top:10px">Ещё 2 сделки недели (16.11, этапы «Взял в работу» и «ЛПР выявлен», SEO · Секвойя) в выгрузке CRM без названия и контакта — в таблицу не выведены, но входят в 10 ЦЛ недели и в блоки «Каналы» и «Проекты».</p>
     </div>
 
-    <div class="c wk fade">
+    <div class="c wk fade" id="s-wk">
       <div class="c-h"><h2>Ноябрь по неделям</h2><span>план 70 ЦЛ · 480 000 ₽</span></div>
       <div class="weeks">
         <div class="w" data-wk="0"><div class="d">02–08.11</div><div class="v">10 ЦЛ</div><div class="m">48 345 ₽<br>846 кликов</div></div>
@@ -736,7 +739,7 @@
 
   <footer>
     <span>Вариант C — bento / motion</span>
-    <span>Директ API · CRM · Calltouch · 23.11.2026</span>
+    <span id="footSrc">Директ API · CRM · Calltouch · 23.11.2026</span>
   </footer>
 </div>
 
@@ -773,6 +776,7 @@
       setTimeout(function(){ el.style.width = el.getAttribute("data-w")+"%"; }, i*70);
     });
   }
+  window.__drawBars=drawBars;
   if(reduce) drawBars();
 
   if(reduce) return;
@@ -963,6 +967,7 @@
         : (ci>=0 ? 'Шапка и выделенная неделя — за выбранный период. Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты, лиды, воронка и план месяца ниже — за 16–22.11.'
                  : 'Шапка — за выбранную неделю. Тренд ЦЛ по 13 неделям, сравнение недель, полная таблица, каналы, проекты, лиды и воронка ниже — за 16–22.11.');
     }
+    if(window.__period) window.__period(mode,it.k);
   }
 
   function listFor(mode){ return mode==='m'?MONTHS:WEEKS; }
@@ -1075,9 +1080,11 @@
   var NS='http://www.w3.org/2000/svg';
   function el(n,a){ var e=document.createElementNS(NS,n); for(var k in a) e.setAttribute(k,a[k]); return e; }
   var COL={all:'#0f1a2b',dir:'#2f5dfa',se:'#7c3aed',sma:'#12a06a',bar:'#dde3ee',grid:'#eaeef6',band:'#f6f8fc',mute:'#8b97ab',x:'#5b6a80'};
+  var TREND_ALL=TREND.slice();
   var N=TREND.length;
 
   function draw(){
+    N=TREND.length;
     host.querySelectorAll('svg').forEach(function(n){ n.remove(); });
     var W=Math.max(720, host.clientWidth||1000), padL=48, padR=128, padT=24, rowH=74, gap=22;
     var rowsH=3*(rowH+gap)-gap, H=padT+rowsH+40;
@@ -1148,6 +1155,7 @@
     host.insertBefore(svg,tip);
   }
   draw();
+  window.__trendSet=function(a,b){ TREND=TREND_ALL.slice(a,b); draw(); };
   var tm; window.addEventListener('resize',function(){ clearTimeout(tm); tm=setTimeout(draw,150); });
 })();
 </script>
@@ -1278,7 +1286,7 @@
   function money(v){return v?new Intl.NumberFormat('ru-RU').format(v)+' ₽':'—';}
   var count=document.getElementById('ldCount');
   var sub=document.getElementById('ldSub');
-  function curData(){ return window.__M==='m'?DEALS_M:DEALS_W; }
+  function curData(){ return window.__ldData || (window.__M==='m'?DEALS_M:DEALS_W); }
   function periodLabel(){ return window.__M==='m'?'01.11–22.11':'16–22.11'; }
   var CH_DEF=[
     {n:'8 сделок с тегом «Целевой», созданных 16.11–22.11: у всех есть название и контакт в CRM. Номер или почта клиента — копируется. Статусы этапов — на 24.11.2026.', f:'Ещё 2 сделки недели (16.11, этапы «Взял в работу» и «ЛПР выявлен», SEO · Секвойя) в выгрузке CRM без названия и контакта — в таблицу не выведены, но входят в 10 ЦЛ недели и в блоки «Каналы» и «Проекты».'},
@@ -1312,11 +1320,22 @@
     if(!n) out='<tr><td class="ld-empty" colspan="6">Ничего не найдено — сбросьте фильтр или запрос</td></tr>';
     body.innerHTML=out;
     syncChips();
-    if(count) count.textContent=(n===data.length?data.length:n+' из '+data.length)+' сделок · '+periodLabel();
-    if(sub) sub.textContent=CH_DEF[window.__M==='m'?1:0].n;
-    var note=document.getElementById('ldNote'); if(note) note.textContent=CH_DEF[window.__M==='m'?1:0].f;
+    if(count) count.textContent=window.__ldHead || ((n===data.length?data.length:n+' из '+data.length)+' сделок · '+periodLabel());
+    if(sub) sub.textContent=window.__ldSub || CH_DEF[window.__M==='m'?1:0].n;
+    var note=document.getElementById('ldNote'); if(note) note.textContent=window.__ldNote || CH_DEF[window.__M==='m'?1:0].f;
   }
-  window.__updLeads=function(){ render(); };
+  function bind(){
+    body=document.getElementById('ldB')||body;
+    count=document.getElementById('ldCount')||count;
+    sub=document.getElementById('ldSub')||sub;
+    var p=document.getElementById('ldProj');
+    if(p&&!p.dataset.ldOn){ p.dataset.ldOn='1'; group('ldProj','p'); }
+    var ch=document.getElementById('ldChan');
+    if(ch&&!ch.dataset.ldOn){ ch.dataset.ldOn='1'; group('ldChan','c'); }
+    var q=document.getElementById('ldQ');
+    if(q&&!q.dataset.ldOn){ q.dataset.ldOn='1'; q.addEventListener('input',function(){ F.q=q.value; render(); }); }
+  }
+  window.__updLeads=function(){ bind(); render(); };
 function group(id,key){
     var g=document.getElementById(id); if(!g) return;
     g.addEventListener('click',function(e){
@@ -1326,9 +1345,7 @@ function group(id,key){
       render();
     });
   }
-  group('ldProj','p'); group('ldChan','c');
-  var q=document.getElementById('ldQ');
-  if(q) q.addEventListener('input',function(){ F.q=q.value; render(); });
+  bind();
   render();
 })();
 </script>
@@ -1344,6 +1361,90 @@ function group(id,key){
     set('fnWork',d.work); set('fnWorkT',d.workT); set('fnZak',d.zak); set('fnZakT',d.zakT);
   };
   window.__funnel(window.__M||'w');
+})();
+</script>
+<script>
+(function(){
+  var $=function(id){ return document.getElementById(id); };
+  var trH=$('trTitle'), trS=$('trSub'), trN=$('trNote');
+  var T0={h:trH.textContent,s:trS.textContent,n:trN.textContent};
+  var IDS=['s-novw','s-w2w','s-full','s-chan','s-proj','s-leads','s-wk','s-fun','s-money','s-eff'];
+  var BASE={};
+  IDS.forEach(function(id){ var e=$(id); if(e) BASE[id]=e.innerHTML; });
+  var foot=$('footSrc'), footTxt=foot?foot.textContent:'';
+  var CH={w12:0,w13:1,w14:2,m11:3};
+  var OCT={"novw":"<div class=\"c-h\"><h2>Недели октября</h2><span>целевые и доля месячного плана 65 ЦЛ</span></div>\n      <div class=\"nw-rows\">\n        <div class=\"nw-r\"><div class=\"nw-l\">28.09–04.10 · неделя 1</div><div class=\"nw-v\">12 ЦЛ · 7 в октябре</div><div class=\"nw-bar\"><i style=\"width:75%\"></i></div></div>\n        <div class=\"nw-r\"><div class=\"nw-l\">05–11.10 · неделя 2</div><div class=\"nw-v\">16 ЦЛ · 25 % плана</div><div class=\"nw-bar\"><i style=\"width:100%\"></i></div></div>\n        <div class=\"nw-r\"><div class=\"nw-l\">12–18.10 · неделя 3</div><div class=\"nw-v\">13 ЦЛ · 20 % плана</div><div class=\"nw-bar\"><i style=\"width:81%\"></i></div></div>\n        <div class=\"nw-r\"><div class=\"nw-l\">19–25.10 · неделя 4</div><div class=\"nw-v\">13 ЦЛ · 20 % плана</div><div class=\"nw-bar\"><i style=\"width:81%\"></i></div></div>\n        <div class=\"nw-r on\"><div class=\"nw-l\">26.10–01.11 · неделя 5</div><div class=\"nw-v\">14 ЦЛ · 22 % плана</div><div class=\"nw-bar\"><i style=\"width:88%\"></i></div></div>\n      </div>\n      <div class=\"nw-acc\"><div class=\"nw-l\">Накоплено за месяц (31 день)</div><div class=\"nw-v\">63 ЦЛ · 97 %</div><div class=\"nw-bar\"><i style=\"width:97%\"></i></div></div>\n      <div class=\"nw-call blue\">Октябрь закрыт на 97 % плана: 63 целевых из 65 за 31 день. Сильнейшая неделя — 05–11.10 (16 ЦЛ), слабейшая — 28.09–04.10 (12 ЦЛ, из них только 7 пришлись на октябрь).</div>\n      <div class=\"nw-call amber\">Бюджет 396 494 ₽ против плана 370 000 ₽ — 107,2 % (+26 494 ₽). CPL 6 294 ₽ против плановых 5 692 ₽ (+10,6 %), конверсия клик → ЦЛ 3,43 %.</div>\n      <table class=\"nw-tb\">\n        <colgroup><col><col style=\"width:16%\"><col style=\"width:16%\"><col style=\"width:14%\"></colgroup>\n        <thead><tr><th>Контрольная точка</th><th>План, ЦЛ</th><th>Факт, ЦЛ</th><th>Δ</th></tr></thead>\n        <tbody>\n          <tr><td>04.10</td><td>8</td><td>7</td><td class=\"down\">−1</td></tr>\n          <tr><td>11.10</td><td>23</td><td>23</td><td class=\"flat\">0</td></tr>\n          <tr><td>18.10</td><td>38</td><td>36</td><td class=\"down\">−2</td></tr>\n          <tr><td>25.10</td><td>52</td><td>49</td><td class=\"down\">−3</td></tr>\n          <tr><td>01.11</td><td>65</td><td>63</td><td class=\"down\">−2</td></tr>\n        </tbody>\n      </table>\n      <p class=\"w2w-note\" style=\"padding-top:8px\">Чек-поинты — медиаплан октября от 26.10.2026 (65 ЦЛ / 370 000 ₽). Факт — CRM, тег «Целевой», сделки, созданные 01.10–31.10.2026. Расходы недель включают 28–30.09 и 01.11, поэтому их сумма (412 056 ₽) больше месячной (396 494 ₽).</p>","w2w":"<div class=\"c-h\"><h2>Неделя к неделе</h2><span>26.10–01.11 против 19–25.10</span></div>\n      <div class=\"w2w-b\">\n        <div class=\"w2wr\">\n          <div class=\"w2wh\"><b>Показы</b><span class=\"dchip up\">+2 %</span></div>\n          <div class=\"w2wl\"><i>19–25.10</i><span class=\"w2wt\"><span class=\"w2wb\" style=\"width:98%\"></span></span><b>49 335</b></div>\n          <div class=\"w2wl on\"><i>26.10–01.11</i><span class=\"w2wt\"><span class=\"w2wb\" style=\"width:100%\"></span></span><b>50 378</b></div>\n        </div>\n        <div class=\"w2wr\">\n          <div class=\"w2wh\"><b>Клики</b><span class=\"dchip down\">−2 %</span></div>\n          <div class=\"w2wl\"><i>19–25.10</i><span class=\"w2wt\"><span class=\"w2wb\" style=\"width:100%\"></span></span><b>458</b></div>\n          <div class=\"w2wl on\"><i>26.10–01.11</i><span class=\"w2wt\"><span class=\"w2wb\" style=\"width:98%\"></span></span><b>449</b></div>\n        </div>\n        <div class=\"w2wr\">\n          <div class=\"w2wh\"><b>Бюджет, тыс ₽</b><span class=\"dchip up\">−9 %</span></div>\n          <div class=\"w2wl\"><i>19–25.10</i><span class=\"w2wt\"><span class=\"w2wb\" style=\"width:100%\"></span></span><b>96,1</b></div>\n          <div class=\"w2wl on\"><i>26.10–01.11</i><span class=\"w2wt\"><span class=\"w2wb\" style=\"width:91%\"></span></span><b>87,7</b></div>\n        </div>\n        <div class=\"w2wr\">\n          <div class=\"w2wh\"><b>Целевые</b><span class=\"dchip up\">+8 %</span></div>\n          <div class=\"w2wl\"><i>19–25.10</i><span class=\"w2wt\"><span class=\"w2wb\" style=\"width:93%\"></span></span><b>13</b></div>\n          <div class=\"w2wl on\"><i>26.10–01.11</i><span class=\"w2wt\"><span class=\"w2wb\" style=\"width:100%\"></span></span><b>14</b></div>\n        </div>\n        <div class=\"w2wr\">\n          <div class=\"w2wh\"><b>CPL</b><span class=\"dchip up\">−15 %</span></div>\n          <div class=\"w2wl\"><i>19–25.10</i><span class=\"w2wt\"><span class=\"w2wb\" style=\"width:100%\"></span></span><b>7 394 ₽</b></div>\n          <div class=\"w2wl on\"><i>26.10–01.11</i><span class=\"w2wt\"><span class=\"w2wb\" style=\"width:85%\"></span></span><b>6 267 ₽</b></div>\n        </div>\n      </div>\n      <p class=\"w2w-note\">Обе недели — по последней сверке CRM: 13 и 14 ЦЛ (в отчёте на дату было 12 и 14). 01.11 входит в выгрузку Директа, поэтому неделя 26.10–01.11 считается по семи дням. Конверсия 2,85 % → 3,12 %.</p>","octFull":"<div class=\"c-h\"><h2>Полная таблица показателей</h2><span>октябрь к сентябрю</span></div>\n      <p class=\"full-s\">Сентябрь — 30 дней, октябрь — 31. Показы, клики, CTR, CPC и бюджет — Директ (в октябре окно выгрузки 01.10–01.11). Целевые — CRM: 49 в сентябре и 63 в октябре.</p>\n      <table class=\"ft\">\n        <colgroup><col style=\"width:32%\"><col style=\"width:17%\"><col style=\"width:17%\"><col style=\"width:17%\"><col style=\"width:17%\"></colgroup>\n        <thead><tr><th>Показатель</th><th>Сентябрь</th><th>Октябрь</th><th>Изм.</th></tr></thead>\n        <tbody>\n          <tr><td>Целевые лиды (CRM)</td><td>49</td><td class=\"v\">63</td><td class=\"up\">+29 %</td></tr>\n          <tr><td>Показы (Директ)</td><td>86 411</td><td class=\"v\">204 723</td><td class=\"up\">+137 %</td></tr>\n          <tr><td>Клики (Директ)</td><td>1 503</td><td class=\"v\">1 836</td><td class=\"up\">+22 %</td></tr>\n          <tr><td>CTR</td><td>1,74 %</td><td class=\"v\">0,90 %</td><td class=\"down\">−0,84 п.п.</td></tr>\n          <tr><td>CPC</td><td>264 ₽</td><td class=\"v\">216 ₽</td><td class=\"up\">−18 %</td></tr>\n          <tr><td>Рекламный бюджет</td><td>396 147 ₽</td><td class=\"v\">396 494 ₽</td><td class=\"flat\">+0,1 %</td></tr>\n          <tr><td>Цена целевого лида</td><td>8 085 ₽</td><td class=\"v\">6 294 ₽</td><td class=\"up\">−22 %</td></tr>\n          <tr><td>Конверсия клик → ЦЛ</td><td>3,26 %</td><td class=\"v\">3,43 %</td><td class=\"up\">+0,17 п.п.</td></tr>\n          <tr><td>Целевых в день</td><td>1,63</td><td class=\"v\">2,03</td><td class=\"up\">+24 %</td></tr>\n        </tbody>\n      </table>","full":"<div class=\"c-h\"><h2>Полная таблица показателей</h2><span>октябрь к сентябрю</span></div>\n      <p class=\"full-s\">Сентябрь — 30 дней, октябрь — 31. Показы, клики, CTR, CPC и бюджет — Директ (в октябре окно выгрузки 01.10–01.11). Целевые — CRM: 49 в сентябре и 63 в октябре.</p>\n      <table class=\"ft\">\n        <colgroup><col style=\"width:32%\"><col style=\"width:17%\"><col style=\"width:17%\"><col style=\"width:17%\"><col style=\"width:17%\"></colgroup>\n        <thead><tr><th>Показатель</th><th>Сентябрь</th><th>Октябрь</th><th>Изм.</th></tr></thead>\n        <tbody>\n          <tr><td>Целевые лиды (CRM)</td><td>49</td><td class=\"v\">63</td><td class=\"up\">+29 %</td></tr>\n          <tr><td>Показы (Директ)</td><td>86 411</td><td class=\"v\">204 723</td><td class=\"up\">+137 %</td></tr>\n          <tr><td>Клики (Директ)</td><td>1 503</td><td class=\"v\">1 836</td><td class=\"up\">+22 %</td></tr>\n          <tr><td>CTR</td><td>1,74 %</td><td class=\"v\">0,90 %</td><td class=\"down\">−0,84 п.п.</td></tr>\n          <tr><td>CPC</td><td>264 ₽</td><td class=\"v\">216 ₽</td><td class=\"up\">−18 %</td></tr>\n          <tr><td>Рекламный бюджет</td><td>396 147 ₽</td><td class=\"v\">396 494 ₽</td><td class=\"flat\">+0,1 %</td></tr>\n          <tr><td>Цена целевого лида</td><td>8 085 ₽</td><td class=\"v\">6 294 ₽</td><td class=\"up\">−22 %</td></tr>\n          <tr><td>Конверсия клик → ЦЛ</td><td>3,26 %</td><td class=\"v\">3,43 %</td><td class=\"up\">+0,17 п.п.</td></tr>\n          <tr><td>Целевых в день</td><td>1,63</td><td class=\"v\">2,03</td><td class=\"up\">+24 %</td></tr>\n        </tbody>\n      </table>","chan":"<div class=\"c-h\"><h2>Каналы</h2><span>октябрь · 63 целевых</span></div>\n      <div class=\"row\"><span class=\"nm\">Директ</span><span class=\"vl\">38 · 60 %</span><div class=\"track\"><i class=\"i1\" data-w=\"60\"></i></div></div>\n      <div class=\"row\"><span class=\"nm\">SEO / органика</span><span class=\"vl\">16 · 25 %</span><div class=\"track\"><i class=\"i2\" data-w=\"25\"></i></div></div>\n      <div class=\"row\" style=\"margin-bottom:0\"><span class=\"nm\">Email</span><span class=\"vl\">9 · 14 %</span><div class=\"track\"><i class=\"i3\" data-w=\"14\"></i></div></div>\n      <p style=\"margin:14px 0 0;font-size:11.5px;color:var(--txt-3)\">Директ: 396 494 ₽ за 38 целевых — CPL 10 434 ₽. SEO и Email — без отдельного бюджета в медиаплане октября, CPL по ним не считается</p>\n      <p style=\"margin:10px 0 0;font-size:11.5px;color:var(--txt-3)\">CTR <b style=\"color:var(--txt);font-weight:600\">0,90 %</b> · CPC <b style=\"color:var(--txt);font-weight:600\">216 ₽</b> · 1 836 кликов на 204 723 показа. Calltouch за месяц отдельно не выгружен</p>","proj":"<div class=\"c-h\"><h2>Проекты</h2><span>октябрь · 35 / 16 / 12 целевых</span></div>\n      <div class=\"row\"><span class=\"nm\">Sequoia</span><span class=\"vl\">35 ЦЛ · 284 731 ₽</span><div class=\"track\"><i class=\"i1\" data-w=\"72\"></i></div></div>\n      <div class=\"row\"><span class=\"nm\">Ruqi</span><span class=\"vl\">16 ЦЛ · 111 762 ₽</span><div class=\"track\"><i class=\"i2\" data-w=\"28\"></i></div></div>\n      <div class=\"row\" style=\"margin-bottom:0\"><span class=\"nm\">Solution PRO</span><span class=\"vl\">12 ЦЛ · вне Direct</span><div class=\"track\"><i class=\"i3\" data-w=\"0\"></i></div></div>\n      <p style=\"margin:14px 0 0;font-size:11.5px;color:var(--txt-3)\">Показы/клики: Sequoia 201&nbsp;877 / 1&nbsp;651, Ruqi 2&nbsp;846 / 185. Бюджет Директа: 284&nbsp;731 + 111&nbsp;762 = 396&nbsp;494 ₽</p>\n      <p style=\"margin:10px 0 0;font-size:11.5px;color:var(--txt-3)\">CPL Директа: Секвойя 8 135 ₽, Руки 6 985 ₽. Solution PRO: SEO 5, Email 4, Директ 3 — отдельного бюджета Директа нет</p>","wk":"<div class=\"c-h\"><h2>Октябрь по неделям</h2><span>план 65 ЦЛ · 370 000 ₽</span></div>\n      <div class=\"weeks\">\n        <div class=\"w\" data-wk=\"0\"><div class=\"d\">28.09–04.10</div><div class=\"v\">12 ЦЛ</div><div class=\"m\">63 000 ₽<br>CPL 5 250 ₽</div></div>\n        <div class=\"w\" data-wk=\"1\"><div class=\"d\">05–11.10</div><div class=\"v\">16 ЦЛ</div><div class=\"m\">89 000 ₽<br>CPL 5 563 ₽</div></div>\n        <div class=\"w\" data-wk=\"2\"><div class=\"d\">12–18.10</div><div class=\"v\">13 ЦЛ</div><div class=\"m\">76 194 ₽<br>CPL 5 861 ₽</div></div>\n        <div class=\"w\" data-wk=\"3\"><div class=\"d\">19–25.10</div><div class=\"v\">13 ЦЛ</div><div class=\"m\">96 124 ₽<br>CPL 7 394 ₽</div></div>\n        <div class=\"w on\" data-wk=\"4\"><div class=\"d\">26.10–01.11</div><div class=\"v\">14 ЦЛ</div><div class=\"m\">87 738 ₽<br>CPL 6 267 ₽</div></div>\n      </div>","fun":"<div class=\"c-h\"><h2>Воронка</h2><span id=\"fnHead\">60 сделок · 3 подписаны</span></div>\n      <div class=\"fn-grid\">\n      <div class=\"fnrow\"><b>Договор подписан</b><span class=\"q\" id=\"fnDog\">1</span><span class=\"tip\" id=\"fnDogT\">Kanzler · Руки · 1 980 000 ₽</span></div>\n      <div class=\"fnrow\"><b>В договоре</b><span class=\"q\" id=\"fnPer\">2</span><span class=\"tip\" id=\"fnPerT\">переговоры по договору</span></div>\n      <div class=\"fnrow\"><b>Переговоры</b><span class=\"q\" id=\"fnKp\">5</span><span class=\"tip\" id=\"fnKpT\">переговоры по КП · потребности</span></div>\n      <div class=\"fnrow\"><b>КП выставлено</b><span class=\"q\" id=\"fnWork\">5</span><span class=\"tip\" id=\"fnWorkT\">коммерческие предложения</span></div>\n      <div class=\"fnrow\"><b>В работе</b><span class=\"q\">3</span><span class=\"tip\">встреча · ЛПР · заявка получена</span></div>\n      <div class=\"fnrow\"><b>Отложено</b><span class=\"q\">6</span><span class=\"tip\">отложенные клиенты</span></div>\n      <div class=\"fnrow\" style=\"margin-bottom:0\"><b>Закрыто и не реализовано</b><span class=\"q\" id=\"fnZak\">38</span><span class=\"tip\" id=\"fnZakT\">закрыто без сделки</span></div>\n      </div>\n      <p class=\"w2w-note\" style=\"padding-top:12px\">Этапы — статусы CRM по последней сверке, по 60 сделкам без трёх подписанных (6 200 040 ₽, все — Директ). Суммы по этапам в выгрузке не сохранены, поэтому воронка без денег; средний чек и эффективность — в блоках ниже.</p>","money":"<div class=\"c-h\"><h2>Средний чек по каналам</h2><span>октябрь · 3 подписанных</span></div>\n      <div class=\"chk-rows\">\n        <div class=\"chk-r\">\n          <span class=\"chk-k\">Директ</span>\n          <div class=\"chk-bar\"><i style=\"width:80%\"></i></div>\n          <span class=\"chk-v\">2 066 680 ₽<small>3 подписанных · 6 200 040 ₽ + Kanzler 1 980 000 ₽</small></span>\n        </div>\n        <div class=\"chk-r\">\n          <span class=\"chk-k\">SEO</span>\n          <div class=\"chk-bar\"><i style=\"width:20%\"></i></div>\n          <span class=\"chk-v\">—<small>0 подписанных · 1 989 900 ₽ в работе</small></span>\n        </div>\n        <div class=\"chk-r\">\n          <span class=\"chk-k\">Email</span>\n          <div class=\"chk-bar\"><i style=\"width:0\"></i></div>\n          <span class=\"chk-v\">—<small>0 подписанных · сумм в выгрузке нет</small></span>\n        </div>\n      </div>\n      <p class=\"w2w-note\" style=\"padding-top:10px\">Средний чек Директа — 6 200 040 / 3 = 2 066 680 ₽. Полосы — доля сумм договоров: 10 169 940 ₽ (Директ 8 180 040, SEO 1 989 900). Kanzler (1 980 000 ₽, статус «Договор подписан») и Camillamed (1 989 900 ₽, «Заявка получена») в средний чек не входят. Это стоимость договоров, не выручка.</p>","eff":"<div class=\"c-h\"><h2>Эффективность рекламы</h2><span>октябрь · 31 день</span></div>\n      <div class=\"eff-grid\">\n        <div class=\"eff-i\"><b>15,6 ₽</b><span>договоров на 1 ₽ рекламы</span></div>\n        <div class=\"eff-i\"><b>132 165 ₽</b><span>стоимость подписанной сделки</span></div>\n        <div class=\"eff-i\"><b>6 294 ₽</b><span>стоимость целевого лида</span></div>\n        <div class=\"eff-i\"><b>4,8 %</b><span>лидов дошло до договора</span></div>\n      </div>\n      <p class=\"w2w-note\" style=\"padding-top:12px\">Октябрь: бюджет 396 494 ₽ и 63 целевых лида; подписано 3 договора на 6 200 040 ₽ — 4,8 % лидов. 15,6 ₽ договоров на 1 ₽ рекламы. Суммы — стоимость договоров, не выручка; ROI не считается.</p>"};
+  var SEP={"novw":"<div class=\"c-h\"><h2>Недели сентября</h2><span>недельного разреза нет</span></div><div class=\"cu-msg\" style=\"display:block;min-height:0;padding:10px 2px 4px\">Недельная детализация сентября в отчётах не сохранилась: есть только месячные итоги (49 ЦЛ / 396 147 ₽ / CPL 8 085 ₽) и пять недель тренда 24.08–27.09.</div>","w2w":"<div class=\"c-h\"><h2>Неделя к неделе</h2><span>сентябрь</span></div><div class=\"cu-msg\" style=\"display:block;min-height:0;padding:10px 2px 4px\">Сравнить две соседние недели сентября не с чем: недельных выгрузок с расходом и CRM-статусами за этот период в архиве нет.</div>","chan":"<div class=\"c-h\"><h2>Каналы</h2><span>сентябрь</span></div><div class=\"cu-msg\" style=\"display:block;min-height:0;padding:10px 2px 4px\">Разбивки сентября по каналам в сводке нет — каналы восстановлены только для октябрьского реестра 63 сделок (Директ 38 / SEO 16 / Email 9).</div>","proj":"<div class=\"c-h\"><h2>Проекты</h2><span>сентябрь</span></div><div class=\"cu-msg\" style=\"display:block;min-height:0;padding:10px 2px 4px\">Разбивки сентября по проектам нет: в CRM-выгрузке проекты размечены только у октябрьских сделок (Секвойя 35 / Руки 16 / Solution PRO 12).</div>","leads":"<div class=\"c-h\"><h2>Целевые лиды по клиентам</h2><span>сентябрь</span></div><div class=\"cu-msg\" style=\"display:block;min-height:0;padding:10px 2px 4px\">Реестра сентябрьских сделок нет: имена, контакты и этапы выгружены только за октябрь — 63 сделки. Месячные итоги сентября: 49 ЦЛ / 396 147 ₽ / CPL 8 085 ₽.</div>","wk":"<div class=\"c-h\"><h2>Сентябрь по неделям</h2><span>недельного разреза нет</span></div><div class=\"cu-msg\" style=\"display:block;min-height:0;padding:10px 2px 4px\">Недельной детализации сентября нет — в отчётах сохранились только месячные итоги. Недельный разрез ведётся с 28.09, поэтому первая неделя октября частично сентябрьская.</div>","fun":"<div class=\"c-h\"><h2>Воронка</h2><span>сентябрь</span></div><div class=\"cu-msg\" style=\"display:block;min-height:0;padding:10px 2px 4px\">Этапов сентябрьских сделок нет: реестр с этапами выгружен только за октябрь. Известно про три подписанных договора — они в блоке «Средний чек».</div>","money":"<div class=\"c-h\"><h2>Средний чек по каналам</h2><span>сентябрь · 3 подписанных</span></div>\n      <div class=\"chk-rows\">\n        <div class=\"chk-r\">\n          <span class=\"chk-k\">Все каналы</span>\n          <div class=\"chk-bar\"><i style=\"width:100%\"></i></div>\n          <span class=\"chk-v\">7 823 180 ₽<small>3 подписанных · 23 469 540 ₽</small></span>\n        </div>\n      </div>\n      <p class=\"w2w-note\" style=\"padding-top:10px\">23 469 540 / 3 = 7 823 180 ₽: Адмирал 3PL — 17 643 000 ₽, Тамбовская индейка — 5 000 000 ₽, Видконди — 826 540 ₽. Разбивки по каналам за сентябрь нет. Это стоимость договоров, не выручка.</p>","eff":"<div class=\"c-h\"><h2>Эффективность рекламы</h2><span>сентябрь · 30 дней</span></div>\n      <div class=\"eff-grid\">\n        <div class=\"eff-i\"><b>59,2 ₽</b><span>договоров на 1 ₽ рекламы</span></div>\n        <div class=\"eff-i\"><b>132 049 ₽</b><span>стоимость подписанной сделки</span></div>\n        <div class=\"eff-i\"><b>8 085 ₽</b><span>стоимость целевого лида</span></div>\n        <div class=\"eff-i\"><b>6,1 %</b><span>лидов дошло до договора</span></div>\n      </div>\n      <p class=\"w2w-note\" style=\"padding-top:12px\">Сентябрь: бюджет 396 147 ₽ и 49 целевых лидов; подписано 3 договора на 23 469 540 ₽ — 6,1 % лидов. Суммы — стоимость договоров, не выручка; ROI не считается.</p>","full":"<div class=\"c-h\"><h2>Полная таблица показателей</h2><span>октябрь к сентябрю</span></div>\n      <p class=\"full-s\">Сентябрь — 30 дней, октябрь — 31. Показы, клики, CTR, CPC и бюджет — Директ (в октябре окно выгрузки 01.10–01.11). Целевые — CRM: 49 в сентябре и 63 в октябре.</p>\n      <table class=\"ft\">\n        <colgroup><col style=\"width:32%\"><col style=\"width:17%\"><col style=\"width:17%\"><col style=\"width:17%\"><col style=\"width:17%\"></colgroup>\n        <thead><tr><th>Показатель</th><th>Сентябрь</th><th>Октябрь</th><th>Изм.</th></tr></thead>\n        <tbody>\n          <tr><td>Целевые лиды (CRM)</td><td>49</td><td class=\"v\">63</td><td class=\"up\">+29 %</td></tr>\n          <tr><td>Показы (Директ)</td><td>86 411</td><td class=\"v\">204 723</td><td class=\"up\">+137 %</td></tr>\n          <tr><td>Клики (Директ)</td><td>1 503</td><td class=\"v\">1 836</td><td class=\"up\">+22 %</td></tr>\n          <tr><td>CTR</td><td>1,74 %</td><td class=\"v\">0,90 %</td><td class=\"down\">−0,84 п.п.</td></tr>\n          <tr><td>CPC</td><td>264 ₽</td><td class=\"v\">216 ₽</td><td class=\"up\">−18 %</td></tr>\n          <tr><td>Рекламный бюджет</td><td>396 147 ₽</td><td class=\"v\">396 494 ₽</td><td class=\"flat\">+0,1 %</td></tr>\n          <tr><td>Цена целевого лида</td><td>8 085 ₽</td><td class=\"v\">6 294 ₽</td><td class=\"up\">−22 %</td></tr>\n          <tr><td>Конверсия клик → ЦЛ</td><td>3,26 %</td><td class=\"v\">3,43 %</td><td class=\"up\">+0,17 п.п.</td></tr>\n          <tr><td>Целевых в день</td><td>1,63</td><td class=\"v\">2,03</td><td class=\"up\">+24 %</td></tr>\n        </tbody>\n      </table>"};
+  var LD_OCT=[{"d":"30.10","n":"Camillamed (ООО «КАМИЛЛАМЕД»)","c":"входящий звонок · колл-центр · сайт s-pro.group · старт 10 чел.","s":"SEO","p":"spr","pn":"Solution PRO","st":"Заявка получена","sum":1989900},{"d":"29.10","n":"Заявка с сайта ruqi-pro.ru – RUQI","c":"ruqi-pro.ru · eLama · «Аренда персонала. Поиск. Москва и МО»","s":"Директ","p":"ruq","pn":"Руки","st":"Закрыто и не реализовано"},{"d":"29.10","n":"Заявка с почты – Евгений Звонарев","c":"письмо · s-pro.group · ООО «Рижский хлеб»","s":"Email","p":"spr","pn":"Solution PRO","st":"Закрыто и не реализовано"},{"d":"29.10","n":"Сантехмарк (ООО «САНТЕХМАРК»)","c":"входящий звонок · колл-центр · sequoia-service.ru · старт 8 чел.","s":"SEO","p":"seq","pn":"Секвойя","st":"Переговоры по КП"},{"d":"29.10","n":"Сделка по звонку 74954810926","c":"входящий звонок · колл-центр · sequoia-service.ru","s":"SEO","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"28.10","n":"Kanzler (ООО «КАНЦЛЕР РУС»)","c":"ruqi-pro.ru · eLama · старт 5 чел. · договор подписан","s":"Директ","p":"ruq","pn":"Руки","st":"Договор подписан","sum":1980000},{"d":"28.10","n":"Заявка с почты – emexglobal.com","c":"письмо · s-pro.group · Дубик Александр","s":"Email","p":"spr","pn":"Solution PRO","st":"Закрыто и не реализовано"},{"d":"28.10","n":"Круазетт","c":"ysclid без utm-меток · вахта, старт 60 чел.","s":"Директ","p":"spr","pn":"Solution PRO","st":"Потребности выявлены"},{"d":"27.10","n":"Сделка по звонку 79193079186","c":"входящий звонок · колл-центр · sequoia-service.ru","s":"SEO","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"26.10","n":"Трапеза (ООО «ТРАПЕЗА»)","c":"форма без utm-меток · старт 10 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"Переговоры по КП"},{"d":"26.10","n":"ООО «Ивановская текстильная компания»","c":"sequoia-service.ru/ivanovo · заход с google.com · старт 5 чел.","s":"SEO","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"26.10","n":"Заявка с сайта sequoia-service.ru – lidmagnit","c":"лид-магнит · метка «3» без utm-кампании","s":"Директ","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"26.10","n":"Заявка с сайта sequoia-service.ru – forma-zahvata","c":"форма без utm-меток","s":"Директ","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"26.10","n":"Заявка с сайта ruqi.ru – RUQI","c":"ruqi.ru/contacts · форма без utm-меток","s":"Директ","p":"ruq","pn":"Руки","st":"Закрыто и не реализовано"},{"d":"24.10","n":"Лиски бройлер","c":"входящий звонок · колл-центр · сайт не определён · дубль · отнесён в Секвойю (SEO)","s":"SEO","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"23.10","n":"Сделка по звонку 79161366453","c":"входящий звонок · колл-центр · s-pro.group","s":"SEO","p":"spr","pn":"Solution PRO","st":"Закрыто и не реализовано"},{"d":"23.10","n":"АО Кама","c":"письмо · ruqi.ru","s":"Email","p":"ruq","pn":"Руки","st":"Контакт с ЛПР установлен"},{"d":"21.10","n":"Мираторг склад Домодедово","c":"форма · сайт не определён · вахта 15 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"Встреча проведена"},{"d":"22.10","n":"Заявка с почты – Сергей Щукин","c":"письмо · сайт не виден · отнесён в Секвойю","s":"Email","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"22.10","n":"List","c":"ООО ИмпэксТрейд-МО · РУКИ ПРО ПЛЮС · СПАМ","s":"Директ","p":"ruq","pn":"Руки","st":"Закрыто и не реализовано"},{"d":"21.10","n":"ООО «Импэкс-Сервис»","c":"ruqi-pro.ru · местный, 10 чел. · дорого","s":"Директ","p":"ruq","pn":"Руки","st":"Закрыто и не реализовано"},{"d":"21.10","n":"ПАО «ТЕПЛАНТ ВОСТОК»","c":"письмо · s-pro.group · местный 10 чел.","s":"Email","p":"spr","pn":"Solution PRO","st":"КП выставлено"},{"d":"20.10","n":"ООО Эксреда","c":"сайт не определён · вахта 30 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"20.10","n":"ООО \"ПЕЛИГРИН МАТЕН\"","c":"сайт не определён · местный 10 чел. · упаковщик, оператор","s":"Директ","p":"seq","pn":"Секвойя","st":"Успешно реализовано","sum":1798500},{"d":"19.10","n":"Сделка по звонку 79656175856","c":"входящий звонок · колл-центр · s-pro.group","s":"SEO","p":"spr","pn":"Solution PRO","st":"Закрыто и не реализовано"},{"d":"19.10","n":"ООО Оливин","c":"письмо · ruqi.ru · вахта 10 чел.","s":"Email","p":"ruq","pn":"Руки","st":"КП выставлено"},{"d":"19.10","n":"Интеграл","c":"ruqi-pro.ru · местный 5 чел.","s":"Директ","p":"ruq","pn":"Руки","st":"Переговоры по договору"},{"d":"16.10","n":"ООО Сахалинский Икорный Дом","c":"s-pro.group · SEO · местный 6 чел. · пропала потребность","s":"SEO","p":"spr","pn":"Solution PRO","st":"Закрыто и не реализовано"},{"d":"16.10","n":"Вкусвилл","c":"вахта 50 чел. · дорого · отнесён в Секвойю","s":"Директ","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"15.10","n":"Оксное","c":"SEO / входящий · сайт не определён","s":"SEO","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"15.10","n":"Pirro Group (Местный)","c":"местный 5 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"15.10","n":"АО Ланцет (Местный)","c":"письмо · s-pro.group · местный 5 чел.","s":"Email","p":"spr","pn":"Solution PRO","st":"Закрыто и не реализовано"},{"d":"14.10","n":"ООО Профреш","c":"риски неоплаты","s":"Директ","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"14.10","n":"Консулит (местный)","c":"входящий звонок · местный 6 чел.","s":"SEO","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"13.10","n":"Заявка с почты – lantaservice.ru","c":"письмо · ruqi.ru · дубль","s":"Email","p":"ruq","pn":"Руки","st":"Закрыто и не реализовано"},{"d":"13.10","n":"Ракодо (Местный)","c":"входящий звонок · местный 10 чел. · отнесён в Секвойю (SEO)","s":"SEO","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"12.10","n":"ООО Отвидо групп","c":"местный 8 чел. · Beeline · отнесён в Секвойю","s":"Директ","p":"seq","pn":"Секвойя","st":"Переговоры по КП"},{"d":"13.10","n":"Вакино Агро (Атлас)","c":"форма без utm-меток","s":"Директ","p":"spr","pn":"Solution PRO","st":"Отложенный клиент"},{"d":"12.10","n":"ООО «Павлово-Посадский хлебокомбинат» (Местный)","c":"ruqi-pro.ru · местный 8 чел.","s":"Директ","p":"ruq","pn":"Руки","st":"Отложенный клиент"},{"d":"13.10","n":"PVG","c":"вахта 130 чел. · отнесён в Секвойю","s":"Директ","p":"seq","pn":"Секвойя","st":"Отложенный клиент"},{"d":"09.10","n":"Заявка с сайта sequoia-service.ru – zavavka","c":"форма · уже работаем с клиентом","s":"Директ","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"09.10","n":"НЕТФНЕТ (Местный)","c":"ruqi-pro.ru · местный 7 чел.","s":"Директ","p":"ruq","pn":"Руки","st":"Закрыто и не реализовано"},{"d":"09.10","n":"ООО Амариста","c":"sequoia-service.ru · местный 16 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"Переговоры по договору"},{"d":"09.10","n":"ИП Пасютина","c":"ruqi-pro.ru · местный 10 чел.","s":"Директ","p":"ruq","pn":"Руки","st":"КП выставлено"},{"d":"08.10","n":"АйсТерра","c":"сайт не определён · вахта 45 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"08.10","n":"ТД Экокультура (Местный)","c":"sequoia-service.ru · риски неоплаты","s":"Директ","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"08.10","n":"Инаут (местный)","c":"сайт не определён · местный 40 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"Отложенный клиент"},{"d":"08.10","n":"Гойлова Вера","c":"ruqi-pro.ru · дорого","s":"Директ","p":"ruq","pn":"Руки","st":"Закрыто и не реализовано"},{"d":"07.10","n":"Зитар","c":"sequoia-service.ru · вахта 25 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"Отложенный клиент"},{"d":"07.10","n":"Allwin (Местный)","c":"sequoia-service.ru · местный 20 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"07.10","n":"ООО Пластик (Местный)","c":"ruqi-pro.ru · местный 10 чел.","s":"Директ","p":"ruq","pn":"Руки","st":"Закрыто и не реализовано"},{"d":"06.10","n":"Wonderlab","c":"форма · местный 10 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"Переговоры по КП"},{"d":"05.10","n":"Спектр","c":"сайт не определён · вахта 60 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"Отложенный клиент"},{"d":"07.10","n":"Сделка по звонку 79607464242","c":"входящий звонок · Колл-центр · сайт не определён · отнесён в Секвойю (SEO)","s":"SEO","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"05.10","n":"Вкус Черноземья","c":"сайт не определён · вахта 10 чел.","s":"Директ","p":"seq","pn":"Секвойя","st":"КП выставлено"},{"d":"05.10","n":"ФФ Подольск (местный)","c":"сайт не определён · местный 20 чел. · договор подписан","s":"Директ","p":"seq","pn":"Секвойя","st":"Успешно реализовано","sum":3682800},{"d":"04.10","n":"Заявка с сайта s-pro.group","c":"s-pro.group · форма без utm-меток","s":"Директ","p":"spr","pn":"Solution PRO","st":"Закрыто и не реализовано"},{"d":"02–04.10","n":"Царь-курник","c":"ООО УК «Время первых» · s-pro.group · SEO · местный 10 чел.","s":"SEO","p":"spr","pn":"Solution PRO","st":"Закрыто и не реализовано"},{"d":"02.10","n":"Заявка с почты – Сергей Кириченко","c":"письмо · ruqi.ru","s":"Email","p":"ruq","pn":"Руки","st":"Закрыто и не реализовано"},{"d":"02.10","n":"ТД трейд ЮГ (местный)","c":"ruqi-pro.ru · местный 5 чел.","s":"Директ","p":"ruq","pn":"Руки","st":"Закрыто и не реализовано"},{"d":"02.10","n":"БыстроГруз (местный)","c":"входящий звонок · сайт не определён · отнесён в Секвойю (SEO)","s":"SEO","p":"seq","pn":"Секвойя","st":"Закрыто и не реализовано"},{"d":"01.10","n":"BOSCO Прачечная (местный)","c":"входящий звонок · sequoia-service.ru · ООО «Экипировочный центр»","s":"SEO","p":"seq","pn":"Секвойя","st":"КП выставлено"},{"d":"01.10","n":"НПО Клевер (местный)","c":"сайт не определён · местный 5 чел. · договор подписан","s":"Директ","p":"seq","pn":"Секвойя","st":"Успешно реализовано","sum":718740}];
+  var cur=null;
+
+  function hlWeek(k){
+    var ci=CH[k]; if(ci==null) ci=-1;
+    var ws=document.querySelectorAll('#s-wk .w[data-wk]');
+    for(var i=0;i<ws.length;i++) ws[i].classList.toggle('on', i===ci);
+  }
+  var FLAT=['s-cu'].concat(IDS);
+  function flat(on){ FLAT.forEach(function(id){ var e=$(id); if(e) e.classList.toggle('flat',!!on); }); }
+  function restore(){
+    flat(false);
+    var cum=$('s-cu'); var cmsg=cum?cum.querySelector('.cu-msg'):null;
+    if(cmsg){ cmsg.style.display=''; cmsg.style.minHeight=''; cmsg.style.padding=''; cmsg.style.alignItems=''; }
+    IDS.forEach(function(id){ var e=$(id); if(e&&BASE[id]!=null) e.innerHTML=BASE[id]; });
+    trH.textContent=T0.h; trS.textContent=T0.s; trN.textContent=T0.n;
+    if(foot) foot.textContent=footTxt;
+    window.__ldData=null; window.__ldHead=null; window.__ldSub=null; window.__ldNote=null;
+    hlWeek(window.__K);
+    if(window.__funnel) window.__funnel(window.__M||'w');
+    if(window.__updLeads) window.__updLeads();
+    if(window.__trendSet) window.__trendSet(0,13);
+    if(window.__drawBars) window.__drawBars();
+  }
+  function fill(map){
+    for(var id in map){ if(id==='octFull') continue; var e=$('s-'+id); if(e) e.innerHTML=map[id]; }
+    if(window.__drawBars) window.__drawBars();
+  }
+  function wrapLd(){
+    var ld=$('s-leads'); if(!ld) return;
+    if(ld.querySelector('.ld-scroll')) return;
+    var tb=ld.querySelector('table.ldtb'); if(!tb) return;
+    var d=document.createElement('div'); d.className='ld-scroll';
+    tb.parentNode.insertBefore(d,tb); d.appendChild(tb);
+  }
+  function oct(){
+    fill(OCT);
+    wrapLd();
+    trH.textContent='Тренд ЦЛ по каналам · 10 недель';
+    trS.textContent='у каждого ряда своя шкала — сравнивайте форму, а не высоту';
+    trN.textContent='Серые столбцы — факт недели. Пунктир — среднее за текущую и две предыдущие недели. «Всего» включает Email и прямые обращения, поэтому больше суммы Директа и SEO. Источник: недельные отчёты и CRM, 24.08–01.11.';
+    window.__ldData=LD_OCT; window.__ldHead='63 сделки · 01–31.10';
+    window.__ldSub='63 сделки с тегом «Целевой», созданные 01.10–31.10.2026, — полный реестр октября. Статусы — по последней сверке CRM; суммы сохранены у 5 сделок из 63.';
+    window.__ldNote='«—» в сумме значит, что сумму в карточке не выгружали. Подписано 3 договора на 6 200 040 ₽ (НПО Клевер, ФФ Подольск, ПЕЛИГРИН); отдельная строка Kanzler (1 980 000 ₽) — статус «Договор подписан».';
+    if(window.__trendSet) window.__trendSet(0,10);
+    if(window.__updLeads) window.__updLeads();
+    if(foot) foot.textContent='Директ API · CRM · Calltouch · данные на 02.11.2026';
+    var fn=$('fixNote');
+    if(fn){ fn.hidden=false; fn.textContent='Все блоки — по октябрю (01–31.10.2026): недели 28.09–01.11, воронка и реестр — 63 сделки CRM, деньги — 3 подписанных договора. Директ — выгрузка 01.10–01.11 (в месячных итогах 396 494 ₽), CRM — по последней сверке статусов, план — медиаплан октября от 26.10.2026.'; }
+  }
+  function sep(){
+    fill(SEP);
+    trH.textContent='Тренд ЦЛ по каналам · 5 недель';
+    trS.textContent='24.08–27.09 · у каждого ряда своя шкала';
+    trN.textContent='Серые столбцы — факт недели. Пунктир — среднее за текущую и две предыдущие недели. «Всего» включает Email и прямые обращения. Источник: недельные отчёты и CRM, 24.08–27.09.';
+    window.__ldData=null;
+    flat(true);
+    var cum=$('s-cu'); var cmsg=cum?cum.querySelector('.cu-msg'):null;
+    if(cmsg){ cmsg.style.display='block'; cmsg.style.minHeight='0'; cmsg.style.padding='10px 2px 4px'; cmsg.style.alignItems=''; }
+    if(window.__trendSet) window.__trendSet(0,5);
+    if(foot) foot.textContent='Директ API · CRM · Calltouch · данные на 02.11.2026';
+    var fn=$('fixNote');
+    if(fn){ fn.hidden=false; fn.textContent='Ниже — сентябрь: где разреза нет, вместо цифр стоит пояснение (недели, каналы, проекты, лиды, воронка). Месячные итоги: 49 ЦЛ / 396 147 ₽ / CPL 8 085 ₽; тренд — 5 недель 24.08–27.09.'; }
+  }
+  window.__period=function(mode,key){
+    if(mode==='m'&&key==='m10'){ if(cur!=='m10') restore(); oct(); cur='m10'; return; }
+    if(mode==='m'&&key==='m9'){ if(cur!=='m9') restore(); sep(); cur='m9'; return; }
+    if(cur){ restore(); cur=null; }
+  };
+  if(window.__M) window.__period(window.__M, window.__K);
 })();
 </script>
 </body>
