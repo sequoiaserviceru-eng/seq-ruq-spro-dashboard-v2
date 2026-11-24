@@ -69,6 +69,10 @@
   .c.h::after{content:"";position:absolute;width:420px;height:420px;right:-140px;top:-160px;border-radius:50%;
     background:radial-gradient(circle,rgba(124,58,237,.55),transparent 66%);filter:blur(10px)}
   .c.k{grid-column:span 7/span 7;display:grid;grid-template-columns:repeat(2,1fr);gap:0;padding:0;overflow:hidden}
+  .c.k.k-solo{grid-template-columns:1fr}
+  .c.k.k-solo #k-budget{grid-column:1/-1;border-right:0}
+  .k-note{grid-column:1/-1;padding:14px 18px 18px;font-size:11.5px;line-height:1.55;color:var(--txt-3);border-top:1px solid var(--line)}
+  .k-note[hidden]{display:none}
   .kv{padding:18px 18px 16px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:0;justify-content:flex-start;min-height:132px}
   .kv:nth-child(2n){border-right:0}
   .kv:nth-child(n+3){border-top:1px solid var(--line)}
@@ -475,35 +479,36 @@
       </div>
     </div>
 
-    <div class="c k fade">
-      <div class="kv">
+    <div class="c k fade" id="kpiRight">
+      <div class="kv" id="k-budget">
         <div class="k-l">Бюджет</div>
         <div class="k-main">
           <div class="k-v"><span data-count="67790" id="hv-spend">67 790</span><small>₽</small></div>
           <div class="k-d"><span class="down" id="hv-spendd">▲ 26 %</span><span id="hv-spendb">было 53 877 ₽</span></div>
         </div>
       </div>
-      <div class="kv">
-        <div class="k-l">Все лиды</div>
+      <div class="kv" id="k-all">
+        <div class="k-l" id="k-all-l">Все лиды</div>
         <div class="k-main">
-          <div class="k-v"><span data-count="243" id="hv-all">243</span></div>
-          <div class="k-d"><span class="up" id="hv-alld">▲ 40 %</span><span id="hv-allb">было 173</span></div>
+          <div class="k-v"><span data-count="243" id="hv-all">243</span><small id="hv-allu"></small></div>
+          <div class="k-d" id="k-all-d"><span class="up" id="hv-alld">▲ 40 %</span><span id="hv-allb">было 173</span></div>
         </div>
       </div>
-      <div class="kv">
-        <div class="k-l">Цена лида (CPA)</div>
+      <div class="kv" id="k-cpa">
+        <div class="k-l" id="k-cpa-l">Цена лида (CPA)</div>
         <div class="k-main">
           <div class="k-v"><span data-count="279" id="hv-cpa">279</span><small id="hv-cpau">₽</small></div>
-          <div class="k-d"><span class="up" id="hv-cpad">▼ 10 %</span><span id="hv-cpab">было 311 ₽</span></div>
+          <div class="k-d" id="k-cpa-d"><span class="up" id="hv-cpad">▼ 10 %</span><span id="hv-cpab">было 311 ₽</span></div>
         </div>
       </div>
-      <div class="kv">
-        <div class="k-l">CR% — из просмотра в лид</div>
+      <div class="kv" id="k-cr">
+        <div class="k-l" id="k-cr-l">CR% — из просмотра в лид</div>
         <div class="k-main">
           <div class="k-v"><span data-count="0.9" id="hv-cr">0,90</span><small id="hv-cru">%</small></div>
-          <div class="k-d"><span class="up" id="hv-crd">▲ 0,81 п.п.</span><span id="hv-crb">было 0,09 %</span></div>
+          <div class="k-d" id="k-cr-d"><span class="up" id="hv-crd">▲ 0,81 п.п.</span><span id="hv-crb">было 0,09 %</span></div>
         </div>
       </div>
+      <div class="k-note" id="kNote" hidden>За эту неделю в архиве есть только ЦЛ, бюджет и CPL: кликов, показов и сырых обращений нет, поэтому CPA и CR не считаются.</div>
     </div>
 
     <div class="c trd fade" id="s-trend">
@@ -792,11 +797,11 @@
      note:'10 ЦЛ, 67 790 ₽, CPL 6 779 ₽; Директ 4 / SEO 5 / Email 1. Лидов всего — 243. Последний день в выгрузке Директа — 21.11.'}
   ];
   var MONTHS=[
-    {k:'m9',id:'сен',d:'01.09 – 30.09',t:'Сентябрь 2026',who:'сентябрь',days:30,leads:49,spend:396147,cpl:8085,conv:3.26,all:null,impr:86411,
+    {k:'m9',id:'сен',d:'01.09 – 30.09',t:'Сентябрь 2026',who:'сентябрь',days:30,leads:49,spend:396147,cpl:8085,conv:3.26,all:null,clicks:1503,impr:86411,
      note:'49 ЦЛ, 396 147 ₽, CPL 8 085 ₽, конверсия 3,26 %. Директ API: 1 503 клика, 86 411 показов. Сырых обращений за сентябрь в выгрузках нет — CPA и CR не считаются.'},
-    {k:'m10',id:'окт',d:'01.10 – 31.10',t:'Октябрь 2026',who:'октябрь',days:31,leads:63,spend:396494,cpl:6294,conv:3.43,all:null,impr:204723,
+    {k:'m10',id:'окт',d:'01.10 – 31.10',t:'Октябрь 2026',who:'октябрь',days:31,leads:63,spend:396494,cpl:6294,conv:3.43,all:null,clicks:1836,impr:204723,
      note:'63 ЦЛ, 396 494 ₽, CPL 6 294 ₽, конверсия 3,43 %. 1 836 кликов; расход сверен повторной выгрузкой 02.11. Сырых обращений за октябрь в выгрузках нет — CPA и CR не считаются.'},
-    {k:'m11',id:'ноя',d:'01.11 – 22.11',t:'Ноябрь 2026 — по 22.11',who:'ноябрь · MTD',days:22,leads:25,spend:170012,cpl:6800,conv:1.95,all:604,allSub:'из них 25 целевых · 02–22.11',cpaSub:'за 02–22.11',crSub:'за 02–22.11',impr:361986,
+    {k:'m11',id:'ноя',d:'01.11 – 22.11',t:'Ноябрь 2026 — по 22.11',who:'ноябрь · MTD',days:22,leads:25,spend:170012,cpl:6800,conv:1.95,all:604,allSub:'из них 25 целевых · 02–22.11',cpaSub:'за 02–22.11',crSub:'за 02–22.11',clicks:1282,impr:361986,
      note:'25 ЦЛ из плана 70, 170 012 ₽, CPL 6 800 ₽, конверсия 1,95 %. Выполнение плана месяца — 36 %. 1 282 клика. Все обращения — 604 по неделям 02–22.11 (за 01.11 сырых данных нет).'}
   ];
   var state={mode:'w',key:'w14'};
@@ -868,25 +873,70 @@
     $('hv-spend').textContent=money(it.spend);
     var ds=dp(it.spend,prev?prev.spend:null,true,false);
     delta('hv-spendd',ds); base('hv-spendb', prev?money(prev.spend)+' ₽':null);
-    na('hv-all', it.all==null);
-    $('hv-all').textContent=it.all!=null?String(it.all):'н/д';
+    // правые плитки: только реальные цифры — если метрики нет, вместо неё смежная
+    var tAll=$('k-all'), tCpa=$('k-cpa'), tCr=$('k-cr');
+    var cl=it.clicks!=null?it.clicks:null, clP=(prev&&prev.clicks!=null)?prev.clicks:null;
     var da=dp(it.all,prev?prev.all:null,false,false);
-    delta('hv-alld',da);
-    txt('hv-allb', it.allSub || ((da&&prev)?String(prev.all):(it.all==null?'в выгрузке только целевые сделки':'')));
+    if(it.all!=null){
+      tAll.style.display='';
+      $('k-all-l').textContent='Все лиды';
+      $('hv-all').textContent=String(it.all);
+      $('hv-allu').textContent='';
+      delta('hv-alld',da);
+      txt('hv-allb', it.allSub || ((da&&prev&&prev.all!=null)?'было '+prev.all:''));
+    } else if(cl!=null){
+      tAll.style.display='';
+      $('k-all-l').textContent='Клики в Директе';
+      $('hv-all').textContent=money(cl);
+      $('hv-allu').textContent='';
+      var dcl=dp(cl,clP,false,false);
+      delta('hv-alld',dcl);
+      txt('hv-allb',(dcl&&clP!=null)?'было '+money(clP):'');
+    } else { tAll.style.display='none'; }
+
     var cpa=cpaOf(it), cpaP=prev?cpaOf(prev):null;
-    na('hv-cpa', cpa==null);
-    $('hv-cpa').textContent=cpa?money(cpa):'н/д';
-    $('hv-cpau').style.display=cpa?'':'none';
-    var dcp=dp(cpa,cpaP,true,false);
-    delta('hv-cpad',dcp);
-    txt('hv-cpab', it.cpaSub || ((dcp&&cpaP)?'было '+money(cpaP)+' ₽':(cpa==null?'в выгрузке только целевые сделки':'')));
+    if(cpa!=null){
+      tCpa.style.display='';
+      $('k-cpa-l').textContent='Цена лида (CPA)';
+      $('hv-cpa').textContent=money(cpa);
+      $('hv-cpau').textContent='₽'; $('hv-cpau').style.display='';
+      var dcp=dp(cpa,cpaP,true,false);
+      delta('hv-cpad',dcp);
+      txt('hv-cpab', it.cpaSub || ((dcp&&cpaP)?'было '+money(cpaP)+' ₽':''));
+    } else if(it.impr!=null){
+      tCpa.style.display='';
+      $('k-cpa-l').textContent='Показы в Директе';
+      $('hv-cpa').textContent=money(it.impr);
+      $('hv-cpau').textContent=''; $('hv-cpau').style.display='none';
+      var dim=dp(it.impr,(prev&&prev.impr!=null)?prev.impr:null,false,false);
+      delta('hv-cpad',dim);
+      txt('hv-cpab',(dim&&prev&&prev.impr!=null)?'было '+money(prev.impr):'');
+    } else { tCpa.style.display='none'; }
+
     var cr=crOf(it), crP=prev?crOf(prev):null;
-    na('hv-cr', cr==null);
-    $('hv-cr').textContent=cr!=null?pct(cr).replace(' %',''):'н/д';
-    $('hv-cru').style.display=cr!=null?'':'none';
-    var dcr=dp(cr,crP,false,true);
-    delta('hv-crd',dcr);
-    txt('hv-crb', it.crSub || ((dcr&&crP!=null)?'было '+pct(crP):(cr==null?'в выгрузке только целевые сделки':'')));
+    var ctr=(cl!=null&&it.impr)?cl/it.impr*100:null;
+    var ctrP=(clP!=null&&prev&&prev.impr)?clP/prev.impr*100:null;
+    if(cr!=null){
+      tCr.style.display='';
+      $('k-cr-l').textContent='CR% — из просмотра в лид';
+      $('hv-cr').textContent=pct(cr).replace(' %','');
+      $('hv-cru').textContent='%'; $('hv-cru').style.display='';
+      var dcr=dp(cr,crP,false,true);
+      delta('hv-crd',dcr);
+      txt('hv-crb', it.crSub || ((dcr&&crP!=null)?'было '+pct(crP):''));
+    } else if(ctr!=null){
+      tCr.style.display='';
+      $('k-cr-l').textContent='CTR — клик из показа';
+      $('hv-cr').textContent=pct(ctr).replace(' %','');
+      $('hv-cru').textContent='%'; $('hv-cru').style.display='';
+      var dctr=dp(ctr,ctrP,false,true);
+      delta('hv-crd',dctr);
+      txt('hv-crb',(dctr&&ctrP!=null)?'было '+pct(ctrP):'');
+    } else { tCr.style.display='none'; }
+
+    var solo = tAll.style.display==='none' && tCpa.style.display==='none' && tCr.style.display==='none';
+    $('kpiRight').classList.toggle('k-solo', solo);
+    $('kNote').hidden = !solo;
 
     // график и плитки недель
     var ci=CHART[it.k]; if(ci==null) ci=-1;
